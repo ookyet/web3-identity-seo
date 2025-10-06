@@ -287,3 +287,15 @@ MIT - Use this architecture to make your Web3 identity Google-visible.
 **Built by the Web3 identity community. Proven by ookyet.eth.**
 
 *Making blockchain identities discoverable to 4 billion Google users.*
+
+ ---
+
+## ⭐ Show Your Support
+
+If this project helped make your Web3 identity Google-visible, please star this repository!
+
+**[⭐ Star this repo](https://github.com/ookyet/web3-identity-seo)** to help others discover it.
+
+## 🔔 Stay Updated
+
+Watch this repository for updates on Web3 SEO best practices and Knowledge Panel optimization techniques.
