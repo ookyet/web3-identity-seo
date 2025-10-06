@@ -1,0 +1,57 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://yoursite.com/#Author",
+  "name": "yourname.eth",
+  "alternateName": "Your Display Name",
+  "description": "Web3 developer and blockchain identity enthusiast",
+  "url": "https://yoursite.com/",
+  "image": "https://yoursite.com/images/avatar.png",
+  "sameAs": [
+    "https://twitter.com/yourusername",
+    "https://github.com/yourusername",
+    "https://linkedin.com/in/yourusername",
+    "https://app.ens.domains/name/yourname.eth"
+  ],
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "propertyID": "ens_domain",
+      "value": "yourname.eth",
+      "description": "Ethereum Name Service domain"
+    },
+    {
+      "@type": "PropertyValue",
+      "propertyID": "ethereum_address",
+      "value": "0xYourEthereumAddress",
+      "description": "Ethereum wallet address"
+    },
+    {
+      "@type": "PropertyValue",
+      "propertyID": "knowledge_graph_eligible",
+      "value": "verified_entity",
+      "description": "Google Knowledge Graph eligibility flag"
+    }
+  ],
+  "hasCredential": [
+    {
+      "@type": "EducationalOccupationalCredential",
+      "name": "Dentity Verified Human",
+      "credentialCategory": "Identity Verification",
+      "recognizedBy": {
+        "@type": "Organization",
+        "name": "Dentity",
+        "url": "https://dentity.com"
+      },
+      "url": "https://dentity.com/yourname.eth"
+    }
+  ],
+  "knowsAbout": [
+    "Web3 Development",
+    "Blockchain Technology",
+    "Ethereum",
+    "ENS",
+    "Smart Contracts",
+    "Decentralized Identity"
+  ]
+}
