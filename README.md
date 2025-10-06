@@ -1,5 +1,10 @@
 # Web3 Identity SEO: Making ENS Domains Google-Visible
 
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![Live Demo](https://img.shields.io/badge/demo-ookyet.eth-blue)](https://ookyet.com/proof/)
+  [![Google KP](https://img.shields.io/badge/KP%20Probability-85%25-brightgreen)](https://ookyet.com/proof/)
+  [![Dentity](https://img.shields.io/badge/Dentity-Verified-success)](https://dentity.com/ookyet.eth)
+
 > **Making blockchain identities discoverable on traditional search engines.**
 >
 > ⭐ **Live Example**: [ookyet.eth](https://ookyet.com/proof/) - 85%+ Knowledge Panel trigger probability
