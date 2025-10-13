@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-10-13T00:41:31.048Z",
+  "metrics": {
+    "externalAuthority": 71,
+    "timeDistribution": 85,
+    "kpProbability": 83,
+    "entityConfidence": 96,
+    "totalScore": 80
+  },
+  "status": "good",
+  "nextEvaluation": "Phase 2 decision"
+}

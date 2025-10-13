@@ -1,0 +1,23 @@
+name: KG Monitor Snapshot
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - run: npm ci
+        if: ${{ hashFiles('package-lock.json') != '' }}
+      - run: node scripts/kg-monitor.js
+      - name: Upload KG monitor report
+        uses: actions/upload-artifact@v4
+        with:
+          name: kg-monitor-report
+          path: .monitoring-logs/

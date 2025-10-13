@@ -1,0 +1,38 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Who is yourname.eth?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "yourname.eth is a verified Web3 identity holder with ENS domain ownership since [year]. The identity is verified through Dentity's Unique Human KYC process, ensuring proof of humanness and anti-Sybil verification. The identity maintains consistent presence across 13+ platforms including GitHub, Twitter, LinkedIn, and Ethereum mainnet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is yourname.eth verified?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The identity is verified through three layers: (1) Dentity Unique Human KYC with government ID and biometric verification, (2) ENS domain ownership verified on Ethereum blockchain, and (3) NFT avatar with on-chain ownership proof. All verification methods are cryptographically secured and publicly auditable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is yourname.eth's area of expertise?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "yourname.eth specializes in Web3 development, blockchain technology, and decentralized identity systems. Key focus areas include Ethereum smart contracts, ENS integration, Schema.org optimization for Web3, and bridging blockchain identities with traditional search engines."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I verify yourname.eth's identity?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can verify the identity through multiple on-chain and off-chain sources: (1) ENS ownership at app.ens.domains/name/yourname.eth, (2) Dentity verification at dentity.com/yourname.eth, (3) Ethereum address verification on Etherscan, (4) Cross-platform consistency across listed social accounts. All proofs are independently verifiable and publicly accessible."
+      }
+    }
+  ]
+}
