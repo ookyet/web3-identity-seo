@@ -316,15 +316,18 @@ if (require.main === module) {
     const result = runEvaluation();
 
     // 可选: 保存结果到日志文件
-    const logDir = path.join(__dirname, '..', '.monitoring-logs');
-    if (!fs.existsSync(logDir)) {
-      fs.mkdirSync(logDir, { recursive: true });
+    if (process.env.KG_MONITOR_LOG === '1') {
+      const logDir = path.join(__dirname, '..', '.monitoring-logs');
+      if (!fs.existsSync(logDir)) {
+        fs.mkdirSync(logDir, { recursive: true });
+      }
+      const logFile = path.join(logDir, `kg-monitor-${new Date().toISOString().split('T')[0]}.json`);
+      fs.writeFileSync(logFile, JSON.stringify(result, null, 2));
+      log(`\n📝 监控日志已保存: ${logFile}`, 'cyan');
+    } else {
+      log('\nℹ️  已跳过本地日志写入（设置 KG_MONITOR_LOG=1 可启用）', 'yellow');
+      log('   参见 PRIVACY.md 中的 Out of Scope 说明。', 'yellow');
     }
-
-    const logFile = path.join(logDir, `kg-monitor-${new Date().toISOString().split('T')[0]}.json`);
-    fs.writeFileSync(logFile, JSON.stringify(result, null, 2));
-
-    log(`\n📝 监控日志已保存: ${logFile}`, 'cyan');
 
     process.exit(0);
   } catch (error) {

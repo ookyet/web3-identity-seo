@@ -94,13 +94,19 @@ async function submitToIndexNow(endpoint) {
 async function main() {
   console.log('🚀 IndexNow Submission Starting...');
   console.log(`📅 Date: ${new Date().toISOString()}`);
-  console.log(`🔑 API Key: ${API_KEY.substring(0, 8)}...`);
+  if (process.env.INDEXNOW_VERBOSE === '1') {
+    console.log(`🔑 API Key (prefix): ${API_KEY.substring(0, 4)}…`);
+  }
   console.log(`📄 URLs: ${URLS_TO_SUBMIT.length}`);
   console.log('---\n');
 
   // Check if API key file exists
   console.log('📋 Remember to create: static/indexnow-key.txt');
-  console.log(`   Content: ${API_KEY}\n`);
+  if (process.env.INDEXNOW_VERBOSE === '1') {
+    console.log(`   Content: ${API_KEY}\n`);
+  } else {
+    console.log('   Content: <your-secret-key> (hidden; set INDEXNOW_VERBOSE=1 to print)\n');
+  }
 
   // Submit to all endpoints
   const results = [];

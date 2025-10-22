@@ -4,10 +4,13 @@
   [![Live Demo](https://img.shields.io/badge/demo-ookyet.eth-blue)](https://ookyet.com/proof/)
   [![Google KP](https://img.shields.io/badge/KP%20Probability-85%25-brightgreen)](https://ookyet.com/proof/)
   [![Dentity](https://img.shields.io/badge/Dentity-Verified-success)](https://dentity.com/ookyet.eth)
+  [![Privacy](https://img.shields.io/badge/Privacy-Notice-blue)](PRIVACY.md)
 
 > **Making blockchain identities discoverable on traditional search engines.**
 >
 > ⭐ **Live Example**: [ookyet.eth](https://ookyet.com/proof/) - 85%+ Knowledge Panel trigger probability
+
+Privacy: see the [Privacy Notice](PRIVACY.md).
 
 ## Problem
 
@@ -149,6 +152,9 @@ async function submitToIndexingAPI(url) {
 await submitToIndexingAPI('https://yoursite.com/proof/');
 ```
 
+Compliance note
+- Google’s Indexing API is intended for specific content types (e.g., JobPosting, live streams). For general pages, prefer sitemaps and normal crawling. Use responsibly and follow Google policies.
+
 ## Results
 
 Based on the **ookyet.eth** implementation:
@@ -198,6 +204,11 @@ Based on the **ookyet.eth** implementation:
 - **Schema.org** - Structured data standard
 - **Google Indexing API** - Direct indexing submission
 - **IndexNow** - Multi-search-engine indexing protocol
+
+## Community
+
+- Issues: actionable, verifiable suggestions only (observability/privacy/minimization). For ideas, use [Discussions](https://github.com/ookyet/web3-identity-seo/discussions).
+- Labels: `proposal:observability`, `privacy-reviewed`, `wontfix:ranking`.
 
 ## Why This Matters
 

@@ -2,6 +2,8 @@
 
 This directory contains ready-to-use examples for implementing Web3 identity SEO.
 
+Privacy: see the repository’s [Privacy Notice](../PRIVACY.md). Examples that submit URLs (Indexing API/IndexNow) do not read personal data and must be used in line with search engine policies.
+
 ## 📋 Files
 
 ### 1. `schema-person.json`
@@ -51,6 +53,8 @@ node indexing-api.js submit  # Submit URLs
 node indexing-api.js status  # Check status
 ```
 
+Compliance note: Google’s Indexing API is intended for specific content types (e.g., JobPosting, live streams). For general pages, prefer sitemaps and normal crawling. Use responsibly and follow Google policies.
+
 ## 🔧 Customization
 
 Replace the following placeholders:
@@ -71,6 +75,7 @@ Replace the following placeholders:
 2. **Indexing API quota**: 200 URLs/day limit per project
 3. **Service account**: Must be added as owner in Google Search Console
 4. **ENS verification**: Ensure ENS domain actually resolves to your address
+5. **Secrets**: Do not commit `service-account.json` or API keys. See project `.gitignore`.
 
 ## 💡 Tips
 

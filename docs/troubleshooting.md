@@ -4,6 +4,8 @@ Common issues and solutions when implementing Web3 Identity SEO.
 
 ---
 
+Privacy: see the repository’s [Privacy Notice](../PRIVACY.md). Indexing/IndexNow tools submit public URLs and do not process personal data; use in line with search engine policies.
+
 ## Schema.org Issues
 
 ### ❌ Google Rich Results Test shows errors
@@ -87,6 +89,8 @@ cat your-schema.json | jq .
 ---
 
 ## Google Indexing API Issues
+
+⚖️ Compliance reminder: Ensure your use of Indexing API matches Google’s allowed content types (e.g., JobPosting, live streams). For general pages, prefer sitemaps and standard crawling.
 
 ### ❌ "Permission denied" error
 

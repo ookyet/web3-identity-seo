@@ -4,6 +4,8 @@ Complete step-by-step guide to making your ENS domain Google-visible.
 
 ---
 
+Privacy: see the repository’s [Privacy Notice](../PRIVACY.md). Submission utilities must follow search engine policies and do not process personal data.
+
 ## 📋 Prerequisites
 
 Before starting, ensure you have:
@@ -216,6 +218,13 @@ node examples/indexing-api.js submit
 - Traditional crawl: 7-30 days
 - Indexing API: 24-48 hours ✅
 
+Compliance note: Google’s Indexing API targets specific content types (e.g., JobPosting, live streams). For general pages, prefer sitemaps and standard crawling to comply with policies.
+
+⚖️ Compliance checklist
+- Confirm your content type is eligible for Indexing API; otherwise use sitemaps/URL Inspection.
+- Do not submit private or user-specific URLs; submit only public pages you own.
+- Respect daily quotas; add delays between submissions.
+
 ### Step 3.2: IndexNow (Bing/Yandex)
 
 **Generate API Key**:
@@ -364,6 +373,7 @@ See [troubleshooting.md](./troubleshooting.md) for common issues and solutions.
 - [ ] FAQ Schema created
 - [ ] Google Indexing API configured and submitted
 - [ ] IndexNow configured for Bing/Yandex
+ - [ ] ⚖️ Compliance verified for Indexing API usage (or fallback to sitemaps)
 
 **Content & Authority** (Week 2-3):
 - [ ] Identity Proof Hub page created

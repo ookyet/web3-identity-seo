@@ -4,6 +4,8 @@ Common questions about Web3 Identity SEO and Google Knowledge Panel optimization
 
 ---
 
+Privacy: see the [Privacy Notice](../PRIVACY.md). Use of submission utilities must follow search engine policies.
+
 ## General Questions
 
 ### What is this project?
@@ -108,6 +110,8 @@ For traditional domains (name.com), you can adapt the Schema.org markup but lose
 - Simpler setup
 
 Use both for maximum coverage. Google Indexing API is critical for Knowledge Panel, IndexNow adds Bing/Yandex visibility.
+
+Compliance note: Google’s Indexing API is intended for specific content types (e.g., JobPosting, live streams). For general pages, prefer sitemaps and normal crawling. Use responsibly and follow Google policies.
 
 ### How do I know if it's working?
 
@@ -285,6 +289,8 @@ Or suggest edits through "Feedback" link on Knowledge Panel (slow, not guarantee
 ---
 
 ## Privacy & Security Questions
+
+For the full policy, see the repository’s [Privacy Notice](../PRIVACY.md).
 
 ### Does Dentity verification expose my personal info?
 

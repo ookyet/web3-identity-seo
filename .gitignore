@@ -1,0 +1,16 @@
+# Local diagnostics
+.monitoring-logs/
+
+# Keys and secrets
+.env
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Example credentials / API tokens
+examples/service-account.json
+static/indexnow-key.txt
+
+# OS files
+.DS_Store

@@ -1,0 +1,17 @@
+name: Auto-close ranking issues
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  close:
+    if: github.event.label.name == 'wontfix:ranking'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close issue with comment
+        uses: peter-evans/close-issue@v3
+        with:
+          comment: |
+            Thanks for the suggestion! This repository focuses on opt-in, read-only observability (no ranking advice, no influence on search systems). 
+            We’re closing this as out of scope with label `wontfix:ranking`. For open-ended discussions, please use Discussions > Ideas.
