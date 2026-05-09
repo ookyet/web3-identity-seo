@@ -95,11 +95,6 @@ Create `layouts/partials/schema-person.html` (Hugo) or inline in `<head>`:
       "@type": "PropertyValue",
       "propertyID": "ens_domain",
       "value": "yourname.eth"
-    },
-    {
-      "@type": "PropertyValue",
-      "propertyID": "knowledge_graph_eligible",
-      "value": "verified_entity"
     }
   ],
   "hasCredential": [{
@@ -113,9 +108,10 @@ Create `layouts/partials/schema-person.html` (Hugo) or inline in `<head>`:
 
 **Key elements**:
 - `@id`: Unique entity identifier
-- `knowledge_graph_eligible`: Google internal flag
 - `hasCredential`: Dentity verification link
 - `sameAs`: Cross-platform consistency (minimum 5 platforms)
+
+> ⚠️ **Avoid non-standard `propertyID` values** (e.g., a fictional `knowledge_graph_eligible` flag). Google does not recognize undocumented properties and its anti-spam systems may down-weight pages that fabricate signals. Stick to standard Schema.org vocabulary plus widely recognized identifier types (`ens_domain`, `wikidata`, etc.).
 
 ### Step 2.2: Active Trigger Interfaces
 
@@ -369,7 +365,7 @@ See [troubleshooting.md](./troubleshooting.md) for common issues and solutions.
 - [ ] ENS domain registered and configured
 - [ ] Dentity Unique Human verification complete
 - [ ] Schema.org Person entity implemented
-- [ ] ProfilePage + knowledge_graph_eligible flag added
+- [ ] ProfilePage declaration added
 - [ ] FAQ Schema created
 - [ ] Google Indexing API configured and submitted
 - [ ] IndexNow configured for Bing/Yandex

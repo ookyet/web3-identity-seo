@@ -307,7 +307,7 @@ site:yoursite.com
 ./scripts/kg-audit.sh
 
 # Check output:
-TRIGGER_SCORE: >90 (good)
+TRIGGER_SCORE: >75 (good — matches script threshold)
 SPAM_FILTER_STATUS: LEGITIMATE (not SUSPECT)
 EXTERNAL_MENTIONS: ≥3
 ```

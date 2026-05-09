@@ -56,9 +56,12 @@ Without Schema.org, Google sees your site as unstructured text. With it, Google 
 
 ### What is the `knowledge_graph_eligible` flag?
 
-A PropertyValue identifier that signals to Google's algorithms this entity is a Knowledge Panel candidate. While not officially documented, it's used internally to mark verified entities.
+**Short answer: it isn't real — don't use it.**
+
+Earlier versions of this guide showed a `PropertyValue` with `propertyID: "knowledge_graph_eligible"` as if it were a recognized signal. It is not. Google has never published or acknowledged such a property, and its anti-spam systems can interpret fabricated identifiers as performative SEO — a negative signal rather than a positive one.
 
 ```json
+// ❌ Don't do this — non-standard, no documented effect, possible spam signal
 "identifier": [{
   "@type": "PropertyValue",
   "propertyID": "knowledge_graph_eligible",
@@ -66,7 +69,17 @@ A PropertyValue identifier that signals to Google's algorithms this entity is a 
 }]
 ```
 
-This flag, combined with other signals (Dentity, external authority), increases KP trigger probability.
+Use standard Schema.org vocabulary instead. For Web3 identity, real, useful identifiers include:
+
+```json
+"identifier": [{
+  "@type": "PropertyValue",
+  "propertyID": "ens_domain",
+  "value": "yourname.eth"
+}]
+```
+
+Knowledge Panel eligibility comes from genuine signals — entity disambiguation, cross-platform consistency, external validation, structured data correctness — not from declaring eligibility yourself.
 
 ### Do I need Dentity verification?
 
@@ -223,12 +236,14 @@ But **choose one primary** for Knowledge Panel candidacy. Multiple entities dilu
 
 ### What's the success rate for getting a Knowledge Panel?
 
-**With this implementation**:
+**With this implementation** (internal estimates from observed implementations — see methodology note below):
 - Full architecture + Dentity + 5 external sources: **85-95%**
 - Partial implementation (no Dentity): **60-70%**
 - Minimal (just Schema.org): **20-30%**
 
 **Timeline**: 4-8 weeks for full implementation, 6-12 months for partial.
+
+> **Methodology note**: These percentages are internal estimates based on observed signal strength, not figures published or confirmed by Google. The Knowledge Panel decision is opaque — Google does not expose a "trigger probability" through any public API, and Knowledge Graph API responses do not distinguish a fully-prepared candidate from an unknown entity. Treat the numbers above as a relative ranking of signal completeness, not as a guarantee or measured probability.
 
 ### Can Google reject my Knowledge Panel?
 

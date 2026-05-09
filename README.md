@@ -2,13 +2,14 @@
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![Live Demo](https://img.shields.io/badge/demo-ookyet.eth-blue)](https://ookyet.com/proof/)
-  [![Google KP](https://img.shields.io/badge/KP%20Probability-85%25-brightgreen)](https://ookyet.com/proof/)
+  [![Google SERP](https://img.shields.io/badge/Google%20SERP-Position%201-success)](https://www.google.com/search?q=ookyet)
+  [![Schema.org](https://img.shields.io/badge/Schema.org-validated-brightgreen)](https://search.google.com/test/rich-results?url=https://ookyet.com/)
   [![Dentity](https://img.shields.io/badge/Dentity-Verified-success)](https://dentity.com/ookyet.eth)
   [![Privacy](https://img.shields.io/badge/Privacy-Notice-blue)](PRIVACY.md)
 
-> **Making blockchain identities discoverable on traditional search engines.**
+> **Making blockchain identities discoverable on traditional search engines** — ENS + Dentity + Schema.org.
 >
-> ⭐ **Live Example**: [ookyet.eth](https://ookyet.com/proof/) - 85%+ Knowledge Panel trigger probability
+> ⭐ **Live**: [`ookyet.eth`](https://ookyet.com/proof/) on Google Search — Position 1 stable 90+ days · Sitelinks · Image Thumbnail · FAQ rich result · AI Overview entity mention.
 
 Privacy: see the [Privacy Notice](PRIVACY.md).
 
@@ -37,10 +38,10 @@ A 5-layer system that bridges blockchain identities with Google's Knowledge Grap
 - **Government ID + Biometric** - AI cannot pass
 - **10/10 verification checks** - Cryptographic proof
 
-### Layer 4: Active Trigger Interfaces
-- **knowledge_graph_eligible flag** - Google internal entity marker
-- **FAQ Schema** - Query intent pre-computation
-- **ProfilePage + MainEntity** - Primary entity declaration
+### Layer 4: Entity Graph Linkage
+- **`@graph` with shared `@id` references** - Person, ProfilePage, WebSite, and Article entities are explicitly linked through stable `@id` URIs, so Google parses one cohesive entity rather than several disconnected ones
+- **FAQ Schema (`FAQPage`)** - declares query intent in machine-readable form; eligible for FAQ rich results in SERP
+- **ProfilePage with `mainEntity` → Person** - signals the page's primary subject is a Person entity (per [Schema.org ProfilePage](https://schema.org/ProfilePage))
 
 ### Layer 5: Cross-Platform Validation
 - **13 unified platforms** - Consistent identity across Web2/Web3
@@ -81,11 +82,6 @@ See **[ookyet.eth](https://ookyet.com/proof/)** for a production example:
       "@type": "PropertyValue",
       "propertyID": "ens_domain",
       "value": "yourname.eth"
-    },
-    {
-      "@type": "PropertyValue",
-      "propertyID": "knowledge_graph_eligible",
-      "value": "verified_entity"
     }
   ]
 }
@@ -159,13 +155,15 @@ Compliance note
 
 Based on the **ookyet.eth** implementation:
 
-| Metric | Before | After |
-|--------|--------|-------|
-| Google Indexing Time | 7-30 days | 24-48 hours |
-| Knowledge Panel Probability | 0% | 85%+ |
-| SERP Features | None | FAQ, Rich Results |
-| Entity Confidence Score | 0% | 96% |
-| Cross-source Consistency | Undefined | 99% |
+| Metric | Before | After | How measured |
+|--------|--------|-------|--------------|
+| Google indexing time (per page) | 7-30 days | 24-48 hours | Google Search Console "Last crawl" timestamps after Indexing API submission |
+| SERP features for `ookyet` / `ookyet.eth` | None | Position 1 stable, Sitelinks, Thumbnail (image), FAQ rich result | Direct SERP observation, sustained over 90+ days |
+| Rich Results Test status | N/A | 0 errors, Person + FAQPage detected | [Google Rich Results Test](https://search.google.com/test/rich-results) |
+| Cross-platform `sameAs` links | 0 | 15+ verified profiles | Manual audit of profile links in `sameAs` array |
+| Knowledge Panel | Not triggered | Not yet triggered as of writing | Google KG API + direct SERP — see note below |
+
+> **Note on Knowledge Panel probability**: Knowledge Panel triggering is a black-box decision by Google. The Knowledge Graph API does not expose a "candidate" or "pre-trigger" state — it returns the same empty `itemListElement` for entities Google has never heard of and entities that are fully prepared but not yet promoted. Any "% probability of KP trigger" stated in this guide or by similar tools is an internal model estimate, not a Google-published metric, and should be read accordingly.
 
 ## Architecture Diagram
 

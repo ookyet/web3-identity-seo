@@ -79,8 +79,8 @@ Replace the following placeholders:
 
 ## 💡 Tips
 
-- Use `knowledge_graph_eligible` flag in identifier array
-- Include Dentity verification in hasCredential
-- Maintain cross-platform consistency in sameAs links
-- Update FAQ content based on actual common queries
-- Submit key pages only to Indexing API (homepage, proof page, about)
+- Stick to standard Schema.org vocabulary; avoid non-standard `propertyID` values such as a fictional `knowledge_graph_eligible` flag — Google does not recognize undocumented properties and may treat them as performative SEO signals
+- Include Dentity verification in `hasCredential` as a real `EducationalOccupationalCredential` (not a free-text string)
+- Maintain cross-platform consistency in `sameAs` links (same display name, avatar, bio across all listed profiles)
+- Update FAQ content based on actual common queries (Google ignores FAQ pages that read as keyword-stuffed)
+- Submit only public, eligible pages to the Indexing API; for general content prefer sitemaps and standard crawling per Google policy

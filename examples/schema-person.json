@@ -19,18 +19,6 @@
       "propertyID": "ens_domain",
       "value": "yourname.eth",
       "description": "Ethereum Name Service domain"
-    },
-    {
-      "@type": "PropertyValue",
-      "propertyID": "ethereum_address",
-      "value": "0xYourEthereumAddress",
-      "description": "Ethereum wallet address"
-    },
-    {
-      "@type": "PropertyValue",
-      "propertyID": "knowledge_graph_eligible",
-      "value": "verified_entity",
-      "description": "Google Knowledge Graph eligibility flag"
     }
   ],
   "hasCredential": [
