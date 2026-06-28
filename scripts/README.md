@@ -53,6 +53,13 @@ docs/entity-audit/YYYYMMDD/
 - KP Trigger Probability (target: 90%+)
 - Spam Filter Status (target: LEGITIMATE)
 
+> **Disclaimer.** These figures are heuristic estimates produced locally by this
+> tool, **not metrics published or exposed by Google**. Google does not provide an
+> "entity confidence" score or a "Knowledge Panel trigger probability"; Knowledge
+> Panel eligibility is a non-public, algorithmic decision. Use these numbers only as
+> a relative checklist of signal completeness — not as measured probabilities,
+> predictions, or guarantees.
+
 ### 2. `indexnow-submit.js`
 IndexNow protocol submission for Bing/Yandex instant indexing.
 
@@ -240,11 +247,17 @@ TRIGGER_SCORE = (CONFIDENCE × 0.25) +
 
 ### KP Trigger Probability
 
+> **Disclaimer.** This is an internal heuristic estimate, **not a Google metric**
+> (see the Monitoring Metrics note above). The bands below are a self-consistent
+> scoring guide for tracking signal completeness over time — not Google-published
+> thresholds, timelines, or guarantees. Knowledge Panel triggering remains Google's
+> non-public decision.
+
 - **0-40%**: Early stage, more work needed
 - **40-70%**: Good progress, add external sources
-- **70-85%**: High probability, expect KP in 4-8 weeks
-- **85-95%**: Very high, expect KP in 1-4 weeks
-- **95%+**: Imminent, monitor daily
+- **70-85%**: High signal completeness (no implied timeline)
+- **85-95%**: Very high signal completeness
+- **95%+**: Signals saturated; nothing more to add on-site
 
 ---
 

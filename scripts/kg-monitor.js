@@ -4,6 +4,14 @@
  *
  * 用途: 评估 ookyet.eth 的 Knowledge Panel 触发概率
  *
+ * DISCLAIMER: The percentages reported by this tool (KP trigger probability,
+ * entity confidence, etc.) are heuristic estimates produced locally by this
+ * script. They are NOT metrics published or exposed by Google. Google does not
+ * provide a "Knowledge Panel trigger probability" or "entity confidence" score;
+ * Knowledge Panel eligibility is a non-public, algorithmic decision. Treat these
+ * numbers only as a relative checklist of signal completeness — not as measured
+ * probabilities, predictions, or guarantees.
+ *
  * 监控指标:
  * - External Authority (外部权威)
  * - Knowledge Panel Probability (KP触发概率)
@@ -231,6 +239,7 @@ function runEvaluation() {
   log(`基线概率: ${kpProb.baseline}%`, 'reset');
   log(`变化: ${kpProb.change >= 0 ? '+' : ''}${kpProb.change}%`, kpProb.change > 0 ? 'green' : 'red');
   log(`目标: 95%+`, 'cyan');
+  log(`(Heuristic estimate by this tool — not a Google metric. KP eligibility is Google's non-public decision.)`, 'cyan');
 
   // 4. 固定指标 (已达标)
   subheader('✅ 4. 已达标指标');
