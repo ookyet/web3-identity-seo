@@ -9,7 +9,7 @@
 
 > **Making blockchain identities discoverable on traditional search engines** — ENS + Dentity + Schema.org.
 >
-> ⭐ **Live**: [`ookyet.eth`](https://ookyet.com/proof/) on Google Search — Position 1 stable 90+ days · Sitelinks · Image Thumbnail · FAQ rich result · AI Overview entity mention.
+> ⭐ **Live**: [`ookyet.eth`](https://ookyet.com/proof/) on Google Search — Position 1 stable 90+ days · Sitelinks · Image Thumbnail · Image pack · AI Overview entity mention.
 
 Privacy: see the [Privacy Notice](PRIVACY.md).
 
@@ -40,8 +40,8 @@ A 5-layer system that bridges blockchain identities with Google's Knowledge Grap
 
 ### Layer 4: Entity Graph Linkage
 - **`@graph` with shared `@id` references** - Person, ProfilePage, WebSite, and Article entities are explicitly linked through stable `@id` URIs, so Google parses one cohesive entity rather than several disconnected ones
-- **FAQ Schema (`FAQPage`)** - declares query intent in machine-readable form; eligible for FAQ rich results in SERP
-- **ProfilePage with `mainEntity` → Person** - signals the page's primary subject is a Person entity (per [Schema.org ProfilePage](https://schema.org/ProfilePage))
+- **ProfilePage with `mainEntity` → Person** - signals the page's primary subject is a Person entity (per [Schema.org ProfilePage](https://schema.org/ProfilePage)). Google requires `mainEntity` to be a `Person` or `Organization`; emit exactly one ProfilePage on the canonical "about" page.
+- **~~FAQ Schema (`FAQPage`)~~ — RETIRED** - Google removed FAQ rich results (Aug 2023) and retired the FAQ structured-data docs (2026-06-15). Do **not** emit `FAQPage` for entity SEO — keep FAQ as visible page content. (`HowTo` likewise retired Sep 2023; `QAPage` is still supported but only for a single **user-submitted** Q&A page, not authored FAQ copy.)
 
 ### Layer 5: Cross-Platform Validation
 - **13 unified platforms** - Consistent identity across Web2/Web3
@@ -55,8 +55,8 @@ See **[ookyet.eth](https://ookyet.com/proof/)** for a production example:
 - ✅ **ENS Domain**: ookyet.eth (owned since 2023)
 - ✅ **Dentity Verified**: Unique Human KYC (10/10 checks)
 - ✅ **NFT Avatar**: Lil Ghost #761 on-chain proof
-- ✅ **Google KP Eligible**: 85%+ trigger probability
-- ✅ **SERP Features**: FAQ, Rich Results enabled
+- ✅ **Indexed entity**: Person + Organization + ProfilePage detected, 0 errors (Rich Results Test)
+- ✅ **SERP features**: Position 1, Sitelinks, Image pack, AI Overview entity mention
 
 **Technical Deep-Dive**: [Identity Through ENS](https://ookyet.com/blog/identity-through-ens/)
 **Complete Proof Hub**: [ookyet.com/proof](https://ookyet.com/proof/)
@@ -65,13 +65,20 @@ See **[ookyet.eth](https://ookyet.com/proof/)** for a production example:
 
 ### Step 1: Schema.org Entity Markup
 
+**Person-first naming.** Make the `Person` your single primary entity. Its `name`
+should read like a person/handle (e.g. `Your Name` or `yourhandle`), **not** the ENS
+domain. Put the ENS name in `alternateName` and as an `identifier` — it is a
+verifiable anchor, not the entity's primary key. This keeps Google's person entity
+keyed to a human/handle while ENS corroborates it.
+
 ```html
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": "https://yoursite.com/#Author",
-  "name": "yourname.eth",
+  "name": "Your Name",
+  "alternateName": ["yourname.eth", "@yourhandle"],
   "hasCredential": [{
     "@type": "EducationalOccupationalCredential",
     "name": "Dentity Verified Human",
@@ -80,8 +87,9 @@ See **[ookyet.eth](https://ookyet.com/proof/)** for a production example:
   "identifier": [
     {
       "@type": "PropertyValue",
-      "propertyID": "ens_domain",
-      "value": "yourname.eth"
+      "propertyID": "ens",
+      "value": "yourname.eth",
+      "url": "https://app.ens.domains/name/yourname.eth"
     }
   ]
 }
@@ -104,9 +112,19 @@ See **[ookyet.eth](https://ookyet.com/proof/)** for a production example:
 </script>
 ```
 
-### Step 3: FAQ Schema for AI Overviews
+### Step 3: FAQ — RETIRED (do not emit `FAQPage`)
+
+> **Google retired FAQ rich results (Aug 2023) and removed the FAQ structured-data
+> documentation (2026-06-15).** Emitting `FAQPage` no longer produces a rich result
+> and can surface as an invalid item / "Q&A" issue in Search Console. Keep FAQ
+> content as **visible page copy** instead. `HowTo` is likewise retired (Sep 2023).
+> `QAPage` remains supported but **only** for a single user-submitted Q&A page — not
+> authored FAQ/marketing content.
+>
+> The former `FAQPage` example is kept below for historical context only — **do not deploy it**:
 
 ```html
+<!-- RETIRED: do NOT deploy. FAQPage no longer yields rich results and may trigger GSC errors. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -114,10 +132,7 @@ See **[ookyet.eth](https://ookyet.com/proof/)** for a production example:
   "mainEntity": [{
     "@type": "Question",
     "name": "Who is yourname.eth?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "yourname.eth is a verifiable Web3 identity..."
-    }
+    "acceptedAnswer": { "@type": "Answer", "text": "..." }
   }]
 }
 </script>
@@ -158,8 +173,8 @@ Based on the **ookyet.eth** implementation:
 | Metric | Before | After | How measured |
 |--------|--------|-------|--------------|
 | Google indexing time (per page) | 7-30 days | 24-48 hours | Google Search Console "Last crawl" timestamps after Indexing API submission |
-| SERP features for `ookyet` / `ookyet.eth` | None | Position 1 stable, Sitelinks, Thumbnail (image), FAQ rich result | Direct SERP observation, sustained over 90+ days |
-| Rich Results Test status | N/A | 0 errors, Person + FAQPage detected | [Google Rich Results Test](https://search.google.com/test/rich-results) |
+| SERP features for `ookyet` / `ookyet.eth` | None | Position 1 stable, Sitelinks, Thumbnail (image), Image pack, AI Overview entity mention | Direct SERP observation, sustained over 90+ days |
+| Rich Results Test status | N/A | 0 errors, Person + ProfilePage detected | [Google Rich Results Test](https://search.google.com/test/rich-results) |
 | Cross-platform `sameAs` links | 0 | 15+ verified profiles | Manual audit of profile links in `sameAs` array |
 | Knowledge Panel | Not triggered | Not yet triggered as of writing | Google KG API + direct SERP — see note below |
 
@@ -172,9 +187,8 @@ Based on the **ookyet.eth** implementation:
 │          Google Knowledge Graph                 │
 │                                                  │
 │  ┌──────────────────────────────────────────┐  │
-│  │   Entity: ookyet.eth                     │  │
+│  │   Entity: ookyet (alt: ookyet.eth)       │  │
 │  │   Type: Person                           │  │
-│  │   Confidence: 96%                        │  │
 │  │   Verification: Dentity ✓                │  │
 │  └──────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────┘
@@ -191,7 +205,8 @@ Based on the **ookyet.eth** implementation:
 │  Layer 4: Active Triggers ───────────────────┤  │
 │  Layer 5: Cross-Platform (13 platforms) ─────┘  │
 │                                                  │
-│  Result: 85%+ KP Trigger Probability             │
+│  Result: indexed, consistent entity signals      │
+│  (KP triggering is Google's black-box decision)  │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -246,10 +261,9 @@ The complete implementation demonstrates:
    - OpenSea ownership proof
 
 4. **Google Optimization**
-   - Schema.org complete @graph
-   - Active trigger interfaces
-   - FAQ Schema for AI Overviews
-   - 85%+ KP trigger probability
+   - Schema.org complete @graph (Person-first; FAQ/HowTo/QAPage not emitted)
+   - ProfilePage with `mainEntity` → Person on the about page
+   - Consistent cross-platform `sameAs` + verifiable `identifier`/`hasCredential`
 
 **Full Technical Breakdown**: https://ookyet.com/blog/identity-through-ens/
 **Live Proof Hub**: https://ookyet.com/proof/
@@ -270,8 +284,8 @@ The complete implementation demonstrates:
 5. Submit to Google
 
 ### Advanced Setup
-- Active trigger interfaces
-- FAQ Schema optimization
+- ProfilePage (`mainEntity` → Person) on the about page
+- Person-first entity model (name = person/handle; ENS in `alternateName` + `identifier`)
 - Cross-platform unification
 - Monitoring with kg-audit.sh
 

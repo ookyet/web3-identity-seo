@@ -192,25 +192,30 @@ Quality > quantity. One GitHub repo with 100 stars better than 10 low-quality Me
 
 ### Should I use my real name or ENS domain as primary name?
 
-**For Knowledge Panel optimization**:
+**Person-first: make `name` a person/handle, and put the ENS domain in
+`alternateName` + `identifier`.** The ENS name is a verifiable *anchor*, not the
+entity's primary key.
 
-**Option A**: ENS as primary (recommended for crypto-native)
 ```json
 {
-  "name": "yourname.eth",
-  "alternateName": "Your Real Name"
+  "name": "Your Name",
+  "alternateName": ["yourname.eth", "@yourhandle"],
+  "identifier": [{
+    "@type": "PropertyValue",
+    "propertyID": "ens",
+    "value": "yourname.eth",
+    "url": "https://app.ens.domains/name/yourname.eth"
+  }]
 }
 ```
 
-**Option B**: Real name primary (better for professional)
-```json
-{
-  "name": "Your Real Name",
-  "alternateName": "yourname.eth"
-}
-```
-
-**Google's preference**: Real names for person entities, but ENS works if you have strong verification (Dentity) and it's consistently used across platforms.
+**Why**: Google keys person entities to a human/handle, not a domain string, and
+[ProfilePage](https://developers.google.com/search/docs/appearance/structured-data/profile-page)
+expects `mainEntity` to be a `Person`/`Organization` identified by a name. Setting
+`name` to the ENS domain makes the primary key a domain and weakens reconciliation
+with your social profiles (where your name/handle appears). You lose nothing — the
+ENS name stays fully present via `alternateName` and `identifier`. (Earlier versions
+of this guide suggested "ENS as primary"; that is no longer recommended.)
 
 ### Can I have multiple ENS domains pointing to one identity?
 
@@ -219,7 +224,8 @@ Yes, use `sameAs` to link them:
 ```json
 {
   "@type": "Person",
-  "name": "primary.eth",
+  "name": "Your Name",
+  "alternateName": ["primary.eth", "secondary.eth"],
   "sameAs": [
     "https://app.ens.domains/name/primary.eth",
     "https://app.ens.domains/name/secondary.eth",
@@ -368,7 +374,8 @@ Google re-evaluates entities periodically. Removing validation sources will caus
 ```json
 {
   "@type": "Person",
-  "name": "yourname.eth",
+  "name": "Your Name",
+  "alternateName": "yourname.eth",
   "url": "https://yoursite.com/"
 }
 ```
@@ -421,23 +428,12 @@ Set up alerts (Slack, email) for status changes.
 
 ### How does this interact with AI Overviews?
 
-**FAQ Schema is key** for AI Overviews (formerly SGE):
-
-```json
-{
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": "Who is yourname.eth?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Detailed answer that AI can use..."
-    }
-  }]
-}
-```
-
-Google's AI uses FAQ content for generative responses. Well-structured FAQs increase chances of appearing in AI Overviews.
+**Do not rely on `FAQPage` markup.** Google retired FAQ rich results (Aug 2023) and
+the FAQ structured-data docs (2026-06-15); `HowTo` was retired too (Sep 2023). AI
+Overviews draw from your **visible, well-structured page content** plus a clean entity
+graph (Person/Organization, `sameAs`, verifiable `identifier`/`hasCredential`) — not
+from `FAQPage`/`HowTo` JSON-LD. Write clear, factual answers as visible copy, and keep
+the structured data to supported entity types.
 
 ### Can I combine this with other Schema.org types?
 

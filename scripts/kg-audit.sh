@@ -70,12 +70,14 @@ echo "$SERP_HTML" > "${TODAY_DIR}/serp/raw.html"
 HAS_KP=$(echo "$SERP_HTML" | grep -o 'knowledge-panel' | wc -l || echo 0)
 HAS_PAA=$(echo "$SERP_HTML" | grep -o 'related-question' | wc -l || echo 0)
 HAS_RICH=$(echo "$SERP_HTML" | grep -o 'rich-result' | wc -l || echo 0)
+# FAQPage is RETIRED by Google (Aug 2023; docs removed 2026-06-15). Presence of
+# FAQPage in your own markup is now a problem to remove, not a positive signal.
 HAS_FAQ=$(echo "$SERP_HTML" | grep -o 'FAQPage' | wc -l || echo 0)
 
 echo "   Knowledge Panel: $([ $HAS_KP -gt 0 ] && echo '✅ FOUND' || echo '❌ Not found')"
 echo "   People Also Ask: $([ $HAS_PAA -gt 0 ] && echo '✅ FOUND' || echo '❌ Not found')"
 echo "   Rich Results: $([ $HAS_RICH -gt 0 ] && echo '✅ FOUND' || echo '❌ Not found')"
-echo "   FAQ Schema: $([ $HAS_FAQ -gt 0 ] && echo '✅ FOUND' || echo '❌ Not found')"
+echo "   FAQPage (RETIRED, should be absent): $([ $HAS_FAQ -gt 0 ] && echo '⚠️ PRESENT — remove FAQPage' || echo '✅ absent')"
 
 # SERP summary
 cat > "${TODAY_DIR}/serp/features.json" <<EOF

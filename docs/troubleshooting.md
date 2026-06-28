@@ -41,14 +41,15 @@ Privacy: see the repository’s [Privacy Notice](../PRIVACY.md). Indexing/IndexN
 // ❌ Missing context
 {
   "@type": "Person",
-  "name": "yourname.eth"
+  "name": "Your Name"
 }
 
 // ✅ Correct
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "yourname.eth"
+  "name": "Your Name",
+  "alternateName": "yourname.eth"
 }
 ```
 
@@ -69,22 +70,15 @@ cat your-schema.json | jq .
 
 ---
 
-### ❌ FAQ Schema not appearing
+### ⚠️ FAQ Schema not appearing — it's retired, that's expected
 
-**Problem**: FAQPage entity not detected
+**Not a bug.** Google removed FAQ rich results (Aug 2023) and retired the FAQ
+structured-data docs (2026-06-15). `FAQPage` will not produce a rich result and may
+appear as an invalid item / "Q&A" issue in Search Console.
 
-**Requirements**:
-- Minimum 2 questions
-- Each question must have acceptedAnswer
-- Text content must be substantive (50+ characters)
-
-```json
-// ❌ Too short
-"text": "A Web3 developer."
-
-// ✅ Sufficient detail
-"text": "yourname.eth is a verified Web3 identity holder with ENS domain ownership since 2023. The identity is verified through Dentity's Unique Human KYC process..."
-```
+**Fix**: remove `FAQPage` and keep FAQ content as **visible page copy**. `HowTo` is
+likewise retired (Sep 2023). `QAPage` is still supported but only for a single
+**user-submitted** Q&A page, not authored FAQ copy.
 
 ---
 
@@ -460,8 +454,9 @@ curl -s https://yoursite.com/ | grep -A 20 'application/ld+json'
       "@id": "https://yoursite.com/#Website"
     },
     {
-      "@type": "FAQPage",
-      "@id": "https://yoursite.com/faq/#FAQPage"
+      "@type": "ProfilePage",
+      "@id": "https://yoursite.com/about/",
+      "mainEntity": { "@id": "https://yoursite.com/#Author" }
     }
   ]
 }

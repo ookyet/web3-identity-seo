@@ -7,31 +7,25 @@ Privacy: see the repository’s [Privacy Notice](../PRIVACY.md). Examples that s
 ## 📋 Files
 
 ### 1. `schema-person.json`
-Complete Schema.org Person entity markup with:
-- ENS domain identifier
-- Dentity credential integration
-- Knowledge Graph eligibility flag
-- Cross-platform sameAs links
+Complete Schema.org Person entity markup (**Person-first**) with:
+- `name` = person/handle (primary key); ENS goes in `alternateName` + `identifier` (not the name)
+- Dentity credential integration (`hasCredential`)
+- Cross-platform `sameAs` links
 
 **Usage**:
 ```html
 <script type="application/ld+json">
-  <!-- Copy contents of schema-person.json here -->
+  <!-- Copy the entity from schema-person.json (drop the leading "_NOTE" key) -->
 </script>
 ```
 
-### 2. `schema-faq.json`
-FAQ Schema for AI Overviews optimization with:
-- Identity verification questions
-- Expertise area descriptions
-- Cross-platform proof explanations
-
-**Usage**:
-```html
-<script type="application/ld+json">
-  <!-- Copy contents of schema-faq.json here -->
-</script>
-```
+### 2. `schema-faq.json` — ⚠️ RETIRED, do not deploy
+Kept for historical context only. **Google removed FAQ rich results (Aug 2023) and
+retired the FAQ docs (2026-06-15)** — emitting `FAQPage` no longer yields a rich
+result and may surface as a Search Console issue. Keep FAQ content as **visible page
+copy** instead. (`HowTo` also retired Sep 2023; `QAPage` only for a single
+user-submitted Q&A page.) The file's top-level is intentionally wrapped so it cannot
+be pasted as valid markup.
 
 ### 3. `indexing-api.js`
 Google Indexing API implementation for fast indexing (24-48h vs 7-30 days).
@@ -82,5 +76,6 @@ Replace the following placeholders:
 - Stick to standard Schema.org vocabulary; avoid non-standard `propertyID` values such as a fictional `knowledge_graph_eligible` flag — Google does not recognize undocumented properties and may treat them as performative SEO signals
 - Include Dentity verification in `hasCredential` as a real `EducationalOccupationalCredential` (not a free-text string)
 - Maintain cross-platform consistency in `sameAs` links (same display name, avatar, bio across all listed profiles)
-- Update FAQ content based on actual common queries (Google ignores FAQ pages that read as keyword-stuffed)
+- Do **not** emit `FAQPage`/`HowTo` (retired by Google) — keep FAQ/how-to as visible page content; use `QAPage` only for a single user-submitted Q&A page
+- Keep the `Person` your single primary entity: `name` = person/handle, ENS in `alternateName` + `identifier`; one `ProfilePage` (`mainEntity` → Person) on the about page
 - Submit only public, eligible pages to the Indexing API; for general content prefer sitemaps and standard crawling per Google policy

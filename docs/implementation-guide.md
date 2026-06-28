@@ -82,7 +82,8 @@ Create `layouts/partials/schema-person.html` (Hugo) or inline in `<head>`:
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": "https://yoursite.com/#Author",
-  "name": "yourname.eth",
+  "name": "Your Name",
+  "alternateName": ["yourname.eth", "@yourhandle"],
   "url": "https://yoursite.com/",
   "image": "https://yoursite.com/images/avatar.png",
   "sameAs": [
@@ -133,28 +134,15 @@ Add `ProfilePage` declaration:
 
 This signals to Google: "This page is about a Person entity eligible for Knowledge Panel."
 
-### Step 2.3: FAQ Schema for AI Overviews
+### Step 2.3: FAQ — RETIRED (do not emit `FAQPage`)
 
-Create FAQ page (`/about/` or `/faq/`):
+> Google removed FAQ rich results (Aug 2023) and retired the FAQ structured-data
+> docs (2026-06-15). Do **not** emit `FAQPage` — it no longer yields a rich result
+> and can surface as an invalid item / "Q&A" issue in Search Console. Keep FAQ
+> content as **visible page copy**. (`HowTo` likewise retired Sep 2023; `QAPage`
+> only for a single user-submitted Q&A page.)
 
-```html
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": "Who is yourname.eth?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "yourname.eth is a verified Web3 identity..."
-    }
-  }]
-}
-</script>
-```
-
-**Validation**:
+**Validation** (against the Person + ProfilePage markup from the steps above):
 ```bash
 # Test with Google Rich Results Test
 https://search.google.com/test/rich-results?url=https://yoursite.com/
@@ -162,8 +150,8 @@ https://search.google.com/test/rich-results?url=https://yoursite.com/
 
 Expected results:
 - ✅ Person entity detected
-- ✅ FAQPage detected
-- ✅ 0 errors, 0 warnings
+- ✅ ProfilePage detected (`mainEntity` → Person)
+- ✅ 0 errors, 0 warnings (no FAQPage / HowTo / QAPage)
 
 ---
 
@@ -421,7 +409,8 @@ If your name is common, add disambiguating properties:
 ```json
 {
   "@type": "Person",
-  "name": "yourname.eth",
+  "name": "Your Name",
+  "alternateName": "yourname.eth",
   "disambiguatingDescription": "Web3 developer specializing in ENS and decentralized identity"
 }
 ```

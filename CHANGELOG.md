@@ -6,7 +6,21 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
-## [2.0.0] — 2026-05-09
+## [3.0.0] — 2026-06-28
+
+Alignment with Google's current structured-data policy and a Person-first entity model, after the 2026-06-28 GSC re-identification of the reference site (`ookyet.com`) flagged retired/misused types. Companion rigor pass to 2.0.0.
+
+### Changed
+
+- **Retired `FAQPage` across the project** (`README.md`, `docs/implementation-guide.md`, `docs/faq.md`, `docs/troubleshooting.md`, `examples/schema-faq.json`, `examples/README.md`, `scripts/kg-audit.sh`). Google removed FAQ rich results (Aug 2023) and retired the FAQ structured-data docs (2026-06-15). The guide no longer recommends emitting `FAQPage`; FAQ content belongs in visible page copy. `examples/schema-faq.json` is kept but wrapped so it cannot be pasted as valid markup.
+- **`HowTo` / `QAPage` guidance** — noted `HowTo` is retired (Sep 2023) and `QAPage` is valid only for a single user-submitted Q&A page (not authored FAQ copy).
+- **Person-first naming** (`README.md` Step 1, `examples/schema-person.json`, `examples/README.md`). The `Person` is the single primary entity; `name` is the person/handle, and the ENS domain moves to `alternateName` + `identifier` (a verifiable anchor, not the primary key). Fixed `propertyID` `ens_domain` → `ens` with a resolvable `url`.
+- **ProfilePage** — clarified `mainEntity` must be a `Person`/`Organization`; emit exactly one ProfilePage on the canonical about page.
+
+### Removed
+
+- **Unverifiable KP-probability claims** (`README.md` Live Implementation `85%+`, architecture diagram `Confidence: 96%` and `85%+ KP Trigger Probability`, case study `85%+`). These contradicted the repo's own Knowledge-Panel-probability disclosure note and were performative signals.
+- **False "FAQ rich result" / "FAQPage detected" outcomes** from the README live badge and Results table (the type is retired and cannot be detected).
 
 Field-rigor revision after ~7 months of running the architecture against `ookyet.eth`. Anti-patterns removed; verifiable outcomes promoted; unverifiable claims qualified with methodology disclosure.
 

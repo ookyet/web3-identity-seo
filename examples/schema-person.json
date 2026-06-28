@@ -1,9 +1,10 @@
 {
+  "_NOTE": "Person-first model: 'name' is the person/handle (the entity's primary key), NOT the ENS domain. The ENS name goes in 'alternateName' and 'identifier' as a verifiable anchor. This keeps Google's person entity keyed to a human/handle while ENS corroborates it.",
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": "https://yoursite.com/#Author",
-  "name": "yourname.eth",
-  "alternateName": "Your Display Name",
+  "name": "Your Name",
+  "alternateName": ["yourname.eth", "@yourhandle"],
   "description": "Web3 developer and blockchain identity enthusiast",
   "url": "https://yoursite.com/",
   "image": "https://yoursite.com/images/avatar.png",
@@ -16,8 +17,9 @@
   "identifier": [
     {
       "@type": "PropertyValue",
-      "propertyID": "ens_domain",
+      "propertyID": "ens",
       "value": "yourname.eth",
+      "url": "https://app.ens.domains/name/yourname.eth",
       "description": "Ethereum Name Service domain"
     }
   ],
