@@ -6,6 +6,24 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.0.4] — 2026-06-29
+
+Results updated to reflect now-verifiable outcomes; added citation metadata.
+
+### Changed
+
+- **`README.md` Results** — recorded the reference implementation's verified, reproducible outcomes: Google AI Overview now narrates `ookyet` as an entity (resolving person, ENS, and NFT avatar from 6-7 sources); Search Console 16-month performance (avg position 1.4, CTR 11.1%). Kept the honest distinction that **AI Overview entity recognition is not a formal Knowledge Panel** (still not triggered).
+
+### Added
+
+- **`CITATION.cff`** — citation metadata so the architecture can be referenced (enables GitHub's "Cite this repository").
+
+### Notes
+
+- Repository description refined to lead with "Google-recognized entities" rather than "Knowledge Panel optimization," matching the project's verifiable-outcomes discipline.
+
+---
+
 ## [3.0.3] — 2026-06-29
 
 Alignment with Google's official documentation as of June 2026 (verified against Search Central).

@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this architecture or its documentation, please cite it."
+title: "Web3 Identity SEO: Structured Data for ENS Identity Pages"
+abstract: >-
+  An open-source architecture and documentation set for making ENS-based
+  identities understandable to search engines as named entities: Schema.org
+  Person-first entity graphs, ProfilePage markup, proof-of-personhood
+  credentials, cross-platform sameAs consistency, and indexing hygiene.
+  Reference implementation: ookyet.eth.
+type: software
+authors:
+  - name: "ookyet"
+    alias: "ookyet.eth"
+    website: "https://ookyet.com"
+repository-code: "https://github.com/ookyet/web3-identity-seo"
+url: "https://ookyet.com/proof/"
+license: MIT
+keywords:
+  - web3-identity
+  - ens
+  - structured-data
+  - schema-org
+  - entity-seo
+  - knowledge-graph
