@@ -1,0 +1,17 @@
+name: Commit Guard
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-head:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify HEAD commit message and author
+        run: bash scripts/commit-message-guard.sh --check-head

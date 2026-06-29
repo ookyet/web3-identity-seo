@@ -296,7 +296,16 @@ The complete implementation demonstrates:
 
 ## Contributing
 
-Improvements and additional implementations welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for scope and process.
+- “Discover/可观测性”建议打 `proposal:observability`；隐私确认后加 `privacy-reviewed`；排名诉求统一 `wontfix:ranking` 并转 Discussions。
+
+Git commit guard setup:
+
+```bash
+git config core.hooksPath .githooks
+chmod +x .githooks/commit-msg scripts/commit-message-guard.sh
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for hook rules (author, ASCII English, no AI trailers).
 
 ## License
 

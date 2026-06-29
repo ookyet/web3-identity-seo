@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ROOT_DIR="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+GUARD_SCRIPT="$ROOT_DIR/scripts/commit-message-guard.sh"
+
+if [[ ! -x "$GUARD_SCRIPT" ]]; then
+  chmod +x "$GUARD_SCRIPT" 2>/dev/null || true
+fi
+
+if [[ ! -f "$GUARD_SCRIPT" ]]; then
+  echo "commit-msg blocked: missing scripts/commit-message-guard.sh" >&2
+  exit 1
+fi
+
+exec bash "$GUARD_SCRIPT" "$1"
