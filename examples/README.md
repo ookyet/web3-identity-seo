@@ -61,7 +61,7 @@ Replace the following placeholders:
 
 - [Main README](../README.md) - Complete implementation guide
 - [Documentation](../docs/) - Detailed setup instructions
-- [Live Example](https://ookyet.com/proof/) - Working implementation
+- [Reference implementation](https://ookyet.com/proof/) - Documented example site
 
 ## ⚠️ Important Notes
 

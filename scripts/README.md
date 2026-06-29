@@ -237,11 +237,11 @@ TRIGGER_SCORE = (CONFIDENCE × 0.25) +
                 (UNIQUENESS × 0.10)
 ```
 
-**Target**: 90+ for Knowledge Panel eligibility
+**Target**: 90+ on the internal trigger-score heuristic (not a Google metric)
 
 ### Spam Filter Status
 
-- `LEGITIMATE`: ✅ All clear, KP eligible
+- `LEGITIMATE`: ✅ Heuristic score indicates complete signals
 - `REVIEWING`: ⚠️ Under evaluation, needs more signals
 - `SUSPECT`: ❌ Blocked, increase external authority
 
@@ -258,6 +258,18 @@ TRIGGER_SCORE = (CONFIDENCE × 0.25) +
 - **70-85%**: High signal completeness (no implied timeline)
 - **85-95%**: Very high signal completeness
 - **95%+**: Signals saturated; nothing more to add on-site
+
+### Google Discover observability (planned, opt-in)
+
+Tracked in [Issue #9](https://github.com/ookyet/web3-identity-seo/issues/9). Scope if implemented:
+
+- **Source**: Search Console API `searchanalytics.query` with `type: "discover"`
+- **Window**: property-level aggregates only (e.g. last 28 days); no query/page dimensions
+- **Auth**: read-only scope (`webmasters.readonly`); credentials stay on the user's machine
+- **UI**: compact status badge (absent | present | rising); no scores or optimization tips
+- **Default**: off; user-enabled only
+
+**Non-goals**: Discover metrics will **not** feed into KP trigger probability or any ranking heuristic. This repo does not provide growth/SEO guidance or attempt to influence Google systems. See `docs/privacy-ui-copy.md` and `.github/ISSUE_TEMPLATE/observability-proposal.md`.
 
 ---
 

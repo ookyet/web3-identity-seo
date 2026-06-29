@@ -1,4 +1,4 @@
-# Web3 Identity SEO: Making ENS Domains Google-Visible
+# Web3 Identity SEO: Structured Data for ENS Identity Pages
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![Live Demo](https://img.shields.io/badge/demo-ookyet.eth-blue)](https://ookyet.com/proof/)
@@ -7,21 +7,19 @@
   [![Dentity](https://img.shields.io/badge/Dentity-Verified-success)](https://dentity.com/ookyet.eth)
   [![Privacy](https://img.shields.io/badge/Privacy-Notice-blue)](PRIVACY.md)
 
-> **Making blockchain identities discoverable on traditional search engines** — ENS + Dentity + Schema.org.
+> Open-source documentation for structured data, identity verification, and search indexing of ENS-based pages.
 >
-> ⭐ **Live**: [`ookyet.eth`](https://ookyet.com/proof/) on Google Search — Position 1 stable 90+ days · Sitelinks · Image Thumbnail · Image pack · AI Overview entity mention.
+> Reference implementation: [`ookyet.eth`](https://ookyet.com/proof/) — measured outcomes in [Results](#results).
 
 Privacy: see the [Privacy Notice](PRIVACY.md).
 
 ## Problem
 
-ENS domains like `vitalik.eth` or `ookyet.eth` are invisible to Google Search. When users search for these identities, nothing appears in search results or Knowledge Panels.
-
-This creates a discovery gap between Web3 and Web2.
+ENS domains like `vitalik.eth` or `ookyet.eth` often lack structured entity markup on an associated website. Without machine-readable Person/Organization data and cross-source consistency, they may not appear as named entities in web search results or Knowledge Panels.
 
 ## Solution Architecture
 
-A 5-layer system that bridges blockchain identities with Google's Knowledge Graph:
+A documented five-layer approach for entity markup and indexing submission:
 
 ### Layer 1: Indexing Acceleration
 - **Google Indexing API** - 24-48 hour indexing vs 7+ days traditional crawl
@@ -30,13 +28,13 @@ A 5-layer system that bridges blockchain identities with Google's Knowledge Grap
 
 ### Layer 2: Entity Markup
 - **Schema.org @graph** - Structured entity data
-- **Person/Organization types** - Knowledge Graph eligible entities
+- **Person/Organization types** - Standard Schema.org entity types
 - **hasCredential properties** - Dentity/ENS verification signals
 
 ### Layer 3: Proof of Humanness
 - **Dentity Unique Human verification** - Anti-Sybil KYC
-- **Government ID + Biometric** - AI cannot pass
-- **10/10 verification checks** - Cryptographic proof
+- **Government ID + Biometric** - Third-party liveness and document checks
+- **Verification checklist** - Provider-specific credential status
 
 ### Layer 4: Entity Graph Linkage
 - **`@graph` with shared `@id` references** - Person, ProfilePage, WebSite, and Article entities are explicitly linked through stable `@id` URIs, so Google parses one cohesive entity rather than several disconnected ones
@@ -48,7 +46,7 @@ A 5-layer system that bridges blockchain identities with Google's Knowledge Grap
 - **NFT avatar** - Visual identity proof
 - **sameAs linkage** - Cross-source consistency
 
-## Live Implementation
+## Reference Implementation
 
 See **[ookyet.eth](https://ookyet.com/proof/)** for a production example:
 
@@ -223,22 +221,21 @@ Based on the **ookyet.eth** implementation:
 - Issues: actionable, verifiable suggestions only (observability/privacy/minimization). For ideas, use [Discussions](https://github.com/ookyet/web3-identity-seo/discussions).
 - Labels: `proposal:observability`, `privacy-reviewed`, `wontfix:ranking`.
 
-## Why This Matters
+## Use Cases
 
-### For Individual Identity
-- Web3 identities become searchable on Google
-- Cryptographic ownership proof visible to Web2 users
-- Anti-Sybil verification (Dentity Unique Human)
+### Individual identity
+- Publish structured Person/Organization markup tied to an ENS name
+- Express on-chain ownership and optional third-party verification in `identifier` / `hasCredential`
+- Link a canonical website and social profiles via `sameAs`
 
-### For Web3 Adoption
-- Bridges discovery gap between Web2/Web3
-- Makes blockchain identities accessible to 4 billion Google users
-- Establishes verifiable digital identity standards
+### Web3 / Web2 interoperability
+- Document a repeatable pattern for aligning on-chain names with a public site
+- Provide cross-source consistency signals search engines can parse
 
-### For Search Engines
-- Structured entity data for AI understanding
-- Proof of Humanness (vs AI-generated identities)
-- Cross-platform consistency validation
+### Search engines
+- Machine-readable entity graphs (`@graph`, ProfilePage, Person)
+- Optional proof-of-personhood credentials where applicable
+- Explicit cross-platform linkage for entity disambiguation
 
 ## Case Study: ookyet.eth
 
@@ -246,7 +243,7 @@ The complete implementation demonstrates:
 
 1. **ENS Ownership Proof**
    - Domain: ookyet.eth
-   - Wallet: 0x1691E606553805D771e411bF5c6e395D16916f99
+   - Wallet: 0xC5F1c8b15A658B1b36A0CF2c64b45101568B17fF
    - On-chain since 2023
 
 2. **Dentity Verification**
@@ -260,13 +257,13 @@ The complete implementation demonstrates:
    - Consistent visual identity
    - OpenSea ownership proof
 
-4. **Google Optimization**
+4. **Search indexing and markup**
    - Schema.org complete @graph (Person-first; FAQ/HowTo/QAPage not emitted)
    - ProfilePage with `mainEntity` → Person on the about page
    - Consistent cross-platform `sameAs` + verifiable `identifier`/`hasCredential`
 
 **Full Technical Breakdown**: https://ookyet.com/blog/identity-through-ens/
-**Live Proof Hub**: https://ookyet.com/proof/
+**Proof hub**: https://ookyet.com/proof/
 
 ## Getting Started
 
@@ -291,7 +288,7 @@ The complete implementation demonstrates:
 
 ## Resources
 
-- **Live Example**: [ookyet.eth](https://ookyet.com/proof/)
+- **Reference example**: [ookyet.eth](https://ookyet.com/proof/)
 - **Technical Blog**: [Identity Through ENS](https://ookyet.com/blog/identity-through-ens/)
 - **ENS Domains**: [app.ens.domains](https://app.ens.domains)
 - **Dentity KYC**: [dentity.com](https://dentity.com)
@@ -299,26 +296,12 @@ The complete implementation demonstrates:
 
 ## Contributing
 
-Improvements and additional implementations welcome. This is an evolving standard for Web3 identity discoverability.
+Improvements and additional implementations welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for scope and process.
 
 ## License
 
-MIT - Use this architecture to make your Web3 identity Google-visible.
+MIT License.
 
 ---
 
-**Built by the Web3 identity community. Proven by ookyet.eth.**
-
-*Making blockchain identities discoverable to 4 billion Google users.*
-
- ---
-
-## ⭐ Show Your Support
-
-If this project helped make your Web3 identity Google-visible, please star this repository!
-
-**[⭐ Star this repo](https://github.com/ookyet/web3-identity-seo)** to help others discover it.
-
-## 🔔 Stay Updated
-
-Watch this repository for updates on Web3 SEO best practices and Knowledge Panel optimization techniques.
+Reference implementation: [ookyet.eth](https://ookyet.com/proof/).

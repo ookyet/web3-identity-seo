@@ -1,6 +1,6 @@
 # Frequently Asked Questions
 
-Common questions about Web3 Identity SEO and Google Knowledge Panel optimization.
+Common questions about implementing structured data and indexing for ENS identity pages.
 
 ---
 
@@ -10,11 +10,11 @@ Privacy: see the [Privacy Notice](../PRIVACY.md). Use of submission utilities mu
 
 ### What is this project?
 
-An open-source architecture for making ENS (Ethereum Name Service) domains discoverable on Google Search and eligible for Knowledge Panels. It bridges the gap between Web3 blockchain identities and traditional search engines.
+An open-source architecture documenting structured data, verification, and indexing patterns for ENS identity pages. Knowledge Panel display is determined by Google and is not guaranteed by this project.
 
 ### Why do I need this?
 
-ENS domains like `vitalik.eth` or `yourname.eth` are invisible to Google's 4+ billion users. This creates a discovery gap where your blockchain identity can't be found through normal web search. This project solves that problem through structured data, verification, and indexing optimization.
+ENS domains like `vitalik.eth` or `yourname.eth` often lack structured entity markup on an associated website, so they may not appear as named entities in web search. This project documents repeatable patterns—Schema.org markup, optional verification credentials, and indexing submission—to improve parseability and discoverability.
 
 ### How long does implementation take?
 
@@ -52,7 +52,7 @@ Basic HTML/JSON knowledge helpful but not required. If you use Hugo or similar s
 
 Schema.org is a structured data standard created by Google, Microsoft, Yahoo, and Yandex. It tells search engines "this page is about a Person named X with these properties."
 
-Without Schema.org, Google sees your site as unstructured text. With it, Google understands you're a specific entity eligible for Knowledge Graph inclusion.
+Without Schema.org, Google sees your site as unstructured text. With it, search engines can parse a typed entity (Person/Organization) with explicit properties.
 
 ### What is the `knowledge_graph_eligible` flag?
 
@@ -83,30 +83,22 @@ Knowledge Panel eligibility comes from genuine signals — entity disambiguation
 
 ### Do I need Dentity verification?
 
-**Strongly recommended** but not technically required.
+**Optional** third-party verification. It is not required to deploy Schema.org markup or submit URLs for indexing.
 
 **With Dentity** (Unique Human KYC):
-- Proves you're a real person (not AI-generated)
-- Strongest anti-spam signal for Google
-- Increases KP probability by ~40%
-- Estimated timeline: 4-8 weeks
+- Adds a verifiable `hasCredential` block to your entity markup
+- Documents identity verification from a third-party provider
+- May reduce ambiguity when search systems evaluate person entities
 
 **Without Dentity**:
-- Google may flag entity as potential spam
-- Longer validation timeline: 6-12 months
-- Lower KP probability: 60-70% vs 85-95%
+- You can still publish Person markup, `sameAs` links, and ENS identifiers
+- Google does not publish how it weights third-party KYC credentials
 
-For serious implementation, invest the ~$30-50 in Dentity.
+See [What's the success rate for getting a Knowledge Panel?](#whats-the-success-rate-for-getting-a-knowledge-panel) for a relative ranking of signal completeness, with caveats in the methodology note there.
 
 ### Can I use this without ENS?
 
-The architecture works for any identity, but ENS provides unique advantages:
-- On-chain ownership proof
-- Cryptographic verification
-- Cross-platform identifier
-- Growing recognition by Google
-
-For traditional domains (name.com), you can adapt the Schema.org markup but lose blockchain verification benefits.
+The architecture works for any identity, but ENS provides on-chain ownership proof and a portable identifier you can express in `identifier` and `sameAs`.
 
 ### What's the difference between IndexNow and Indexing API?
 
@@ -122,7 +114,7 @@ For traditional domains (name.com), you can adapt the Schema.org markup but lose
 - No hard limit
 - Simpler setup
 
-Use both for maximum coverage. Google Indexing API is critical for Knowledge Panel, IndexNow adds Bing/Yandex visibility.
+Use both where applicable. Indexing API may speed Google crawl/indexing for eligible URL types; IndexNow notifies Bing/Yandex. Neither guarantees Knowledge Panel display.
 
 Compliance note: Google’s Indexing API is intended for specific content types (e.g., JobPosting, live streams). For general pages, prefer sitemaps and normal crawling. Use responsibly and follow Google policies.
 
@@ -173,6 +165,31 @@ All support custom domains and HTTPS (required for Schema.org).
 - May not qualify for Knowledge Panel
 
 Best: Own both and link them bidirectionally.
+
+### How do I handle multiple subdomains or site sections?
+
+Use **one Person entity** as the primary subject across your web presence.
+
+**Recommended pattern**
+
+- **`name`**: your person/handle (not the ENS domain)
+- **`alternateName` / `identifier`**: include your primary ENS name
+- **`url`**: your canonical site root (or an array of official site URLs you control)
+- **One `ProfilePage`** on the canonical about page with `mainEntity` pointing to that Person `@id`
+- **Section or subdomain pages** (e.g. `/work/`, `/art/`, or `work.example.com`): use page-level `WebPage` / `CollectionPage` markup; do **not** create separate Person entities for each section
+
+**Avoid**
+
+- A fictional `knowledge_graph_eligible` property — removed from this guide in v3.0.0; Google does not recognize it
+- Treating `kg-monitor.js` / `kg-audit.sh` percentages as Google metrics — they are local heuristics for signal completeness only
+- Duplicate or near-duplicate copy across sections; fix Search Console duplicate-content warnings before expanding markup
+- Bulk Indexing API submission of thin section landing pages; prefer sitemap + normal crawl for general content
+
+**Dentity**: verification is tied to the wallet/ENS you verified. It does not automatically cover every subdomain — reuse the same `hasCredential` URL on pages that represent the same person.
+
+**`sameAs`**: keep one consistent set of profile links on the canonical Person entity. Section-specific pages can link back to the canonical about page; avoid divergent identity signals across subdomains.
+
+Related discussion: [Issue #8](https://github.com/ookyet/web3-identity-seo/issues/8).
 
 ### How many external sources do I need?
 
@@ -476,7 +493,7 @@ Ways to contribute:
 - Add examples for other static site generators
 - Report implementation results
 - Submit bug fixes
-- Share optimization techniques
+- Share implementation notes
 
 ### Where can I share my success story?
 
@@ -484,8 +501,6 @@ Ways to contribute:
 2. **Twitter** - Tag @ookyet (or project account)
 3. **Dev.to** - Write your own tutorial
 4. **ENS Discord** - #showcase channel
-
-We love seeing implementations in the wild!
 
 ### Is there a community for Web3 SEO?
 
@@ -503,8 +518,6 @@ Growing! Join:
 - 💡 Suggest improvements
 - 🔗 Link to this repo from your implementation
 
-Open-source thrives on community contributions!
-
 ---
 
 ## Still Have Questions?
@@ -520,7 +533,7 @@ Open-source thrives on community contributions!
 
 4. **Community discussion**: [GitHub Discussions](https://github.com/ookyet/web3-identity-seo/discussions)
 
-5. **Live example**: See [ookyet.eth](https://ookyet.com/proof/) for working implementation
+5. **Reference example**: See [ookyet.eth](https://ookyet.com/proof/) for a documented implementation
 
 ---
 

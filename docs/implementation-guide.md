@@ -1,6 +1,6 @@
 # Web3 Identity SEO Implementation Guide
 
-Complete step-by-step guide to making your ENS domain Google-visible.
+Step-by-step guide to implementing structured data and indexing for ENS identity pages.
 
 ---
 
@@ -56,7 +56,7 @@ curl https://metadata.ens.domains/mainnet/0x[YOUR_ADDRESS]
 5. Save verification URL: https://dentity.com/yourname.eth
 ```
 
-**Why critical**: Dentity provides "Proof of Humanness" - the strongest anti-spam signal for Google's algorithms. Without it, your entity may be flagged as potential AI-generated spam.
+**Optional but recommended**: Dentity adds a third-party `hasCredential` you can include in Person markup. Google does not publish how it weights such signals.
 
 ### Step 1.3: NFT Avatar (Optional but Recommended)
 
@@ -132,7 +132,7 @@ Add `ProfilePage` declaration:
 </script>
 ```
 
-This signals to Google: "This page is about a Person entity eligible for Knowledge Panel."
+This declares that the page's primary subject is a Person entity (`ProfilePage.mainEntity`).
 
 ### Step 2.3: FAQ — RETIRED (do not emit `FAQPage`)
 
