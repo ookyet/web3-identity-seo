@@ -20,10 +20,10 @@ ENS domains like `vitalik.eth` or `yourname.eth` often lack structured entity ma
 
 **Technical setup**: 1-2 days
 **Content creation**: 3-5 days
-**External authority**: 1-2 weeks
-**Total to Knowledge Panel**: 4-8 weeks
+**External corroboration**: ongoing (typically weeks to months)
+**Knowledge Panel**: no reliable timeline — Google's non-public decision; not guaranteed by this project
 
-The technical implementation is fast. Most time is spent on external validation (GitHub, Dev.to, community engagement).
+The technical implementation is fast. Most ongoing work is external validation (GitHub, Dev.to, cross-source consistency).
 
 ### Do I need coding knowledge?
 
@@ -251,7 +251,7 @@ Yes, use `sameAs` to link them:
 }
 ```
 
-But **choose one primary** for Knowledge Panel candidacy. Multiple entities dilute signals.
+But **choose one primary** canonical site and Person `@id` for entity disambiguation. Multiple competing primary entities dilute signals.
 
 ---
 
@@ -259,14 +259,15 @@ But **choose one primary** for Knowledge Panel candidacy. Multiple entities dilu
 
 ### What's the success rate for getting a Knowledge Panel?
 
-**With this implementation** (internal estimates from observed implementations — see methodology note below):
-- Full architecture + Dentity + 5 external sources: **85-95%**
-- Partial implementation (no Dentity): **60-70%**
-- Minimal (just Schema.org): **20-30%**
+Google does not publish success rates or timelines. Use this **signal completeness checklist** instead of a probability score:
 
-**Timeline**: 4-8 weeks for full implementation, 6-12 months for partial.
+| Tier | Typical signals present |
+|------|-------------------------|
+| **Full** | Person-first `@graph`; one ProfilePage on the about page; optional `hasCredential`; 5+ consistent `sameAs` profiles; stable canonical URLs (minimal schema churn) |
+| **Partial** | Person markup + canonical site; fewer external sources; no third-party KYC |
+| **Minimal** | Person JSON-LD on a single site only |
 
-> **Methodology note**: These percentages are internal estimates based on observed signal strength, not figures published or confirmed by Google. The Knowledge Panel decision is opaque — Google does not expose a "trigger probability" through any public API, and Knowledge Graph API responses do not distinguish a fully-prepared candidate from an unknown entity. Treat the numbers above as a relative ranking of signal completeness, not as a guarantee or measured probability.
+> **Methodology note**: These tiers rank how complete your **on-site and cross-source signals** are. They are not Google metrics. Knowledge Panel display is opaque — the Knowledge Graph API does not expose a "candidate" state, and empty API results do not distinguish "unknown" from "prepared but not promoted." After signals are stable, further schema tweaks often reset Google's re-evaluation clock rather than accelerate KP.
 
 ### Can Google reject my Knowledge Panel?
 

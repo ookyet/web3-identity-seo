@@ -6,6 +6,20 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.0.1] — 2026-06-29
+
+Rigor pass aligned with the reference site (`ookyet.com`) KG/KP discipline: stable signals over KP chasing.
+
+### Changed
+
+- **`docs/faq.md`** — replaced KP "success rate" percentages and timelines with a signal-completeness tier table; clarified KP has no reliable timeline.
+- **`docs/implementation-guide.md`** — monitoring metrics and phase timeline no longer promise KP activation weeks; KG API empty results documented as non-diagnostic.
+- **`scripts/kg-monitor.js`** — renamed KP probability output to signal completeness (heuristic); removed `95%+` target line.
+- **`scripts/README.md`** — heuristic bands described without implying Google timelines.
+- **`CONTRIBUTING.md` / `README.md`** (prior commits in this series) — issue-closure policy; retired `KnowledgePanelCandidate` / Active Trigger naming; `ens` propertyID consistency.
+
+---
+
 ## [3.0.0] — 2026-06-28
 
 Alignment with Google's current structured-data policy and a Person-first entity model, after the 2026-06-28 GSC re-identification of the reference site (`ookyet.com`) flagged retired/misused types. Companion rigor pass to 2.0.0.

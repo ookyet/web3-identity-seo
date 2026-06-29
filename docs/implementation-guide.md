@@ -312,11 +312,13 @@ chmod +x kg-audit.sh
 ./kg-audit.sh
 ```
 
-**Key metrics to track**:
-- Entity confidence score (target: 95%+)
-- Cross-source consistency (target: 99%+)
-- External validation count (target: 3+)
-- KP trigger probability (target: 90%+)
+**Key metrics to track** (local heuristics in `kg-audit.sh` / `kg-monitor.js` — **not Google metrics**):
+- `TRIGGER_SCORE` / signal-completeness bands (relative checklist only)
+- Cross-source consistency (`sameAs` + display name / avatar alignment)
+- External validation count (minimum 3 independent sources recommended)
+- Rich Results Test: 0 errors on canonical Person + ProfilePage
+
+See [scripts/README.md](../scripts/README.md) for heuristic band definitions and disclaimers.
 
 ### Step 5.2: Google Search Console
 
@@ -334,10 +336,7 @@ Monitor weekly:
 curl "https://kgsearch.googleapis.com/v1/entities:search?query=yourname.eth&key=YOUR_API_KEY&limit=1"
 ```
 
-**Timeline expectations**:
-- Week 1-2: No results (normal)
-- Week 3-4: Possible candidate appearance
-- Week 5-8: Full Knowledge Panel (if all signals met)
+**KG API note**: Empty `itemListElement` is normal and does not distinguish "not indexed as an entity" from "signals present but no KP." Do not treat API responses as a KP probability.
 
 ---
 
@@ -374,11 +373,10 @@ See [troubleshooting.md](./troubleshooting.md) for common issues and solutions.
 - [ ] Daily KG audit running
 - [ ] Cross-source consistency maintained
 
-**Expected Timeline**:
+**Implementation phases** (your pace may vary):
 - Week 1: Technical setup complete
 - Week 2: Content published
-- Week 3: External authority building
-- Week 4-8: Knowledge Panel activation
+- Week 3+: External corroboration and stability (no KP timeline — see FAQ)
 
 ---
 

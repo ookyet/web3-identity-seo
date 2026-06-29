@@ -253,11 +253,11 @@ TRIGGER_SCORE = (CONFIDENCE × 0.25) +
 > thresholds, timelines, or guarantees. Knowledge Panel triggering remains Google's
 > non-public decision.
 
-- **0-40%**: Early stage, more work needed
-- **40-70%**: Good progress, add external sources
-- **70-85%**: High signal completeness (no implied timeline)
-- **85-95%**: Very high signal completeness
-- **95%+**: Signals saturated; nothing more to add on-site
+- **0–40**: Early — more signals needed
+- **40–70**: Progress — add external sources
+- **70–85**: High completeness (heuristic band; no implied timeline)
+- **85–95**: Very high completeness (heuristic band)
+- **95+**: Signals saturated on-site; external corroboration and time matter more than further schema changes
 
 ### Google Discover observability (planned, opt-in)
 

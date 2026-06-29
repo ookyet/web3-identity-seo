@@ -2,9 +2,9 @@
 /**
  * Knowledge Graph 监控脚本
  *
- * 用途: 评估 ookyet.eth 的 Knowledge Panel 触发概率
+ * Purpose: Local signal-completeness checklist for the ookyet.eth reference implementation.
  *
- * DISCLAIMER: The percentages reported by this tool (KP trigger probability,
+ * DISCLAIMER: The percentages reported by this tool (signal completeness,
  * entity confidence, etc.) are heuristic estimates produced locally by this
  * script. They are NOT metrics published or exposed by Google. Google does not
  * provide a "Knowledge Panel trigger probability" or "entity confidence" score;
@@ -231,15 +231,14 @@ function runEvaluation() {
   log(`进度状态: ${timeDist.status}`, 'cyan');
   log(`目标: ${timeDist.targetDays}天自然分布 (避免spam过滤)`, 'reset');
 
-  // 3. Knowledge Panel 概率
-  subheader('🎯 3. Knowledge Panel 触发概率');
+  // 3. Signal completeness (heuristic)
+  subheader('🎯 3. Signal completeness (heuristic — not a Google metric)');
   const kpProb = calculateKPProbability(externalAuth, timeDist);
 
-  log(`当前概率: ${kpProb.score}%`, kpProb.score >= 90 ? 'green' : 'yellow');
-  log(`基线概率: ${kpProb.baseline}%`, 'reset');
-  log(`变化: ${kpProb.change >= 0 ? '+' : ''}${kpProb.change}%`, kpProb.change > 0 ? 'green' : 'red');
-  log(`目标: 95%+`, 'cyan');
-  log(`(Heuristic estimate by this tool — not a Google metric. KP eligibility is Google's non-public decision.)`, 'cyan');
+  log(`Current score: ${kpProb.score}%`, kpProb.score >= 90 ? 'green' : 'yellow');
+  log(`Baseline: ${kpProb.baseline}%`, 'reset');
+  log(`Change: ${kpProb.change >= 0 ? '+' : ''}${kpProb.change}%`, kpProb.change > 0 ? 'green' : 'red');
+  log(`(Heuristic estimate by this tool — not a Google metric. KP display is Google's non-public decision.)`, 'cyan');
 
   // 4. 固定指标 (已达标)
   subheader('✅ 4. 已达标指标');
