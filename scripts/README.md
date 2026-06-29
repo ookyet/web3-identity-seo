@@ -47,11 +47,11 @@ docs/entity-audit/YYYYMMDD/
 └── summary.txt
 ```
 
-**Monitoring Metrics**:
-- Entity Confidence Score (target: 96%+)
-- Cross-source Consistency (target: 99%+)
-- KP Trigger Probability (target: 90%+)
-- Spam Filter Status (target: LEGITIMATE)
+**Monitoring Metrics** (local heuristics only — not Google metrics):
+- Entity score (`TRIGGER_SCORE` in kg-audit.sh): internal completeness checklist (see bands below)
+- Cross-source consistency: compare `sameAs` / display names across listed profiles
+- KP trigger probability (kg-monitor.js): relative signal-completeness estimate only
+- Spam filter status: local label derived from the heuristic score
 
 > **Disclaimer.** These figures are heuristic estimates produced locally by this
 > tool, **not metrics published or exposed by Google**. Google does not provide an

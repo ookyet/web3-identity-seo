@@ -94,7 +94,7 @@ Create `layouts/partials/schema-person.html` (Hugo) or inline in `<head>`:
   "identifier": [
     {
       "@type": "PropertyValue",
-      "propertyID": "ens_domain",
+      "propertyID": "ens",
       "value": "yourname.eth"
     }
   ],
@@ -112,9 +112,9 @@ Create `layouts/partials/schema-person.html` (Hugo) or inline in `<head>`:
 - `hasCredential`: Dentity verification link
 - `sameAs`: Cross-platform consistency (minimum 5 platforms)
 
-> ⚠️ **Avoid non-standard `propertyID` values** (e.g., a fictional `knowledge_graph_eligible` flag). Google does not recognize undocumented properties and its anti-spam systems may down-weight pages that fabricate signals. Stick to standard Schema.org vocabulary plus widely recognized identifier types (`ens_domain`, `wikidata`, etc.).
+> ⚠️ **Avoid non-standard `propertyID` values** (e.g., a fictional `knowledge_graph_eligible` flag). Google does not recognize undocumented properties and its anti-spam systems may down-weight pages that fabricate signals. Stick to standard Schema.org vocabulary plus widely recognized identifier types (`ens`, `wikidata`, etc.).
 
-### Step 2.2: Active Trigger Interfaces
+### Step 2.2: ProfilePage Declaration
 
 Add `ProfilePage` declaration:
 
@@ -123,7 +123,7 @@ Add `ProfilePage` declaration:
 {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
-  "@id": "https://yoursite.com/#KnowledgePanelCandidate",
+  "@id": "https://yoursite.com/#ProfilePage",
   "mainEntity": {
     "@type": "Person",
     "@id": "https://yoursite.com/#Author"
@@ -426,6 +426,6 @@ After implementation:
 4. Keep cross-platform consistency
 5. Publish regular content (1+ per month)
 
-**Expected Knowledge Panel probability**: 85-95% after 4-8 weeks
+Knowledge Panel display remains Google's non-public decision. Treat signal completeness (see FAQ methodology note) as a checklist, not a timeline or guarantee.
 
 For support and questions, open an issue in the GitHub repository.

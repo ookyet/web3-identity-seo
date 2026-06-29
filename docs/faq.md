@@ -74,7 +74,7 @@ Use standard Schema.org vocabulary instead. For Web3 identity, real, useful iden
 ```json
 "identifier": [{
   "@type": "PropertyValue",
-  "propertyID": "ens_domain",
+  "propertyID": "ens",
   "value": "yourname.eth"
 }]
 ```
@@ -195,7 +195,7 @@ Related discussion: [Issue #8](https://github.com/ookyet/web3-identity-seo/issue
 
 **Minimum**: 3 independent sources with average Domain Authority (DA) ≥ 70
 
-**Recommended**: 5-6 sources for 95%+ confidence
+**Recommended**: 5-6 independent sources for stronger cross-source corroboration (quality over quantity).
 
 **Suggested platforms**:
 1. GitHub (DA 96) - Technical repo
@@ -369,7 +369,7 @@ Someone could create a fake profile, but:
 ```json
 "identifier": [{
   "@type": "PropertyValue",
-  "propertyID": "ens_domain",
+  "propertyID": "ens",
   "value": "yourname.eth"
 }]
 ```

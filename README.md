@@ -94,14 +94,14 @@ keyed to a human/handle while ENS corroborates it.
 </script>
 ```
 
-### Step 2: Active Trigger Enhancement
+### Step 2: ProfilePage Declaration
 
 ```html
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
-  "@id": "https://yoursite.com/#KnowledgePanelCandidate",
+  "@id": "https://yoursite.com/#ProfilePage",
   "mainEntity": {
     "@type": "Person",
     "@id": "https://yoursite.com/#Author"
@@ -200,7 +200,7 @@ Based on the **ookyet.eth** implementation:
 │  Layer 1: Indexing API ──────────────────────┐  │
 │  Layer 2: Schema.org @graph ─────────────────┤  │
 │  Layer 3: Dentity Unique Human ──────────────┤  │
-│  Layer 4: Active Triggers ───────────────────┤  │
+│  Layer 4: Entity Graph Linkage ──────────────┤  │
 │  Layer 5: Cross-Platform (13 platforms) ─────┘  │
 │                                                  │
 │  Result: indexed, consistent entity signals      │
@@ -296,7 +296,7 @@ The complete implementation demonstrates:
 
 ## Contributing
 
-- “Discover/可观测性”建议打 `proposal:observability`；隐私确认后加 `privacy-reviewed`；排名诉求统一 `wontfix:ranking` 并转 Discussions。
+Improvements welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for scope, process, and issue policy.
 
 Git commit guard setup:
 
@@ -304,8 +304,6 @@ Git commit guard setup:
 git config core.hooksPath .githooks
 chmod +x .githooks/commit-msg scripts/commit-message-guard.sh
 ```
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for hook rules (author, ASCII English, no AI trailers).
 
 ## License
 
