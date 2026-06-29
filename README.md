@@ -42,7 +42,7 @@ A documented five-layer approach for entity markup and indexing submission:
 - **~~FAQ Schema (`FAQPage`)~~ — RETIRED** - Google removed FAQ rich results (Aug 2023) and retired the FAQ structured-data docs (2026-06-15). Do **not** emit `FAQPage` for entity SEO — keep FAQ as visible page content. (`HowTo` likewise retired Sep 2023; `QAPage` is still supported but only for a single **user-submitted** Q&A page, not authored FAQ copy.)
 
 ### Layer 5: Cross-Platform Validation
-- **13 unified platforms** - Consistent identity across Web2/Web3
+- **Unified cross-platform identity** - Consistent name/avatar/links across Web2/Web3 (audited count in [Results](#results))
 - **NFT avatar** - Visual identity proof
 - **sameAs linkage** - Cross-source consistency
 
@@ -201,7 +201,7 @@ Based on the **ookyet.eth** implementation:
 │  Layer 2: Schema.org @graph ─────────────────┤  │
 │  Layer 3: Dentity Unique Human ──────────────┤  │
 │  Layer 4: Entity Graph Linkage ──────────────┤  │
-│  Layer 5: Cross-Platform (13 platforms) ─────┘  │
+│  Layer 5: Cross-Platform sameAs linkage ─────┘  │
 │                                                  │
 │  Result: indexed, consistent entity signals      │
 │  (KP triggering is Google's black-box decision)  │
