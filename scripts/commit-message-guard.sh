@@ -97,34 +97,63 @@ validate_message() {
   fi
 }
 
-check_head_commit() {
+check_commit() {
+  local commit="$1"
   local author_name author_email committer_name committer_email
   local msg_file
 
-  git rev-parse --verify HEAD >/dev/null 2>&1 || fail "could not read HEAD commit"
+  git rev-parse --verify "$commit^{commit}" >/dev/null 2>&1 || fail "could not read commit $commit"
 
-  author_name="$(git log -1 --pretty=format:%an)"
-  author_email="$(git log -1 --pretty=format:%ae)"
-  committer_name="$(git log -1 --pretty=format:%cn)"
-  committer_email="$(git log -1 --pretty=format:%ce)"
+  author_name="$(git log -1 --pretty=format:%an "$commit")"
+  author_email="$(git log -1 --pretty=format:%ae "$commit")"
+  committer_name="$(git log -1 --pretty=format:%cn "$commit")"
+  committer_email="$(git log -1 --pretty=format:%ce "$commit")"
 
-  check_ident_values "HEAD author" "$author_name" "$author_email"
-  check_ident_values "HEAD committer" "$committer_name" "$committer_email"
+  check_ident_values "$commit author" "$author_name" "$author_email"
+  check_ident_values "$commit committer" "$committer_name" "$committer_email"
 
   msg_file="$(mktemp)"
-  git log -1 --pretty=format:%B > "$msg_file"
+  git log -1 --pretty=format:%B "$commit" > "$msg_file"
 
   if contains_forbidden_lines "$msg_file"; then
     rm -f "$msg_file"
-    fail "HEAD commit message contains AI/tool watermark or extra author trailer"
+    fail "commit $commit message contains AI/tool watermark or extra author trailer"
   fi
 
   validate_message "$msg_file"
   rm -f "$msg_file"
 }
 
+check_range() {
+  local base="$1"
+  local head="$2"
+  local rev_spec commits commit
+
+  # New branches report an all-zero base SHA; fall back to validating only the tip.
+  if [[ -z "$base" || "$base" =~ ^0+$ ]]; then
+    rev_spec="$head"
+  else
+    rev_spec="$base..$head"
+  fi
+
+  commits="$(git rev-list "$rev_spec" 2>/dev/null || true)"
+  if [[ -z "$commits" ]]; then
+    echo "commit-msg: no commits to check in range ${base:-<none>}..$head" >&2
+    return 0
+  fi
+
+  for commit in $commits; do
+    check_commit "$commit"
+  done
+}
+
 if [[ "${1:-}" == "--check-head" ]]; then
-  check_head_commit
+  check_commit HEAD
+  exit 0
+fi
+
+if [[ "${1:-}" == "--check-range" ]]; then
+  check_range "${2:-}" "${3:-HEAD}"
   exit 0
 fi
 

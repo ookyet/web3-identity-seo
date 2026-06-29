@@ -19,7 +19,7 @@ Git commit guard (required)
 - This repo uses `core.hooksPath=.githooks`. The `commit-msg` hook calls `scripts/commit-message-guard.sh`.
 - Author and committer must be `ookyet <ookyet.mid@gmail.com>`.
 - Commit messages must be ASCII English. The hook strips and blocks `Co-authored-by:`, `Signed-off-by:`, `Made-with:`, `Generated with ...`, and similar AI/tool watermarks.
-- CI runs the same guard on HEAD via `commit-guard.yml`. Do not use `--no-verify` unless explicitly requested.
+- CI runs the same guard on every commit in a push or pull request range via `commit-guard.yml` (not just HEAD). Do not use `--no-verify` unless explicitly requested.
 - One-time local setup:
 
 ```bash
@@ -38,4 +38,4 @@ Issues
 - 不接受：排名/SEO 优化、操纵搜索系统、抓取/采集第三方用户数据。
 - Issues 只收可执行、可验证建议；泛讨论移至 Discussions 的 Ideas。文档化不等于关 issue；保留历史实现讨论，除非 reporter 确认已解决或为重复 issue。
 - PR 审查后合并；遵循 `PRIVACY.md` 约束。
-- **Git 提交围栏**：`core.hooksPath=.githooks`；`commit-msg` 调用 `scripts/commit-message-guard.sh`。作者/提交者必须是 `ookyet <ookyet.mid@gmail.com>`；提交说明 ASCII English；自动删除 `Co-authored-by:` 等 AI/工具水印。CI 用 `commit-guard.yml` 验证 HEAD。本地一次性配置：`git config core.hooksPath .githooks && chmod +x .githooks/commit-msg scripts/commit-message-guard.sh`
+- **Git 提交围栏**：`core.hooksPath=.githooks`；`commit-msg` 调用 `scripts/commit-message-guard.sh`。作者/提交者必须是 `ookyet <ookyet.mid@gmail.com>`；提交说明 ASCII English；自动删除 `Co-authored-by:` 等 AI/工具水印。CI 用 `commit-guard.yml` 验证 push/PR 范围内的每个 commit（不只 HEAD）。本地一次性配置：`git config core.hooksPath .githooks && chmod +x .githooks/commit-msg scripts/commit-message-guard.sh`
