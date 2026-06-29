@@ -6,6 +6,19 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.0.2] — 2026-06-29
+
+Tooling and documentation hardening. No changes to the structured-data guidance.
+
+### Changed
+
+- **`scripts/commit-message-guard.sh`** — added a `--check-range` mode so the guard validates every commit in a push or pull-request range, not just the tip. `--check-head` is preserved.
+- **`.github/workflows/commit-guard.yml`** — CI now runs the guard over the full commit range of each push/PR instead of only HEAD.
+- **`CONTRIBUTING.md`** — documented the `core.hooksPath` one-time setup and clarified that CI checks the whole range.
+- **`docs/troubleshooting.md`** — replaced placeholder links in "Getting Help" with the real GitHub issues URL and Google Search Central community link.
+
+---
+
 ## [3.0.1] — 2026-06-29
 
 Rigor pass aligned with the reference site (`ookyet.com`) KG/KP discipline: stable signals over KP chasing.
