@@ -6,6 +6,22 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.0.3] — 2026-06-29
+
+Alignment with Google's official documentation as of June 2026 (verified against Search Central).
+
+### Changed
+
+- **Indexing API guidance** (`README.md` Step 4, `docs/implementation-guide.md`) — corrected to state the API may **only** be used for `JobPosting` / `BroadcastEvent` (in `VideoObject`) per Google's policy, cited the May 2025 reiteration, and replaced the example that submitted an identity/`/proof/` page with a `JobPosting` URL. Identity/`ProfilePage` pages now point to sitemaps + URL Inspection.
+- **FAQ deprecation timeline** (`README.md`, `docs/faq.md`, `docs/troubleshooting.md`, `docs/implementation-guide.md`, `examples/README.md`) — replaced the imprecise "removed Aug 2023" with the accurate sequence: limited to authoritative gov/health sites Aug 2023, fully removed from Search May 7, 2026, docs removed June 15, 2026.
+- **ProfilePage** (`README.md` Step 2) — linked Google's official ProfilePage doc, noted the Discussions-and-Forums connection and Google-recognized properties (`sameAs`, `identifier`, `description`, `dateCreated`/`dateModified`).
+
+### Added
+
+- **`docs/troubleshooting.md`** — a structured-data currency note listing the June 2025 retired rich-result types (Book Actions, Course Info, Claim Review, Estimated Salary, Learning Video, Special Announcement, Vehicle Listing).
+
+---
+
 ## [3.0.2] — 2026-06-29
 
 Tooling and documentation hardening. No changes to the structured-data guidance.

@@ -136,8 +136,9 @@ This declares that the page's primary subject is a Person entity (`ProfilePage.m
 
 ### Step 2.3: FAQ — RETIRED (do not emit `FAQPage`)
 
-> Google removed FAQ rich results (Aug 2023) and retired the FAQ structured-data
-> docs (2026-06-15). Do **not** emit `FAQPage` — it no longer yields a rich result
+> Google limited FAQ rich results to authoritative government/health sites in Aug
+> 2023, then fully removed the feature from Search on May 7, 2026 (FAQ structured-data
+> docs removed June 15, 2026). Do **not** emit `FAQPage` — it no longer yields a rich result
 > and can surface as an invalid item / "Q&A" issue in Search Console. Keep FAQ
 > content as **visible page copy**. (`HowTo` likewise retired Sep 2023; `QAPage`
 > only for a single user-submitted Q&A page.)
@@ -202,7 +203,7 @@ node examples/indexing-api.js submit
 - Traditional crawl: 7-30 days
 - Indexing API: 24-48 hours ✅
 
-Compliance note: Google’s Indexing API targets specific content types (e.g., JobPosting, live streams). For general pages, prefer sitemaps and standard crawling to comply with policies.
+Compliance note: Google’s Indexing API may **only** be used for pages with `JobPosting` or `BroadcastEvent` (in a `VideoObject`) — see [Google's policy](https://developers.google.com/search/apis/indexing-api/v3/using-api). In May 2025 Google reiterated it may stop supporting other formats without notice, and misuse can get API access revoked. Identity/`ProfilePage` URLs are **not** eligible: use sitemaps + Search Console URL Inspection ("Request indexing") instead. The 24-48h timeline above applies to eligible content types.
 
 ⚖️ Compliance checklist
 - Confirm your content type is eligible for Indexing API; otherwise use sitemaps/URL Inspection.

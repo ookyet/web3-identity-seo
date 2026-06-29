@@ -446,8 +446,9 @@ Set up alerts (Slack, email) for status changes.
 
 ### How does this interact with AI Overviews?
 
-**Do not rely on `FAQPage` markup.** Google retired FAQ rich results (Aug 2023) and
-the FAQ structured-data docs (2026-06-15); `HowTo` was retired too (Sep 2023). AI
+**Do not rely on `FAQPage` markup.** Google limited FAQ rich results to authoritative
+government/health sites in Aug 2023, then fully removed the feature from Search on May 7,
+2026 (FAQ structured-data docs removed June 15, 2026); `HowTo` was retired too (Sep 2023). AI
 Overviews draw from your **visible, well-structured page content** plus a clean entity
 graph (Person/Organization, `sameAs`, verifiable `identifier`/`hasCredential`) — not
 from `FAQPage`/`HowTo` JSON-LD. Write clear, factual answers as visible copy, and keep

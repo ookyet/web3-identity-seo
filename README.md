@@ -39,7 +39,7 @@ A documented five-layer approach for entity markup and indexing submission:
 ### Layer 4: Entity Graph Linkage
 - **`@graph` with shared `@id` references** - Person, ProfilePage, WebSite, and Article entities are explicitly linked through stable `@id` URIs, so Google parses one cohesive entity rather than several disconnected ones
 - **ProfilePage with `mainEntity` → Person** - signals the page's primary subject is a Person entity (per [Schema.org ProfilePage](https://schema.org/ProfilePage)). Google requires `mainEntity` to be a `Person` or `Organization`; emit exactly one ProfilePage on the canonical "about" page.
-- **~~FAQ Schema (`FAQPage`)~~ — RETIRED** - Google removed FAQ rich results (Aug 2023) and retired the FAQ structured-data docs (2026-06-15). Do **not** emit `FAQPage` for entity SEO — keep FAQ as visible page content. (`HowTo` likewise retired Sep 2023; `QAPage` is still supported but only for a single **user-submitted** Q&A page, not authored FAQ copy.)
+- **~~FAQ Schema (`FAQPage`)~~ — RETIRED** - Google limited FAQ rich results to authoritative government/health sites in Aug 2023, then fully removed the feature from Search on **May 7, 2026** (FAQ structured-data docs removed June 15, 2026). Do **not** emit `FAQPage` for entity SEO — keep FAQ as visible page content. (`HowTo` likewise retired Sep 2023; `QAPage` is still supported but only for a single **user-submitted** Q&A page, not authored FAQ copy.)
 
 ### Layer 5: Cross-Platform Validation
 - **Unified cross-platform identity** - Consistent name/avatar/links across Web2/Web3 (audited count in [Results](#results))
@@ -96,12 +96,16 @@ keyed to a human/handle while ENS corroborates it.
 
 ### Step 2: ProfilePage Declaration
 
+Per [Google's ProfilePage documentation](https://developers.google.com/search/docs/appearance/structured-data/profile-page), the page's primary focus must be a single person/organization affiliated with the site (an "About" / author page qualifies). `mainEntity` must be a `Person` or `Organization`, and `name` is required. Google also recognizes `sameAs`, `identifier`, `description`, and `dateCreated`/`dateModified` on the entity. This markup feeds Google's **Discussions and Forums** understanding of who a creator is.
+
 ```html
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
   "@id": "https://yoursite.com/#ProfilePage",
+  "dateCreated": "2023-01-01T00:00:00+00:00",
+  "dateModified": "2026-06-29T00:00:00+00:00",
   "mainEntity": {
     "@type": "Person",
     "@id": "https://yoursite.com/#Author"
@@ -112,8 +116,9 @@ keyed to a human/handle while ENS corroborates it.
 
 ### Step 3: FAQ — RETIRED (do not emit `FAQPage`)
 
-> **Google retired FAQ rich results (Aug 2023) and removed the FAQ structured-data
-> documentation (2026-06-15).** Emitting `FAQPage` no longer produces a rich result
+> **Google limited FAQ rich results to authoritative government/health sites in
+> Aug 2023, then fully removed the feature from Search on May 7, 2026 (FAQ
+> structured-data docs removed June 15, 2026).** Emitting `FAQPage` no longer produces a rich result
 > and can surface as an invalid item / "Q&A" issue in Search Console. Keep FAQ
 > content as **visible page copy** instead. `HowTo` is likewise retired (Sep 2023).
 > `QAPage` remains supported but **only** for a single user-submitted Q&A page — not
@@ -136,7 +141,11 @@ keyed to a human/handle while ENS corroborates it.
 </script>
 ```
 
-### Step 4: Google Indexing API
+### Step 4: Get pages indexed
+
+> ⚠️ **The Google Indexing API is NOT for identity/profile pages.** Per [Google's policy](https://developers.google.com/search/apis/indexing-api/v3/using-api), the Indexing API may only be used for pages with `JobPosting` or `BroadcastEvent` (in a `VideoObject`). In May 2025 Google reiterated it "may stop supporting unsupported content formats without notice," and misuse can get API access revoked. **For an identity/`ProfilePage` like `/proof/`, do not call the Indexing API** — submit a sitemap and, for a one-off, use Search Console → URL Inspection → "Request indexing." IndexNow (below) covers Bing/Yandex.
+
+The API call itself, shown only for the content types Google actually allows (e.g. a `JobPosting` page):
 
 ```javascript
 const { google } = require('googleapis');
@@ -150,19 +159,13 @@ async function submitToIndexingAPI(url) {
   const indexing = google.indexing({ version: 'v3', auth });
 
   await indexing.urlNotifications.publish({
-    requestBody: {
-      url: url,
-      type: 'URL_UPDATED'
-    }
+    requestBody: { url, type: 'URL_UPDATED' }
   });
 }
 
-// Submit key pages
-await submitToIndexingAPI('https://yoursite.com/proof/');
+// Allowed: a JobPosting / BroadcastEvent page only.
+await submitToIndexingAPI('https://yoursite.com/jobs/some-job-posting/');
 ```
-
-Compliance note
-- Google’s Indexing API is intended for specific content types (e.g., JobPosting, live streams). For general pages, prefer sitemaps and normal crawling. Use responsibly and follow Google policies.
 
 ## Results
 

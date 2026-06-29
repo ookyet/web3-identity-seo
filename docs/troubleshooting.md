@@ -72,13 +72,22 @@ cat your-schema.json | jq .
 
 ### ⚠️ FAQ Schema not appearing — it's retired, that's expected
 
-**Not a bug.** Google removed FAQ rich results (Aug 2023) and retired the FAQ
-structured-data docs (2026-06-15). `FAQPage` will not produce a rich result and may
+**Not a bug.** Google limited FAQ rich results to authoritative government/health
+sites in Aug 2023, then fully removed the feature from Search on May 7, 2026 (FAQ
+structured-data docs removed June 15, 2026). `FAQPage` will not produce a rich result and may
 appear as an invalid item / "Q&A" issue in Search Console.
 
 **Fix**: remove `FAQPage` and keep FAQ content as **visible page copy**. `HowTo` is
 likewise retired (Sep 2023). `QAPage` is still supported but only for a single
 **user-submitted** Q&A page, not authored FAQ copy.
+
+> **Structured-data currency (as of June 2026).** Google has been steadily pruning
+> Search appearances. Beyond FAQ (fully removed May 7, 2026) and HowTo (Sep 2023),
+> the June 2025 round retired rich results for **Book Actions, Course Info, Claim
+> Review, Estimated Salary, Learning Video, Special Announcement, and Vehicle
+> Listing**. Don't build an entity strategy on any single rich-result feature —
+> favour a clean, stable entity graph (`Person`/`Organization`, `sameAs`,
+> verifiable `identifier`/`hasCredential`) that survives feature deprecations.
 
 ---
 

@@ -20,8 +20,9 @@ Complete Schema.org Person entity markup (**Person-first**) with:
 ```
 
 ### 2. `schema-faq.json` — ⚠️ RETIRED, do not deploy
-Kept for historical context only. **Google removed FAQ rich results (Aug 2023) and
-retired the FAQ docs (2026-06-15)** — emitting `FAQPage` no longer yields a rich
+Kept for historical context only. **Google limited FAQ rich results to authoritative
+government/health sites in Aug 2023, then fully removed the feature from Search on May 7,
+2026 (FAQ docs removed June 15, 2026)** — emitting `FAQPage` no longer yields a rich
 result and may surface as a Search Console issue. Keep FAQ content as **visible page
 copy** instead. (`HowTo` also retired Sep 2023; `QAPage` only for a single
 user-submitted Q&A page.) The file's top-level is intentionally wrapped so it cannot
