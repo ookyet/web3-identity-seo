@@ -474,8 +474,8 @@ echo '{"@context": "https://schema.org", ...}' | jq -c .
 
 If issue persists:
 
-1. **Check GitHub Issues**: [Link to repo issues]
-2. **Google Search Central Community**: [Link]
+1. **Check GitHub Issues**: https://github.com/ookyet/web3-identity-seo/issues
+2. **Google Search Central Community**: https://support.google.com/webmasters/community
 3. **Schema.org GitHub**: For schema questions
 4. **ENS Discord**: For ENS-specific issues
 5. **Dentity Support**: For verification problems
