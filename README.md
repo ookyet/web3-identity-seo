@@ -176,12 +176,12 @@ Based on the **ookyet.eth** implementation:
 | Google indexing time (per page) | 7-30 days | 24-48 hours | Google Search Console "Last crawl" timestamps |
 | SERP features for `ookyet` / `ookyet.eth` | None | Position 1, Sitelinks, Image thumbnail, Image pack | Reproducible — search `ookyet` / `ookyet.eth` |
 | Entity recognition in AI Overview | None | Google's AI Overview answers that ookyet "is indeed an entity," resolving the person (real name), the `ookyet.eth` ENS name, and the NFT avatar from 6-7 cross-linked sources | Reproducible — search `ookyet` or `ookyet is entity` |
-| Search performance (trailing 16 months) | — | Avg position **1.4**, CTR **11.1%** (11.8K impressions / 1.31K clicks) | Search Console → Performance (Web, 16-month window) |
+| Search performance (cumulative since first indexed, Aug 2025) | — | Avg position **1.4**, CTR **11.1%** (11.8K impressions / 1.31K clicks) | Search Console → Performance (Web); ookyet.com was first indexed Aug 2025, so these are ~10 months of cumulative data |
 | Rich Results Test status | N/A | 0 errors, Person + ProfilePage detected | [Google Rich Results Test](https://search.google.com/test/rich-results) |
 | Cross-platform `sameAs` links | 0 | 15+ verified profiles | Manual audit of profile links in `sameAs` array |
 | Knowledge Panel (formal KP box) | Not triggered | Still not triggered — AI Overview entity recognition is **not** the same as a formal Knowledge Panel | Google KG API + direct SERP |
 
-> **AI Overview entity recognition ≠ a Knowledge Panel.** Being narrated as an entity in an AI Overview (achieved above) means Google has resolved and understood the entity; a formal Knowledge Panel is a separate, black-box decision Google has not made here. The Knowledge Graph API exposes no "candidate"/pre-trigger state, so any "% probability of KP trigger" is an internal model estimate, not a Google metric. This project optimizes for **verifiable entity understanding**, not for forcing a KP.
+> **AI Overview entity recognition ≠ a Knowledge Panel.** Being narrated as an entity in an AI Overview (achieved above) means Google has resolved and understood the entity; a formal Knowledge Panel is a separate, black-box decision Google has not made here. (AI Overviews are generated and can vary between queries/sessions; the entity recognition above has been observed stable over an extended period.) The Knowledge Graph API exposes no "candidate"/pre-trigger state, so any "% probability of KP trigger" is an internal model estimate, not a Google metric. This project optimizes for **verifiable entity understanding**, not for forcing a KP.
 
 ## Architecture Diagram
 

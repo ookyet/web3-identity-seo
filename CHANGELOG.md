@@ -6,6 +6,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.0.5] — 2026-06-30
+
+Accuracy correction to the v3.0.4 Results figures.
+
+### Changed
+
+- **`README.md` Results** — corrected the Search Console performance row: ookyet.com was first indexed in Aug 2025, so the 11.8K impressions / 1.31K clicks (avg position 1.4, CTR 11.1%) are **~10 months of cumulative data**, not a full "16-month" span (16 months was only the GSC date-range filter). Added an explicit note that AI Overviews are generated and can vary, while the observed entity recognition has been stable.
+
+---
+
 ## [3.0.4] — 2026-06-29
 
 Results updated to reflect now-verifiable outcomes; added citation metadata.
