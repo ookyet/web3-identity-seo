@@ -9,8 +9,10 @@ abstract: >-
   Reference implementation: ookyet.eth.
 type: software
 authors:
-  - name: "ookyet"
-    alias: "ookyet.eth"
+  - given-names: Qifeng
+    family-names: Huang
+    alias: ookyet
+    orcid: "https://orcid.org/0009-0005-1400-7291"
     website: "https://ookyet.com"
 repository-code: "https://github.com/ookyet/web3-identity-seo"
 url: "https://ookyet.com/proof/"
