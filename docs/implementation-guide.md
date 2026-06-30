@@ -110,7 +110,13 @@ Create `layouts/partials/schema-person.html` (Hugo) or inline in `<head>`:
 **Key elements**:
 - `@id`: Unique entity identifier
 - `hasCredential`: Dentity verification link
-- `sameAs`: Cross-platform consistency (minimum 5 platforms)
+- `sameAs`: cross-source identity links — quality matters more than count (see note)
+
+> 🔗 **`sameAs` quality > quantity.** Google's Knowledge Graph reconciles entities against authoritative identifier sources, so think in two tiers rather than stacking profiles:
+> - **Consistency anchors** — your real, active profiles (X, Instagram, GitHub, ENS, on-chain proofs). Keep name / handle / avatar identical across them; that consistency is the trust signal, not the number.
+> - **High-authority KG anchors** — sources Google's KG actively reconciles against: **Wikidata, Wikipedia, LinkedIn, ORCID, Crunchbase**. These carry the most weight.
+>   - **Wikidata / Wikipedia are notability-gated** — a self-created item with no independent sources can be deleted, which is a *negative* signal. Don't force them.
+>   - **LinkedIn and ORCID are attainable by anyone** (ORCID is free and region-neutral). For an individual / niche entity these are the realistic high-authority anchors. Add them to `sameAs`, put ORCID in `identifier` too (`propertyID: orcid`), and make sure the anchor links back to your site (reciprocal linking strengthens reconciliation).
 
 > ⚠️ **Avoid non-standard `propertyID` values** (e.g., a fictional `knowledge_graph_eligible` flag). Google does not recognize undocumented properties and its anti-spam systems may down-weight pages that fabricate signals. Stick to standard Schema.org vocabulary plus widely recognized identifier types (`ens`, `wikidata`, etc.).
 
@@ -388,13 +394,14 @@ Ensure consistent identity across:
 1. ENS App profile
 2. GitHub profile
 3. Twitter bio
-4. LinkedIn profile
-5. Personal website
-6. Dentity profile
-7. OpenSea (if NFT avatar)
-8. Mirror.xyz / Paragraph
-9. Farcaster
-10. Lens Protocol
+4. LinkedIn profile *(high-authority KG anchor — attainable by anyone)*
+5. ORCID iD *(high-authority KG anchor — free, region-neutral; also add as `identifier` propertyID `orcid`)*
+6. Personal website
+7. Dentity profile
+8. OpenSea (if NFT avatar)
+9. Mirror.xyz / Paragraph
+10. Farcaster
+11. Lens Protocol
 
 **Consistency requirements**:
 - Same display name

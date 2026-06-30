@@ -6,6 +6,20 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.0.6] — 2026-06-30
+
+Entity / Knowledge-Graph guidance aligned with Google's 2026 stance and real-world constraints for individual entities.
+
+### Changed
+
+- **`docs/implementation-guide.md`** — reframed `sameAs` from a count ("minimum 5 platforms") to a quality model: **consistency anchors** (your active profiles) vs **high-authority KG anchors** (Wikidata, Wikipedia, LinkedIn, ORCID, Crunchbase). Noted Wikidata/Wikipedia are notability-gated (self-created items can be deleted — a negative signal), while **LinkedIn and ORCID are attainable by anyone** and are the realistic high-authority anchors for an individual/niche entity. Added ORCID to the external-sources list.
+
+### Added
+
+- **`docs/faq.md`** — two Knowledge-Panel Q&As: (1) why an entity can appear in **AI Overview** without a formal **Knowledge Panel** (AI Overview recognition is the realistic ceiling for niche entities; KP is notability-gated), and (2) how to **claim/correct** a Knowledge Panel per Google's official process (claim via Search Console/YouTube/X/Facebook; you can suggest edits via Feedback, not overwrite facts).
+
+---
+
 ## [3.0.5] — 2026-06-30
 
 Accuracy correction to the v3.0.4 Results figures.

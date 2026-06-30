@@ -269,6 +269,25 @@ Google does not publish success rates or timelines. Use this **signal completene
 
 > **Methodology note**: These tiers rank how complete your **on-site and cross-source signals** are. They are not Google metrics. Knowledge Panel display is opaque — the Knowledge Graph API does not expose a "candidate" state, and empty API results do not distinguish "unknown" from "prepared but not promoted." After signals are stable, further schema tweaks often reset Google's re-evaluation clock rather than accelerate KP.
 
+### My entity shows in an AI Overview but there's no Knowledge Panel — why?
+
+These are different outcomes, and AI Overview recognition is the more attainable one:
+
+- **AI Overview entity recognition** means Google has *resolved and understood* your entity — it can name you, your ENS, your avatar, and cite your sources. This is achievable with a clean entity graph plus cross-source consistency, and for a **niche or individual entity it is the realistic ceiling**.
+- **A formal Knowledge Panel** is a separate, automatic decision driven mainly by **notability** — being covered or referenced by enough *independent* third parties. Markup cannot force it; it is earned over time.
+
+Don't read "no Knowledge Panel" as failure. If AI Overviews and SERP features (sitelinks, thumbnails) already recognize your entity, the architecture is working as intended.
+
+### Once I have a Knowledge Panel, how do I claim or correct it?
+
+Per [Google's official documentation](https://support.google.com/knowledgepanel/answer/7534902), Knowledge Panels are **auto-generated** — you cannot create one or edit its facts directly. When one appears for you:
+
+1. Search your name; if a panel appears, click **"Claim this knowledge panel."**
+2. Verify by signing in to an official channel: **Search Console, YouTube, X, or Facebook.**
+3. You can then **suggest** changes through **Feedback** (Google reviews them) and add authorized managers — but you cannot directly overwrite facts.
+
+Not all panels are claimable yet, and verification lets you *suggest* corrections, not control the content.
+
 ### Can Google reject my Knowledge Panel?
 
 Yes, if:
