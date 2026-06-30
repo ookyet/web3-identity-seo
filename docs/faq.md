@@ -288,6 +288,14 @@ Per [Google's official documentation](https://support.google.com/knowledgepanel/
 
 Not all panels are claimable yet, and verification lets you *suggest* corrections, not control the content.
 
+### How many third-party citations do I need for a Knowledge Panel?
+
+There is no magic number. "You need 30+ references" is SEO-community folklore, not a Google threshold. Knowledge Panel eligibility is a fuzzy confidence judgment, and **source quality × time × stability compounds** — one authoritative, independent mention (e.g. a recognized organization referencing you) outweighs dozens of anonymous reposts. Don't chase a count; let quality signals accumulate and stay stable.
+
+### Does a unique or coined name help?
+
+Yes — significantly, but understand *how*. A rare/coined name (vs. a common name shared by many people) gives you **zero disambiguation**: you rank #1 for the term and Google never has to decide "which person." This does not *trigger* a Knowledge Panel by itself (ranking ≠ panel), but it acts as a **multiplier** — every external signal converts cleanly and you need less corroboration than someone with a contested name. It is the strongest structural advantage a niche personal entity can have, and it is fully white-hat (you are simply unambiguous).
+
 ### Can Google reject my Knowledge Panel?
 
 Yes, if:

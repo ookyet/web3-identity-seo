@@ -6,6 +6,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.0.7] — 2026-06-30
+
+More entity guidance for individual/niche entities, mirrored from the reference implementation's field notes.
+
+### Added
+
+- **`docs/implementation-guide.md`** — `sameAs` inclusion criteria ("only add real anchors — active, identity-consistent, reachable/indexed; don't stack ghosts") and the **`sameAs` vs `subjectOf`** distinction (third-party mentions are corroboration, not `sameAs`).
+- **`docs/faq.md`** — two Q&As: there is no magic number of third-party citations (quality × time × stability compounds; "30+" is folklore), and how a unique/coined name helps (zero-disambiguation multiplier, not a Knowledge Panel trigger).
+
+---
+
 ## [3.0.6] — 2026-06-30
 
 Entity / Knowledge-Graph guidance aligned with Google's 2026 stance and real-world constraints for individual entities.

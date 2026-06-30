@@ -117,6 +117,8 @@ Create `layouts/partials/schema-person.html` (Hugo) or inline in `<head>`:
 > - **High-authority KG anchors** — sources Google's KG actively reconciles against: **Wikidata, Wikipedia, LinkedIn, ORCID, Crunchbase**. These carry the most weight.
 >   - **Wikidata / Wikipedia are notability-gated** — a self-created item with no independent sources can be deleted, which is a *negative* signal. Don't force them.
 >   - **LinkedIn and ORCID are attainable by anyone** (ORCID is free and region-neutral). For an individual / niche entity these are the realistic high-authority anchors. Add them to `sameAs`, put ORCID in `identifier` too (`propertyID: orcid`), and make sure the anchor links back to your site (reciprocal linking strengthens reconciliation).
+> - **Only add real anchors — don't stack.** A profile belongs in `sameAs` only if it is **active, identity-consistent, and reachable/indexed**. A ghost or empty profile adds nothing and can dilute (an active Threads profile: yes; an abandoned page with 0 followers: no).
+> - **`sameAs` ≠ `subjectOf`.** `sameAs` is only for the entity's *own* profiles/home pages. A *third party writing about you* (e.g. an organization's post mentioning you) is **not** `sameAs` — that's external corroboration: use `subjectOf`, or simply let Google index it. Putting third-party mentions in `sameAs` is semantically wrong and can confuse entity reconciliation.
 
 > ⚠️ **Avoid non-standard `propertyID` values** (e.g., a fictional `knowledge_graph_eligible` flag). Google does not recognize undocumented properties and its anti-spam systems may down-weight pages that fabricate signals. Stick to standard Schema.org vocabulary plus widely recognized identifier types (`ens`, `wikidata`, etc.).
 
