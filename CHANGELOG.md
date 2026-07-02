@@ -6,6 +6,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.1.1] — 2026-07-02
+
+Ported the remaining hard-won entity-graph lessons from the reference implementation's Jun–Jul 2026 Search Console recovery.
+
+### Added
+
+- **`docs/implementation-guide.md` Step 2.4 "Entity-graph hygiene"** — four field-tested rules: (1) one page entity per URL and no synthetic "SEO intent" nodes (markup must reflect actual page content); (2) Organization stays a thin publisher/brand shell — `sameAs`/`identifier`/credentials belong to the Person exclusively (avoids Person↔Org reconciliation ambiguity); (3) no `WebSite.potentialAction`/`SearchAction` unless a real search page exists (Sitelinks Search Box retired Oct 2024; a modal-only search plus `/search` 404 violates markup policy — bug shipped and fixed in the reference implementation); (4) `mentions` is CreativeWork-only — invalid on a Person node. Plus a note: serve JSON-LD server-side from a single source of truth.
+- **`docs/implementation-guide.md` Step 2.2** — `mainEntity` must be a typed, named node; a bare `@id` reference trips GSC "Invalid object type for field mainEntity". Example updated to carry `name`.
+- **`docs/troubleshooting.md`** — new entry mapping the GSC triple report (`Unparsable structured data` "string" root / `Profile page` invalid `mainEntity` / `Q&A` invalid items) to root causes and fixes, with the batch-fix → Validate Fix → freeze recovery protocol.
+
+---
+
 ## [3.1.0] — 2026-07-02
 
 First externally verifiable Knowledge Graph outcome for the reference implementation.

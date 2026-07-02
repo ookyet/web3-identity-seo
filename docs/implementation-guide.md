@@ -134,13 +134,20 @@ Add `ProfilePage` declaration:
   "@id": "https://yoursite.com/#ProfilePage",
   "mainEntity": {
     "@type": "Person",
-    "@id": "https://yoursite.com/#Author"
+    "@id": "https://yoursite.com/#Author",
+    "name": "Your Name"
   }
 }
 </script>
 ```
 
 This declares that the page's primary subject is a Person entity (`ProfilePage.mainEntity`).
+
+> ⚠️ **`mainEntity` must be a typed, named node — not a bare `@id` reference.** A bare
+> `{"@id": "...#Author"}` can trip Google Search Console with *"Invalid object type for
+> field mainEntity"* (observed in the reference implementation, Jun 2026). Carry
+> `@type` + `name` explicitly; using the same `@id` as your canonical Person node still
+> merges cleanly in the graph.
 
 ### Step 2.3: FAQ — RETIRED (do not emit `FAQPage`)
 
@@ -161,6 +168,44 @@ Expected results:
 - ✅ Person entity detected
 - ✅ ProfilePage detected (`mainEntity` → Person)
 - ✅ 0 errors, 0 warnings (no FAQPage / HowTo / QAPage)
+
+### Step 2.4: Entity-graph hygiene (hard-won rules)
+
+Four rules from the reference implementation's Search Console recovery (Jun–Jul 2026).
+Each one was learned by triggering a real GSC error or shipping markup Google ignores:
+
+1. **One page entity per URL — and no synthetic "SEO intent" nodes.** Emit exactly one
+   page-level entity (WebPage / ProfilePage / CollectionPage) per URL, and never mint
+   nodes that describe your *ambitions* rather than the page (e.g. a WebPage named
+   "Knowledge Panel candidate"). Google's policy requires markup to reflect actual page
+   content; aspirational nodes add a duplicate page entity, restate facts already on
+   your Person node, and read as spam. The reference implementation shipped one and
+   later retired it.
+
+2. **Keep `Organization` a thin publisher/brand shell.** If you emit an Organization
+   (as `publisher`/`brand`), give it only `name` / `url` / `logo` / `founder`. Identity
+   anchors — `sameAs`, `identifier`, credentials — belong to the **Person** exclusively.
+   Duplicating them on the Organization makes Google reconcile two competing entities
+   with the same evidence (Person↔Org ambiguity), which weakens both.
+
+3. **Don't emit `WebSite.potentialAction` (`SearchAction`) unless a real search page
+   exists.** Google retired the Sitelinks Search Box in Oct 2024 — the markup is inert.
+   Worse, if your "search" is a client-side modal and `/search?q=` returns 404 (common
+   on static sites), the markup points at a nonexistent page and violates the
+   markup-must-reflect-the-page policy. The reference implementation shipped exactly
+   this bug and removed the node in Jul 2026.
+
+4. **Respect property domains: `mentions` is CreativeWork-only.** Third-party references
+   feel like they belong on your Person node, but `mentions` is only valid on
+   CreativeWork types (WebPage, Article, ProfilePage). On a Person node it is a domain
+   violation; carry those references via `identifier`, `sameAs`, `hasCredential`, or
+   `subjectOf` instead.
+
+> 💡 **Serve JSON-LD from one place, server-side.** Google can process JS-generated
+> structured data, but a client-side injector that duplicates or drifts from your
+> server-rendered graph is how you get *duplicate `@id` collisions* and stale nodes.
+> The reference implementation runs a strict "SSR is the only source of truth" rule —
+> its client script never injects JSON-LD.
 
 ---
 

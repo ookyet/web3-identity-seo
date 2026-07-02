@@ -91,6 +91,29 @@ likewise retired (Sep 2023). `QAPage` is still supported but only for a single
 
 ---
 
+### ❌ GSC reports "Unparsable structured data" / invalid "Profile page" / "Q&A" items
+
+The reference implementation hit all three at once (Jun 2026) and recovered. Causes
+map one-to-one to fixes:
+
+| GSC report | Root cause | Fix |
+|---|---|---|
+| `Unparsable structured data` — *Invalid top level element "string"* | A template serialized JSON-LD so the document root was a **quoted string**, not an object (e.g. double-encoding, or piping an already-stringified value through another encoder) | Build the node as a data structure and serialize **once**; verify the rendered `<script>` starts with `{` |
+| `Profile page` — *Invalid object type for field mainEntity* | `mainEntity` was a bare `{"@id": ...}` reference | Give `mainEntity` an explicit `@type` + `name` (same `@id` still merges with your canonical Person node) |
+| `Q&A` invalid items | Emitting `FAQPage`/`QAPage` for authored FAQ copy (retired / wrong type) | Remove the markup; keep FAQ as visible copy |
+
+**Recovery protocol** (order matters):
+
+1. Fix **all** structural causes in one batch — every schema change resets Google's
+   re-evaluation clock, so don't drip-feed fixes.
+2. In GSC, open each failing report and click **Validate Fix**.
+3. Request indexing for the affected key pages (profile page first); resubmit the sitemap.
+4. Then **freeze**: no schema/robots/canonical tweaks while Google re-crawls (typically
+   1–6 weeks). "URL is on Google, but has issues" only blocks rich-result enhancements —
+   it does **not** deindex the page.
+
+---
+
 ## Google Indexing API Issues
 
 ⚖️ Compliance reminder: Ensure your use of Indexing API matches Google’s allowed content types (e.g., JobPosting, live streams). For general pages, prefer sitemaps and standard crawling.
