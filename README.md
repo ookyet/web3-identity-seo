@@ -3,6 +3,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![Live Demo](https://img.shields.io/badge/demo-ookyet.eth-blue)](https://ookyet.com/proof/)
   [![Google SERP](https://img.shields.io/badge/Google%20SERP-Position%201-success)](https://www.google.com/search?q=ookyet)
+  [![Google KG](https://img.shields.io/badge/Google%20KG-Person%20entity-success)](#milestone-knowledge-graph-entity-node-2026-07-02)
   [![Schema.org](https://img.shields.io/badge/Schema.org-validated-brightgreen)](https://search.google.com/test/rich-results?url=https://ookyet.com/)
   [![Dentity](https://img.shields.io/badge/Dentity-Verified-success)](https://dentity.com/ookyet.eth)
   [![Privacy](https://img.shields.io/badge/Privacy-Notice-blue)](PRIVACY.md)
@@ -179,9 +180,28 @@ Based on the **ookyet.eth** implementation:
 | Search performance (cumulative since first indexed, Aug 2025) | — | Avg position **1.4**, CTR **11.1%** (11.8K impressions / 1.31K clicks) | Search Console → Performance (Web); ookyet.com was first indexed Aug 2025, so these are ~10 months of cumulative data |
 | Rich Results Test status | N/A | 0 errors, Person + ProfilePage detected | [Google Rich Results Test](https://search.google.com/test/rich-results) |
 | Cross-platform `sameAs` links | 0 | 15+ verified profiles | Manual audit of profile links in `sameAs` array |
-| Knowledge Panel (formal KP box) | Not triggered | Still not triggered — AI Overview entity recognition is **not** the same as a formal Knowledge Panel | Google KG API + direct SERP |
+| **Google Knowledge Graph entity node** | None (KG API returned no entity) | **Machine-generated Person node confirmed 2026-07-02** — query `ookyet` resolves uniquely to MID `/g/11z806my44` | KG Search API, reproducible ([see milestone](#milestone-knowledge-graph-entity-node-2026-07-02)) |
+| Knowledge Panel (formal KP box) | Not triggered | Still not triggered — a KG entity node is the mechanical prerequisite for a KP, **not** the KP itself | Google KG API + direct SERP |
 
 > **AI Overview entity recognition ≠ a Knowledge Panel.** Being narrated as an entity in an AI Overview (achieved above) means Google has resolved and understood the entity; a formal Knowledge Panel is a separate, black-box decision Google has not made here. (AI Overviews are generated and can vary between queries/sessions; the entity recognition above has been observed stable over an extended period.) The Knowledge Graph API exposes no "candidate"/pre-trigger state, so any "% probability of KP trigger" is an internal model estimate, not a Google metric. This project optimizes for **verifiable entity understanding**, not for forcing a KP.
+
+### Milestone: Knowledge Graph entity node (2026-07-02)
+
+About 11 months after first indexing (Aug 2025), the Google Knowledge Graph Search API returns a machine-generated Person node for this implementation:
+
+```bash
+curl "https://kgsearch.googleapis.com/v1/entities:search?query=ookyet&limit=10&indent=true&key=YOUR_API_KEY"
+# → exactly one result: kg:/g/11z806my44 (@type: Person)
+```
+
+Why this is the outcome the architecture targets:
+
+- **`/g/` MID = a machine-minted node** (post-Freebase), created by Google's own cross-source reconciliation. It cannot be registered or bought — only corroborated into existence. This is entity resolution, not document retrieval.
+- **Zero-ambiguity resolution.** The KG holds **8 distinct Person nodes** sharing the author's real name; the query `ookyet` resolves uniquely to this one. A coined handle works as a cross-namespace disambiguation key (`handle → person`), which is exactly what a Person-first entity model is for.
+- **Third-party corroboration outweighs self-declaration.** The node's canonical name is the author's real name (Qifeng Huang — see [CITATION.cff](CITATION.cff)), taken from high-authority anchors (LinkedIn, ORCID) rather than the site's self-declared `name: ookyet`. Expected and healthy: the handle stays the unique entry point; the legal name carries source authority.
+- **Honest status.** The node is still sparse (no `detailedDescription`, `image`, or `url` exposed; near-zero `resultScore`), and a formal Knowledge Panel remains untriggered. Growth from here is driven by independent third-party coverage plus time — not by further markup changes.
+
+Timeline: **Aug 2025** first indexed → **Oct 2025** Dentity verification + entity markup → **Jun 2026** Person-first convergence (single Person entity; FAQ/HowTo retired) → **Jul 2, 2026** KG entity node confirmed via API.
 
 ## Architecture Diagram
 
@@ -193,6 +213,7 @@ Based on the **ookyet.eth** implementation:
 │  │   Entity: ookyet (alt: ookyet.eth)       │  │
 │  │   Type: Person                           │  │
 │  │   Verification: Dentity ✓                │  │
+│  │   KG node: /g/11z806my44 (2026-07-02)    │  │
 │  └──────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────┘
                         ▲
@@ -208,7 +229,7 @@ Based on the **ookyet.eth** implementation:
 │  Layer 4: Entity Graph Linkage ──────────────┤  │
 │  Layer 5: Cross-Platform sameAs linkage ─────┘  │
 │                                                  │
-│  Result: indexed, consistent entity signals      │
+│  Result: KG Person node minted on 2026-07-02     │
 │  (KP triggering is Google's black-box decision)  │
 └─────────────────────────────────────────────────┘
 ```

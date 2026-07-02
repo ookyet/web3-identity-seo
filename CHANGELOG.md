@@ -6,6 +6,21 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.1.0] — 2026-07-02
+
+First externally verifiable Knowledge Graph outcome for the reference implementation.
+
+### Added
+
+- **`README.md` Results + "Milestone" subsection** — Google Knowledge Graph **entity node confirmed** via the KG Search API: the query `ookyet` resolves **uniquely** to a machine-generated Person MID (`/g/11z806my44`). Documented the reproducible API check (key placeholder only), the disambiguation evidence (8 distinct same-named Person nodes in the KG; the handle selects exactly one), the canonical-name observation (Google chose the author's real name from high-authority anchors over the site's self-declared handle — third-party corroboration outweighs self-declaration), the ~11-month timeline (first indexed Aug 2025 → KG node Jul 2, 2026), and the honest status (node still sparse; **no formal Knowledge Panel** — an entity node is the mechanical prerequisite, not the KP).
+- **`README.md`** — Google KG badge linking to the milestone section.
+
+### Changed
+
+- **`README.md` architecture diagram** — the Knowledge Graph box now shows the minted node (MID + date) instead of a hypothetical target; result line updated accordingly. KP remains explicitly labeled as Google's black-box decision.
+
+---
+
 ## [3.0.7] — 2026-06-30
 
 More entity guidance for individual/niche entities, mirrored from the reference implementation's field notes.
