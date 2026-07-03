@@ -171,8 +171,10 @@ Expected results:
 
 ### Step 2.4: Entity-graph hygiene (hard-won rules)
 
-Four rules from the reference implementation's Search Console recovery (Jun–Jul 2026).
-Each one was learned by triggering a real GSC error or shipping markup Google ignores:
+Seven rules from the reference implementation's Search Console recovery and
+cross-surface audit (Jun–Jul 2026). Each one was learned the hard way — by triggering
+a real GSC error, shipping markup Google ignores, or letting the markup drift from
+what the page actually shows:
 
 1. **One page entity per URL — and no synthetic "SEO intent" nodes.** Emit exactly one
    page-level entity (WebPage / ProfilePage / CollectionPage) per URL, and never mint
@@ -200,6 +202,29 @@ Each one was learned by triggering a real GSC error or shipping markup Google ig
    CreativeWork types (WebPage, Article, ProfilePage). On a Person node it is a domain
    violation; carry those references via `identifier`, `sameAs`, `hasCredential`, or
    `subjectOf` instead.
+
+5. **Never emit structured data for content that does not exist yet.** A "planned
+   coverage" section is legitimate visible copy, but marking it up asserts publications
+   Google can verify do not exist — dead URLs carrying past `datePublished` values. On
+   an identity site this is worse than a technical error: it fabricates precisely the
+   notability evidence the Knowledge Graph weighs most, and it is provably false. Gate
+   JSON-LD emission on publication status and let the visible layer carry the "planned"
+   label alone. The reference implementation shipped three such phantom articles and
+   retired them in Jul 2026.
+
+6. **Keep every visible identity surface consistent with the graph.** Google's Article
+   guidance expects the author name in markup to match the visible byline. A byline
+   reading `yourname.eth` while `Person.name`, `<meta name="author">`, and the RSS feed
+   all say `yourname` re-introduces, at the presentation layer, the exact naming split
+   you resolved in the graph. Audit bylines, footer copyright, and page headings as one
+   controlled vocabulary: the markup and the page must tell the same story.
+
+7. **If you emit `speakable`, its CSS selectors must exist in the rendered DOM.**
+   Speakable is a news-oriented beta with no rich-result upside for identity sites. If
+   you keep it anyway, treat the selector list as a contract with the template:
+   generate it under the same condition that renders the elements, so a selector can
+   never point at nothing. A dead selector is the markup-must-reflect-the-page
+   violation in miniature.
 
 > 💡 **Serve JSON-LD from one place, server-side.** Google can process JS-generated
 > structured data, but a client-side injector that duplicates or drifts from your
@@ -350,6 +375,45 @@ description: "Complete verifiable identity proof for yourname.eth"
 3. Launch Tuesday/Wednesday 12:01 AM PST
 ```
 
+### Step 4.3: Off-site co-occurrence — bind the real name to the handle
+
+Once the on-site graph is clean, the highest-leverage external work is making your
+real name and your handle co-occur on every authority surface Google already
+reconciles against. The Knowledge Graph selects an entity's canonical name from those
+sources — not from your self-declared markup — so each profile should let Google
+complete the triangle *real name ↔ handle ↔ your domain* on its own.
+
+**The LinkedIn "at yourname.eth" trap.** LinkedIn derives the default headline from
+your current position, so an Experience entry whose *company* field is `yourname.eth`
+renders as "Founder at yourname.eth" — an employment phrase that tells Google
+`yourname.eth` is an organization. That quietly re-creates, from off-site, the
+Person↔Org ambiguity Rule 2 eliminates on-site. The fix costs nothing:
+
+- Set the company field to your website domain (or Self-employed) — never the ENS name.
+- Write a custom headline that carries the bare handle, e.g.
+  `Digital Identity Architect (yourhandle) — ENS yourname.eth · yoursite.com`.
+- Open the About section with the same one-sentence identity statement your site uses.
+  Verbatim reuse across independent domains is corroboration, not duplication.
+
+**ORCID — the structured alias field.** ORCID is a high-authority identity registry
+anyone can join, and its *Also known as* field is machine-readable: mirror your
+`Person.alternateName` there (both the handle and the ENS name). Add a one-sentence
+biography in your controlled vocabulary, plus researcher URLs for your site, proof
+page, and GitHub. Two details silently void the work if missed:
+
+- Every ORCID field has its own visibility toggle — set it to **Everyone**, or the
+  public API (and Google) sees nothing.
+- Name URL entries after their destinations (`yoursite.com`, not "My site").
+
+**The template to replicate everywhere**: `Real Name (@handle)` — Instagram's display
+format is the ideal shape. Verify what actually reached the public record through the
+ORCID public API rather than trusting the edit form:
+
+```bash
+curl -s -H "Accept: application/json" \
+  "https://pub.orcid.org/v3.0/YOUR-ORCID-ID/person" | jq '."other-names"'
+```
+
 ---
 
 ## Phase 5: Monitoring & Validation (Ongoing)
@@ -467,6 +531,16 @@ If your name is common, add disambiguating properties:
   "disambiguatingDescription": "Web3 developer specializing in ENS and decentralized identity"
 }
 ```
+
+### Image Structured Data (the Google Images surface)
+
+Identity queries increasingly resolve on the Images tab, and once an entity node
+exists, avatars, logos, and social cards get indexed fast. Google's *image metadata*
+feature (`ImageObject` with `creator`, `creditText`, `copyrightNotice`, `license`) is
+the only supported structured-data feature that operates on that surface: it binds
+your images to your Person node and earns a creator credit in the Images viewer.
+Lower priority than the entity graph itself — schedule it for your next planned markup
+change rather than breaking a stable graph's freeze window for it.
 
 ---
 

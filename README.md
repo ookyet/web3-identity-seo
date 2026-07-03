@@ -46,6 +46,7 @@ A documented five-layer approach for entity markup and indexing submission:
 - **Unified cross-platform identity** - Consistent name/avatar/links across Web2/Web3 (audited count in [Results](#results))
 - **NFT avatar** - Visual identity proof
 - **sameAs linkage** - Cross-source consistency
+- **Off-site co-occurrence** - `Real Name (@handle)` on every authority profile (LinkedIn, ORCID) so Google reconciles the alias itself — see [Step 4.3 of the guide](docs/implementation-guide.md)
 
 ## Reference Implementation
 
@@ -300,16 +301,20 @@ The complete implementation demonstrates:
 - Google Cloud service account
 
 ### Quick Start
-1. Clone this architecture
-2. Implement Schema.org markup
-3. Add Dentity verification
-4. Configure Indexing API
-5. Submit to Google
+
+The fastest path is to fork this repository and adapt the reference schema to your own identity:
+
+1. **Fork this repo** — you'll be editing the schema examples and scripts to match your identity, so start from your own copy.
+2. **Replace the placeholder values** in [`examples/schema-person.json`](examples/schema-person.json): your domain (`yoursite.com`), your ENS name (`yourname.eth`), and your handle (`@yourhandle`).
+3. **Serve the JSON-LD server-side** as a single `@graph` — one source of truth, no client-side injection ([implementation guide](docs/implementation-guide.md)).
+4. **Verify, then submit**: pass the [Rich Results Test](https://search.google.com/test/rich-results) with zero errors, then accelerate indexing with the Indexing API and IndexNow scripts in [`scripts/`](scripts/).
+5. **Bind your off-site profiles** — LinkedIn, ORCID, GitHub — to the same name/handle pair (guide, Step 4.3).
 
 ### Advanced Setup
 - ProfilePage (`mainEntity` → Person) on the about page
 - Person-first entity model (name = person/handle; ENS in `alternateName` + `identifier`)
-- Cross-platform unification
+- Cross-platform unification and off-site co-occurrence (guide, Step 4.3)
+- Image structured data for the Google Images surface (guide, Advanced Optimization)
 - Monitoring with kg-audit.sh
 
 ## Resources

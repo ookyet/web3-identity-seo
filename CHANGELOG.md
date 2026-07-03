@@ -6,6 +6,23 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.2.0] — 2026-07-03
+
+Ported the off-site reconciliation lessons from the reference implementation's Jul 2026 cross-surface audit, and reframed onboarding around forking.
+
+### Added
+
+- **`docs/implementation-guide.md` Step 2.4, rules 5–7** — three more field-tested entity-graph rules: (5) never emit structured data for content that does not exist yet (phantom "planned coverage" articles assert publications Google can verify are false — fabricated notability evidence; gate JSON-LD on publication status); (6) keep every visible identity surface consistent with the graph (the byline, footer copyright, and page headings must carry the same name as `Person.name`, `meta author`, and the feed — Google's Article guidance expects markup author names to match visible bylines); (7) `speakable` selectors must exist in the rendered DOM (generate the selector list under the same condition that renders the elements).
+- **`docs/implementation-guide.md` Step 4.3 "Off-site co-occurrence"** — the highest-leverage external work once the on-site graph is clean: the LinkedIn "at yourname.eth" company-field trap (an employment phrase that re-creates Person↔Org ambiguity from off-site, plus the three-part fix); the ORCID structured-alias playbook (*Also known as* mirroring `Person.alternateName`, per-field visibility set to Everyone, destination-named URLs, public-API verification command); and the `Real Name (@handle)` template.
+- **`docs/implementation-guide.md` Advanced Optimization** — image structured data (`ImageObject` with `creator`/`creditText`/`copyrightNotice`/`license`) for the Google Images surface, scheduled for a planned markup window rather than breaking a stable graph's freeze.
+- **`README.md`** — Layer 5 gains the off-site co-occurrence bullet; Advanced Setup points at Step 4.3 and the Images-surface note.
+
+### Changed
+
+- **`README.md` Quick Start** — reframed as fork-first: fork → replace the placeholder identity values in `examples/schema-person.json` → serve the JSON-LD server-side as a single `@graph` → verify with the Rich Results Test and submit via the indexing scripts → bind off-site profiles to the same name/handle pair.
+
+---
+
 ## [3.1.1] — 2026-07-02
 
 Ported the remaining hard-won entity-graph lessons from the reference implementation's Jun–Jul 2026 Search Console recovery.
