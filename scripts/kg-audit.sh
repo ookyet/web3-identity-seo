@@ -211,14 +211,18 @@ echo ""
 echo "7️⃣  Entity Score Calculation"
 echo "   ────────────────────────────────────────────────────"
 
-# Score components
+# Score components — internal heuristics for tracking self-maintained signals
+# over time. NOT a Knowledge Panel probability: the KG API exposes no candidate/
+# pre-trigger state, and a KP cannot be forced by markup (it is notability-driven;
+# see README "AI Overview entity recognition ≠ a Knowledge Panel"). The variable
+# name TRIGGER_SCORE and the timeline.csv column are kept for data continuity.
 CONFIDENCE=96   # Dentity + ENS + NFT verified
 CONSISTENCY=99  # 13 platforms aligned
 SALIENCE=50     # Current estimate (to be updated with /press/)
 UNIQUENESS=32   # Unique Human + NFT
-INTENT_MATCH=85 # FAQ Schema pre-computation
+INTENT_MATCH=85 # query/anchor alignment heuristic (legacy weight; FAQ schema retired)
 
-# Weighted calculation
+# Weighted calculation (internal signal index)
 TRIGGER_SCORE=$(echo "scale=2; ($CONFIDENCE * 0.25) + ($CONSISTENCY * 0.30) + ($INTENT_MATCH * 0.20) + ($SALIENCE * 0.15) + ($UNIQUENESS * 0.10)" | bc)
 
 echo "   Entity Confidence: ${CONFIDENCE}%"
@@ -227,13 +231,13 @@ echo "   Entity Salience: ${SALIENCE}%"
 echo "   Query Intent Match: ${INTENT_MATCH}%"
 echo "   Uniqueness Bonus: ${UNIQUENESS}%"
 echo "   ─────────────────────────────────────────────────"
-echo "   📊 Trigger Score: ${TRIGGER_SCORE}% (threshold: 75%)"
+echo "   📊 Signal Index: ${TRIGGER_SCORE}% (internal heuristic — not a KP probability)"
 
 if (( $(echo "$TRIGGER_SCORE > 75" | bc -l) )); then
-  echo "   ✅ Above KP trigger threshold!"
+  echo "   📈 Self-maintained signals saturated — growth now depends on independent coverage + time"
 else
   NEEDED=$(echo "75 - $TRIGGER_SCORE" | bc)
-  echo "   ⏳ Need +${NEEDED}% to reach threshold"
+  echo "   🏗️  Building: +${NEEDED}% to the internal saturation mark (75%)"
 fi
 
 echo ""
@@ -269,11 +273,12 @@ cat > "${TODAY_DIR}/seo_score_report.json" <<EOF
     "uniqueness": $UNIQUENESS,
     "trigger_score": $TRIGGER_SCORE
   },
-  "thresholds": {
-    "kg_trigger": 75,
+  "signal_index": {
+    "note": "internal heuristic for self-maintained signals; not a KP probability",
+    "saturation_mark": 75,
     "current_score": $TRIGGER_SCORE,
     "gap": $(echo "75 - $TRIGGER_SCORE" | bc),
-    "status": "$([ $(echo "$TRIGGER_SCORE > 75" | bc -l) -eq 1 ] && echo 'ready' || echo 'building')"
+    "status": "$([ "$(echo "$TRIGGER_SCORE > 75" | bc -l)" -eq 1 ] && echo 'saturated' || echo 'building')"
   }
 }
 EOF
@@ -286,7 +291,7 @@ HEALTH_SCORE=0
 [ $HAS_KP -gt 0 ] && HEALTH_SCORE=$((HEALTH_SCORE + 25))
 [ $HAS_PAA -gt 0 ] && HEALTH_SCORE=$((HEALTH_SCORE + 15))
 [ $HAS_RICH -gt 0 ] && HEALTH_SCORE=$((HEALTH_SCORE + 15))
-[ $(echo "$TRIGGER_SCORE > 75" | bc -l) -eq 1 ] && HEALTH_SCORE=$((HEALTH_SCORE + 20))
+[ "$(echo "$TRIGGER_SCORE > 75" | bc -l)" -eq 1 ] && HEALTH_SCORE=$((HEALTH_SCORE + 20))
 
 echo "   📈 Overall Health: ${HEALTH_SCORE}%"
 
@@ -309,7 +314,7 @@ echo "${DATE},${TIMESTAMP},${KG_FOUND},${KG_SCORE},${HAS_KP},${HAS_PAA},${TRIGGE
 echo "   ✅ Timeline updated: timeline.csv"
 
 # Trend analysis (last 7 days)
-if [ $(wc -l < "$TIMELINE_CSV") -gt 7 ]; then
+if [ "$(wc -l < "$TIMELINE_CSV")" -gt 7 ]; then
   echo "   📊 7-day trend:"
   tail -7 "$TIMELINE_CSV" | column -t -s',' | sed 's/^/      /'
 fi
@@ -334,9 +339,9 @@ if [ $HAS_KP -gt 0 ] && [ ! -f "${AUDIT_DIR}/.kp_alert_sent" ]; then
   touch "${AUDIT_DIR}/.kp_alert_sent"
 fi
 
-# Trigger threshold alert
-if [ $(echo "$TRIGGER_SCORE > 75" | bc -l) -eq 1 ] && [ ! -f "${AUDIT_DIR}/.threshold_alert_sent" ]; then
-  echo "   ✅ ALERT: Trigger score crossed 75% threshold!"
+# Signal-index saturation alert (internal heuristic, not a KP predictor)
+if [ "$(echo "$TRIGGER_SCORE > 75" | bc -l)" -eq 1 ] && [ ! -f "${AUDIT_DIR}/.threshold_alert_sent" ]; then
+  echo "   📈 ALERT: Signal index crossed the internal saturation mark (75%)"
   touch "${AUDIT_DIR}/.threshold_alert_sent"
 fi
 
@@ -370,11 +375,11 @@ Entity Scores:
   Intent Match: ${INTENT_MATCH}%
   Uniqueness: ${UNIQUENESS}%
   ─────────────────────────────────
-  Trigger Score: ${TRIGGER_SCORE}% (threshold: 75%)
+  Signal Index: ${TRIGGER_SCORE}% (internal heuristic — not a KP probability)
 
 Overall Health: ${HEALTH_SCORE}%
 
-Status: $([ $(echo "$TRIGGER_SCORE > 75" | bc -l) -eq 1 ] && echo 'READY FOR KP ✅' || echo 'BUILDING 🏗️')
+Status: $([ "$(echo "$TRIGGER_SCORE > 75" | bc -l)" -eq 1 ] && echo 'SIGNALS SATURATED 📈 — KP depends on independent coverage + time' || echo 'BUILDING 🏗️')
 
 Next Steps:
 $([ $HAS_KP -eq 0 ] && echo '  - Continue building external press coverage (/press/)

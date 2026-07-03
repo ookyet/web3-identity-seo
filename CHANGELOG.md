@@ -6,6 +6,25 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.2.1] — 2026-07-03
+
+Repository hygiene: community standards completion, CI lint gate, and retiring the last "KP trigger" relic from the tooling so the scripts say what the docs say.
+
+### Added
+
+- **`CODE_OF_CONDUCT.md`** — Contributor Covenant 2.1 (the last missing GitHub community-standards file).
+- **`.github/workflows/shellcheck.yml`** — ShellCheck CI gate (`-S warning`) over `scripts/*.sh`, path-filtered, minimal permissions.
+
+### Changed
+
+- **`scripts/kg-audit.sh`** — the "Trigger Score / threshold: 75% / READY FOR KP" framing predated the project's own conclusion that a Knowledge Panel is notability-driven and cannot be force-triggered; the docs said one thing and the tooling said another. Renamed the user-facing concept to **Signal Index** (an internal heuristic for self-maintained signals, explicitly "not a KP probability"), reworded the saturation status to point at independent coverage + time, and updated the stale `INTENT_MATCH` comment (FAQ schema is retired). The `TRIGGER_SCORE` variable and the `timeline.csv` column are kept for data continuity.
+
+### Fixed
+
+- **`scripts/kg-audit.sh`** — quoted all unquoted command substitutions in `[ … ]` tests (ShellCheck SC2046); the script now passes the new CI gate.
+
+---
+
 ## [3.2.0] — 2026-07-03
 
 Ported the off-site reconciliation lessons from the reference implementation's Jul 2026 cross-surface audit, and reframed onboarding around forking.
