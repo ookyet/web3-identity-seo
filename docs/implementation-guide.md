@@ -391,7 +391,9 @@ Person↔Org ambiguity Rule 2 eliminates on-site. The fix costs nothing:
 
 - Set the company field to your website domain (or Self-employed) — never the ENS name.
 - Write a custom headline that carries the bare handle, e.g.
-  `Digital Identity Architect (yourhandle) — ENS yourname.eth · yoursite.com`.
+  `Digital Creator (yourhandle) — anchoring a verifiable digital identity · ENS yourname.eth · yoursite.com`.
+  Avoid "Identity Architect"-style titles: in hiring contexts they pattern-match to
+  enterprise IAM/SSO roles, not personal digital identity.
 - Open the About section with the same one-sentence identity statement your site uses.
   Verbatim reuse across independent domains is corroboration, not duplication.
 
