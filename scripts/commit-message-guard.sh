@@ -131,14 +131,23 @@ check_range() {
   local head="$2"
   local rev_spec commits commit
 
-  # New branches report an all-zero base SHA; fall back to validating only the tip.
+  # New branches report an all-zero base SHA; fall back to validating only the tip
+  # (a full-history walk would trip on pre-guard-era commits).
   if [[ -z "$base" || "$base" =~ ^0+$ ]]; then
-    rev_spec="$head"
-  else
-    rev_spec="$base..$head"
+    check_commit "$head"
+    return 0
   fi
 
-  commits="$(git rev-list "$rev_spec" 2>/dev/null || true)"
+  rev_spec="$base..$head"
+
+  # An unresolvable range (e.g. base rewritten by a force push) must not pass
+  # silently; degrade to validating the tip instead of skipping everything.
+  if ! commits="$(git rev-list "$rev_spec" 2>/dev/null)"; then
+    echo "commit-msg: range $rev_spec is unresolvable; falling back to checking $head only" >&2
+    check_commit "$head"
+    return 0
+  fi
+
   if [[ -z "$commits" ]]; then
     echo "commit-msg: no commits to check in range ${base:-<none>}..$head" >&2
     return 0
