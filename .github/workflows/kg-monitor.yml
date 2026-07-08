@@ -12,15 +12,15 @@ jobs:
   run-monitor:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
         with:
           node-version: '18'
       - run: npm ci
         if: ${{ hashFiles('package-lock.json') != '' }}
       - run: node scripts/kg-monitor.js
       - name: Upload KG monitor report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: kg-monitor-report
           path: .monitoring-logs/
