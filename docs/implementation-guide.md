@@ -466,7 +466,7 @@ curl "https://kgsearch.googleapis.com/v1/entities:search?query=yourname.eth&key=
 3. `resultScore` rising an order of magnitude = display-confidence precursor.
 4. `detailedDescription` = encyclopedic-source gated (Wikipedia/Wikidata); often stays empty for niche entities and does **not** block the others.
 
-No change week over week is the normal case and not a negative signal. While waiting, the only lever that moves the corpus is **authored content supply** (posts under your byline, occasional articles); likes/reactions produce zero indexable co-occurrence. Do not touch a stable entity graph to "speed things up" — schema edits reset Google's re-evaluation clock.
+No change week over week is the normal case and not a negative signal. While waiting, the only lever that moves the corpus is **authored content supply** (posts and articles under your byline). Do not touch a stable entity graph to "speed things up" — schema edits reset Google's re-evaluation clock.
 
 ---
 
