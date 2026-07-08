@@ -6,6 +6,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.3.1] — 2026-07-08
+
+Tooling honesty pass for `kg-monitor.js` — the same treatment `kg-audit.sh` received in 3.2.1. The script predated the project's documented conclusions and was still reporting an Oct 2025 fiction.
+
+### Changed
+
+- **`scripts/kg-monitor.js` rewritten as what it claims to be.** The old script reported a hardcoded "Knowledge Panel probability" (baseline 87%) via an invented weighted formula, printed a **simulated** "Google indexing status" as if it were live data (hardcoded Oct 2025 snapshots: "indexed in 48h", "8 reactions"), counted days against a "Phase 1 / Day 7 (2025-10-13)" plan retired months ago, and mixed Chinese into an English-only repo. All of that contradicted the honesty rules the docs already state. The new script has two honest modes: **inventory mode** (default, no network) reporting a weighted **Signal Index** over the self-maintained signal checklist, and **live mode** (`KG_API_KEY` set) querying the KG Search API and reporting the entity node's growth fields in staircase order (`url` -> `image` -> `resultScore` -> `detailedDescription`), with the key-expiry caveat built into its error message. Log-file contract (`KG_MONITOR_LOG=1` -> `.monitoring-logs/*.json`) is unchanged; the JSON schema now carries `signalIndex` + `node` instead of the retired fiction metrics.
+- **`scripts/README.md`** — the metrics list now describes the Signal Index and live node check instead of "KP trigger probability"; the sample CI cron is weekly (Monday) instead of daily, matching the documented monitoring cadence.
+
 ## [3.3.0] — 2026-07-08
 
 Ported the first post-milestone monitoring lessons from the reference implementation's Jul 7 weekly check and GSC recovery confirmation.

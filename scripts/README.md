@@ -50,7 +50,7 @@ docs/entity-audit/YYYYMMDD/
 **Monitoring Metrics** (local heuristics only — not Google metrics):
 - Entity score (`TRIGGER_SCORE` in kg-audit.sh): internal completeness checklist (see bands below)
 - Cross-source consistency: compare `sameAs` / display names across listed profiles
-- KP trigger probability (kg-monitor.js): relative signal-completeness estimate only
+- Signal Index (kg-monitor.js): weighted checklist of self-maintained signals; optional live KG node check (staircase order: url -> image -> resultScore -> detailedDescription) when `KG_API_KEY` is set
 - Spam filter status: local label derived from the heuristic score
 
 > **Disclaimer.** These figures are heuristic estimates produced locally by this
@@ -156,7 +156,7 @@ name: Knowledge Graph Monitoring
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Daily at 8 AM UTC
+    - cron: '0 8 * * 1'  # Weekly (Monday) — KG ingestion is not real-time; daily adds nothing
   workflow_dispatch:
 
 jobs:
