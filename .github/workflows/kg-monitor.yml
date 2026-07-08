@@ -22,8 +22,12 @@ jobs:
       - run: npm ci
         if: ${{ hashFiles('package-lock.json') != '' }}
       - run: node scripts/kg-monitor.js
+        env:
+          KG_MONITOR_LOG: "1"
       - name: Upload KG monitor report
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: kg-monitor-report
           path: .monitoring-logs/
+          # dot-directory is treated as hidden and silently skipped otherwise
+          include-hidden-files: true
