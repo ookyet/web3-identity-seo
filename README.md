@@ -351,6 +351,15 @@ chmod +x .githooks/commit-msg scripts/commit-message-guard.sh
 
 MIT License.
 
+## Disclaimer
+
+This project is independent documentation. It is not affiliated with, endorsed by, or
+sponsored by Google, the Ethereum Name Service (ENS), Dentity, Microsoft, or Yandex; all
+trademarks and product names are the property of their respective owners. Search result
+appearance — including Knowledge Panels — is determined solely by the search engines and
+is not guaranteed by anything in this repository. Nothing here is financial, legal, or
+investment advice.
+
 ---
 
 Reference implementation: [ookyet.eth](https://ookyet.com/proof/).

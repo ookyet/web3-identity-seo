@@ -2,8 +2,11 @@ name: KG Monitor Snapshot
 
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 2 * * 1'
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   run-monitor:
