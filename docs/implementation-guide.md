@@ -420,7 +420,7 @@ curl -s -H "Accept: application/json" \
 
 ## Phase 5: Monitoring & Validation (Ongoing)
 
-### Step 5.1: Daily Knowledge Graph Audit
+### Step 5.1: Knowledge Graph Audit
 
 Use the monitoring script:
 ```bash
@@ -428,7 +428,8 @@ Use the monitoring script:
 cp scripts/kg-audit.sh ~/yourproject/
 chmod +x kg-audit.sh
 
-# Run daily
+# Run weekly (daily adds nothing — KG ingestion is not real-time;
+# same-day repeat queries return identical results)
 ./kg-audit.sh
 ```
 
@@ -456,7 +457,16 @@ Monitor weekly:
 curl "https://kgsearch.googleapis.com/v1/entities:search?query=yourname.eth&key=YOUR_API_KEY&limit=1"
 ```
 
-**KG API note**: Empty `itemListElement` is normal and does not distinguish "not indexed as an entity" from "signals present but no KP." Do not treat API responses as a KP probability.
+**KG API note**: Empty `itemListElement` is normal and does not distinguish "not indexed as an entity" from "signals present but no KP." Do not treat API responses as a KP probability. API keys **expire** — renew before concluding anything from an error response.
+
+**Once a node exists — read its growth in priority order** (the "staircase"; see the [README milestone section](../README.md#milestone-knowledge-graph-entity-node-2026-07-02) for the field-tested rationale):
+
+1. `url` appearing = Google has bound your **entity home** to the node (first milestone; driven by corroboration you already shipped).
+2. `image` appearing = the entity pipeline picked a canonical photo (a consistent avatar across sources keeps this unambiguous).
+3. `resultScore` rising an order of magnitude = display-confidence precursor.
+4. `detailedDescription` = encyclopedic-source gated (Wikipedia/Wikidata); often stays empty for niche entities and does **not** block the others.
+
+No change week over week is the normal case and not a negative signal. While waiting, the only lever that moves the corpus is **authored content supply** (posts under your byline, occasional articles); likes/reactions produce zero indexable co-occurrence. Do not touch a stable entity graph to "speed things up" — schema edits reset Google's re-evaluation clock.
 
 ---
 

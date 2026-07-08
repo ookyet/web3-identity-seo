@@ -202,7 +202,18 @@ Why this is the outcome the architecture targets:
 - **Third-party corroboration outweighs self-declaration.** The node's canonical name is the author's real name (Qifeng Huang — see [CITATION.cff](CITATION.cff)), taken from high-authority anchors (LinkedIn, ORCID) rather than the site's self-declared `name: ookyet`. Expected and healthy: the handle stays the unique entry point; the legal name carries source authority.
 - **Honest status.** The node is still sparse (no `detailedDescription`, `image`, or `url` exposed; near-zero `resultScore`), and a formal Knowledge Panel remains untriggered. Growth from here is driven by independent third-party coverage plus time — not by further markup changes.
 
-Timeline: **Aug 2025** first indexed → **Oct 2025** Dentity verification + entity markup → **Jun 2026** Person-first convergence (single Person entity; FAQ/HowTo retired) → **Jul 2, 2026** KG entity node confirmed via API.
+**Post-milestone monitoring: the growth staircase.** Once a node exists, check it **weekly, not daily** — KG ingestion runs on a weeks-to-months cycle, and repeat queries within a day return byte-identical results (verified). A sparse Person node typically grows in a predictable order, so read the fields by priority:
+
+1. **`url`** — usually first. It means Google has bound your **entity home** to the node; it is driven by the corroboration you already shipped (Person-first graph + ProfilePage + consistent `sameAs`), not by new signals.
+2. **`image`** — next; drawn from the node's reconciled visual identity (a consistent avatar across sources keeps the candidate pool unambiguous).
+3. **`resultScore`** rising by an order of magnitude — a precursor of display-worthiness.
+4. **`detailedDescription`** — usually last, and often never for niche entities: it is largely sourced from encyclopedic references (Wikipedia/Wikidata), which are notability-gated. An empty description does **not** block the other fields.
+
+First weekly check (2026-07-07, five days after discovery): all fields unchanged — expected, not a negative signal. Practical notes: KG Search API keys expire (renew before concluding anything from an error response), and *"the node has grown `url`"* is the point at which "Knowledge Panel plausible soon" becomes a defensible statement.
+
+**Recovery-playbook validation (same window).** The reference site's structured-data fix (retiring `QAPage`, fixing `ProfilePage.mainEntity`; deployed Jun 28) was confirmed digested by Google on **Jul 7**: the GSC Profile page report turned **valid** (1 item, 0 invalid), indexed pages rose **4 → 6**, and 404s stayed at 0 — about **9 days** from deploy to report-level validation, with **zero further schema edits** in between. This is the "fix once, freeze, wait" discipline working as designed; re-tweaking mid-window would have reset Google's evaluation clock. (Related GSC note: **Test Live URL is read-only** — it never queues a crawl or resets anything; only *Request Indexing* sends an active signal.)
+
+Timeline: **Aug 2025** first indexed → **Oct 2025** Dentity verification + entity markup → **Jun 2026** Person-first convergence (single Person entity; FAQ/HowTo retired) → **Jul 2, 2026** KG entity node confirmed via API → **Jul 7, 2026** GSC structured-data recovery confirmed (ProfilePage valid; indexed pages 4→6).
 
 ## Architecture Diagram
 

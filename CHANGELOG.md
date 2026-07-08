@@ -6,6 +6,25 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.3.0] — 2026-07-08
+
+Ported the first post-milestone monitoring lessons from the reference implementation's Jul 7 weekly check and GSC recovery confirmation.
+
+### Added
+
+- **`README.md` milestone section — "Post-milestone monitoring: the growth staircase"** — how to read a sparse KG node over time, in field priority order: `url` (entity home bound; usually first, driven by corroboration already shipped) → `image` → `resultScore` rising an order of magnitude → `detailedDescription` (encyclopedic-source gated; often never for niche entities, and not a blocker for the rest). Weekly cadence rationale (same-day repeat queries return byte-identical results); first weekly check (2026-07-07, unchanged after five days) recorded as the normal case, not a negative signal.
+- **`README.md` milestone section — "Recovery-playbook validation"** — field data for the "fix once, freeze, wait" discipline: structured-data fix deployed Jun 28 → GSC Profile page report valid (1 item, 0 invalid), indexed pages 4→6, 404s 0 by Jul 7 (~9 days), with zero schema edits in between. Includes the *Test Live URL is read-only* GSC note.
+- **`docs/faq.md`** — two new questions: *"The SERP already shows an Images pack for my name — is that the Knowledge Panel image?"* (image retrieval system vs. KG node `image` property; why the pack still helps) and *"I rank #1 on Google but barely appear on other search engines — is something wrong?"* (ranking layer vs. corpus layer; thin-corpus symptoms including AI-fabricated facts and stale self-published narratives; content supply — not markup — as the fix; likes produce zero indexable co-occurrence).
+- **`docs/implementation-guide.md` Step 5.3** — the growth staircase in checklist form, the API-key-expiry pitfall, and the no-change-is-normal guidance.
+
+### Changed
+
+- **`docs/faq.md` "How do I know if it's working?"** — the long-term list promised *"Rich Results (FAQ, Person)"* (FAQ rich results are retired — contradicted this repo's own Step 3) and put a Knowledge Panel on a Week 4–8 calendar (the reference implementation took ~11 months to a KG node, and a KP is not calendar-able). Rewritten to the staircase model with honest timescales; daily monitoring advice relaxed to weekly.
+- **`docs/implementation-guide.md` Step 5.1** — retitled from "Daily Knowledge Graph Audit"; weekly cadence with rationale.
+- **`README.md` timeline** — appended **Jul 7, 2026**: GSC structured-data recovery confirmed (ProfilePage valid; indexed pages 4→6).
+
+---
+
 ## [3.2.1] — 2026-07-03
 
 Repository hygiene: community standards completion, CI lint gate, and retiring the last "KP trigger" relic from the tooling so the scripts say what the docs say.

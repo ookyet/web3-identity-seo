@@ -130,12 +130,12 @@ Compliance note: Google’s Indexing API is intended for specific content types 
 2. External articles (GitHub, Dev.to) indexed
 3. Search Console shows impressions for "yourname.eth"
 
-**Long-term** (Week 4-8):
-1. Knowledge Graph API returns your entity
-2. Knowledge Panel appears for "yourname.eth" search
-3. Rich Results (FAQ, Person) appear in SERP
+**Long-term** (months, not weeks):
+1. Knowledge Graph API returns your entity (the reference implementation took ~11 months from first indexing)
+2. The KG node grows fields over time — read them in priority order: `url` (entity home bound) → `image` → `resultScore` rising → `detailedDescription` (encyclopedic-source gated, often never for niche entities)
+3. A Knowledge Panel remains a separate, notability-driven decision — do not put it on a calendar
 
-Use the `kg-audit.sh` script for daily monitoring.
+Use the `kg-audit.sh` script for monitoring — **weekly is enough** once a node exists (KG ingestion is not real-time; same-day repeat queries return identical results). GSC tip: **Test Live URL is read-only** (safe to click, sends no signal); only *Request Indexing* actively queues a crawl.
 
 ---
 
@@ -277,6 +277,24 @@ These are different outcomes, and AI Overview recognition is the more attainable
 - **A formal Knowledge Panel** is a separate, automatic decision driven mainly by **notability** — being covered or referenced by enough *independent* third parties. Markup cannot force it; it is earned over time.
 
 Don't read "no Knowledge Panel" as failure. If AI Overviews and SERP features (sitelinks, thumbnails) already recognize your entity, the architecture is working as intended.
+
+### The SERP already shows an Images pack for my name — is that the Knowledge Panel image?
+
+No — they come from two different systems, and confusing them leads to false "almost there" readings:
+
+- The **SERP Images pack** is the *image retrieval* system: "people searching this query may want pictures," pulled from pages that rank for the term. It neither reads nor writes the Knowledge Graph.
+- The **Knowledge Panel photo** comes from the KG node's `image` property, selected by the entity pipeline (check it via the KG Search API — the pack can appear while the node's `image` is still empty, as observed on the reference implementation).
+
+The pack is still genuinely useful: if it shows one consistent avatar from multiple independent domains (own site + social + dev platforms), Google's visual systems have an unambiguous candidate pool for the day the entity pipeline picks a node image — and it is one more block of SERP real estate answering "who is this" before a panel exists.
+
+### I rank #1 on Google but barely appear on other search engines — is something wrong?
+
+Nothing is broken — you are looking at two different layers, and both readings are true at once:
+
+- **Ranking layer**: a coined, zero-competition name plus a well-optimized entity home makes you #1 on Google. Nothing can outrank you for your own term.
+- **Corpus layer**: how much content about you *exists anywhere*. Other engines crawl shallower, don't reward your markup the same way, and expose how thin the underlying corpus is (often your entity home won't even make their top 10 — self-authored articles and profile pages will).
+
+A thin corpus does not hurt your ranking (there is nothing to outrank you), but it is exactly what slows KG node growth and Knowledge Panel confidence — there is nothing new to ingest. Two symptoms worth knowing: aggregators and AI assistants **fill gaps with guesses** when a corpus is thin (the reference implementation found a fabricated wallet address attributed to its ENS name in one engine's AI summary), and your loudest self-published article stays the dominant narrative long after it goes stale. The fix is **content supply, not more markup**: occasional posts under your byline. Note that likes/reactions produce **zero** indexable co-occurrence — only authored, crawlable content with your name on it counts.
 
 ### Once I have a Knowledge Panel, how do I claim or correct it?
 
