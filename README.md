@@ -46,7 +46,7 @@ A documented five-layer approach for entity markup and indexing submission:
 - **Unified cross-platform identity** - Consistent name/avatar/links across Web2/Web3 (audited count in [Results](#results))
 - **NFT avatar** - Visual identity proof
 - **sameAs linkage** - Cross-source consistency
-- **Off-site co-occurrence** - `Real Name (@handle)` on every authority profile (LinkedIn, ORCID) so Google reconciles the alias itself — see [Step 4.3 of the guide](docs/implementation-guide.md)
+- **Off-site co-occurrence** - real name and handle together on every authority profile (LinkedIn, ORCID) so Google reconciles the alias itself; display name where it reads natively, otherwise leading the bio — see [Step 4.3 of the guide](docs/implementation-guide.md)
 
 ## Reference Implementation
 
@@ -213,7 +213,7 @@ First weekly check (2026-07-07, five days after discovery): all fields unchanged
 
 **Recovery-playbook validation (same window).** The reference site's structured-data fix (retiring `QAPage`, fixing `ProfilePage.mainEntity`; deployed Jun 28) was confirmed digested by Google on **Jul 7**: the GSC Profile page report turned **valid** (1 item, 0 invalid), indexed pages rose **4 → 6**, and 404s stayed at 0 — about **9 days** from deploy to report-level validation, with **zero further schema edits** in between. This is the "fix once, freeze, wait" discipline working as designed; re-tweaking mid-window would have reset Google's evaluation clock. (Related GSC note: **Test Live URL is read-only** — it never queues a crawl or resets anything; only *Request Indexing* sends an active signal.)
 
-Timeline: **Aug 2025** first indexed → **Oct 2025** Dentity verification + entity markup → **Jun 2026** Person-first convergence (single Person entity; FAQ/HowTo retired) → **Jul 2, 2026** KG entity node confirmed via API → **Jul 7, 2026** GSC structured-data recovery confirmed (ProfilePage valid; indexed pages 4→6).
+Timeline: **Aug 2025** first indexed → **Oct 2025** Dentity verification + entity markup → **Jun 2026** Person-first convergence (single Person entity; FAQ/HowTo retired) → **Jul 2, 2026** KG entity node confirmed via API → **Jul 7, 2026** GSC structured-data recovery confirmed (ProfilePage valid; indexed pages 4→6) → **Jul 8–12, 2026** corpus-supply window: the stale 2025 self-published article superseded by a [current retrospective](https://dev.to/ookyet/i-retired-my-85-knowledge-panel-probability-claim-then-google-built-the-entity-anyway-3e5o) (published Jul 8, indexed within days), first ORCID works entry mounted on the anchor (blog-post type, public-API-verified).
 
 ## Architecture Diagram
 

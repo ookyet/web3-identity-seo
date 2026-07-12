@@ -314,6 +314,34 @@ There is no magic number. "You need 30+ references" is SEO-community folklore, n
 
 Yes — significantly, but understand *how*. A rare/coined name (vs. a common name shared by many people) gives you **zero disambiguation**: you rank #1 for the term and Google never has to decide "which person." This does not *trigger* a Knowledge Panel by itself (ranking ≠ panel), but it acts as a **multiplier** — every external signal converts cleanly and you need less corroboration than someone with a contested name. It is the strongest structural advantage a niche personal entity can have, and it is fully white-hat (you are simply unambiguous).
 
+### Should my display name include my real name on every platform?
+
+Only where a real name reads natively — Instagram (`Real Name (@handle)`), and forum
+profiles with a separate Name field (Discourse puts it on every post page). On
+handle-native platforms (Bluesky, Mastodon, YouTube), keep the handle as the display
+name and open the bio with the real name instead, one controlled sentence reused
+verbatim: `Real Name, known online as yourhandle — … · ENS yourname.eth · yoursite.com`.
+
+What entity reconciliation actually reads is the **profile page**, and that page still
+carries all four tokens (real name, handle, ENS name, domain) either way; the per-post
+byline is a volume amplifier, not a requirement. Forcing a shape that feels wrong is how
+profiles end up quietly reverted and inconsistent — pick what you can hold for years.
+Bonus if you own a domain: Bluesky accepts it as your handle via DNS verification, which
+binds account to entity home harder than any bio link.
+
+### I registered extra domains for my name — should I build anything on them?
+
+No. Defensive domains (`yourname.net` next to your `.com`) have exactly one correct
+configuration: **301 redirect to your entity home, nothing else**. A second domain with
+content is a second entity-home candidate — it dilutes the one signal this whole
+architecture concentrates ("this domain is the canonical home of this entity").
+
+Three rules: redirect apex and www to the canonical site; never leave a registrar
+parking page with ads sitting on your own brand query; keep auto-renew on (an expired
+defensive domain in a squatter's hands is worse than never owning it). Registering them
+is still worthwhile — impersonation defense matters for an identity project — but they
+never appear in `sameAs` or anywhere in your markup.
+
 ### Can Google reject my Knowledge Panel?
 
 Yes, if:

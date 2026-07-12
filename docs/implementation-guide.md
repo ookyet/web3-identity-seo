@@ -407,14 +407,68 @@ page, and GitHub. Two details silently void the work if missed:
   public API (and Google) sees nothing.
 - Name URL entries after their destinations (`yoursite.com`, not "My site").
 
-**The template to replicate everywhere**: `Real Name (@handle)` — Instagram's display
-format is the ideal shape. Verify what actually reached the public record through the
-ORCID public API rather than trusting the edit form:
+Verify what actually reached the public record through the ORCID public API rather
+than trusting the edit form:
 
 ```bash
 curl -s -H "Accept: application/json" \
   "https://pub.orcid.org/v3.0/YOUR-ORCID-ID/person" | jq '."other-names"'
 ```
+
+**ORCID Works — mount your authored content on the anchor.** A frozen identity record
+is not a dead one: ORCID separates *identity fields* (biography, aliases, URLs — fix
+once, then freeze) from the *works list*, which is append-only. Adding a work entry
+creates a machine-readable "Real Name authored → your article" statement on a domain
+Google actively reconciles against — corroboration supply that touches nothing frozen.
+The form has details the UI does not make obvious (all field-tested):
+
+- Use **Add manually**, not the import connectors (The Lens / Web of Science are
+  scholarly-database integrations — irrelevant for web content, and they grant an
+  external service ongoing write access to your record).
+- Work type: **Blog post**, under the *Dissemination* group. Resist "Journal article"
+  even though the picker suggests it first — type misrepresentation is the same
+  aspirational-markup mistake this guide retires elsewhere.
+- Title **verbatim** as published (co-reference discipline); publisher = the platform's
+  name (e.g. `DEV Community`); full publication date.
+- External identifier: type **URI**, with the identifier *value* and the *URL* both set
+  to the article's full canonical URL — for URI identifiers the value and its resolve
+  target are the same string (intended usage, not duplication). Relationship: **Self**,
+  not "Part of".
+- Contributor role: the picker is CRediT-based and has no "Author" option —
+  **Writing – Original Draft** is the author role.
+- Visibility **Everyone**, or none of it exists publicly. Leave every other optional
+  field empty: a works entry needs author, title, date, and URL; the rest is dilution.
+
+Then verify through the public API (what Google can see):
+
+```bash
+curl -s -H "Accept: application/json" \
+  "https://pub.orcid.org/v3.0/YOUR-ORCID-ID/works" | jq '.group[]."work-summary"[0].title'
+```
+
+**Display names: two tiers, one bio.** `Real Name (@handle)` — Instagram's display
+format — is the ideal shape *where a real name reads natively*: Instagram, and Discourse
+forums, whose separate profile **Name** field is worth filling for the same reason.
+On handle-native platforms (Bluesky, Mastodon, YouTube), forcing the real name into the
+display name reads like someone else's account and tends to get reverted; the pattern
+that survives is **handle as display name, real name leading the bio**, with one
+controlled sentence reused verbatim everywhere:
+
+> `Real Name, known online as yourhandle — Digital Creator · ENS yourname.eth · yoursite.com`
+
+The trade-off is honest: the profile page — the anchor page entity reconciliation
+actually reads — keeps all four tokens (real name, bare handle, ENS name, domain),
+while per-post bylines carry only the handle. Per-post real-name co-occurrence is a
+volume amplifier, not a requirement; keep at least one surface that has it natively and
+let the rest stay comfortable. Consistency you can hold for years beats a maximal shape
+you will quietly undo. Two platform mechanics worth the setup time:
+
+- **Bluesky accepts your domain as your handle** (DNS verification). An account whose
+  handle *is* your entity home is the hardest account↔domain binding available —
+  stronger than any bio link.
+- **Discourse forums hide new-user profiles from crawlers until trust level 1** — read
+  a few topics before expecting the profile to exist publicly. Your posts, not the
+  profile page, are the durable carrier there anyway.
 
 ---
 

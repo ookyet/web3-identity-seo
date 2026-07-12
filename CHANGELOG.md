@@ -6,6 +6,23 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.4.0] — 2026-07-12
+
+Ported the corpus-supply execution lessons from the reference implementation's Jul 8–12 field window: authored content mounted on an existing anchor, and the off-site display-name question settled by deploying profiles across five surfaces in one day.
+
+### Added
+
+- **`docs/implementation-guide.md` Step 4.3 "ORCID Works — mount your authored content on the anchor"** — ORCID separates identity fields (fix once, freeze) from the append-only works list, so adding a work is corroboration supply that touches nothing frozen. The field-tested form details the UI does not make obvious: *Add manually* (the import connectors are scholarly-database integrations that also grant an external service write access); work type **Blog post** under Dissemination — not "Journal article", which is the same aspirational-markup mistake retired elsewhere; verbatim title; URI external identifier with value and URL set to the same canonical article URL, relationship **Self**; contributor role **Writing – Original Draft** (the CRediT picker has no "Author"); visibility **Everyone**; every other optional field left empty. Public-API verification command for the works endpoint included.
+- **`docs/implementation-guide.md` Step 4.3 "Display names: two tiers, one bio"** — replaces the flat "`Real Name (@handle)` everywhere" template with what survived contact with real platforms: real name in the display only where it reads natively (Instagram; Discourse Name fields), handle-first display plus a real-name-led controlled bio sentence on handle-native platforms (Bluesky, Mastodon, YouTube). Honest trade-off documented: the profile page — what entity reconciliation actually reads — keeps all four tokens either way; per-post real-name bylines are a volume amplifier, not a requirement. Platform mechanics: Bluesky's domain-as-handle is a DNS-verified account↔domain binding (the hardest available); Discourse hides trust-level-0 profiles from crawlers.
+- **`docs/faq.md`** — two new questions: *"Should my display name include my real name on every platform?"* and *"I registered extra domains for my name — should I build anything on them?"* (defensive domains: 301-redirect-only — a second domain with content is a second entity-home candidate; no registrar parking ads on your own brand query; auto-renew on; never in `sameAs`).
+
+### Changed
+
+- **`README.md` timeline** — appended **Jul 8–12, 2026**: corpus-supply window — the stale 2025 self-published article superseded by a current retrospective (published Jul 8, indexed within days), first ORCID works entry mounted and public-API-verified.
+- **`README.md` Layer 5 off-site bullet** — aligned with the two-tier display-name guidance.
+
+---
+
 ## [3.3.1] — 2026-07-08
 
 Tooling honesty pass for `kg-monitor.js` — the same treatment `kg-audit.sh` received in 3.2.1. The script predated the project's documented conclusions and was still reporting an Oct 2025 fiction.
