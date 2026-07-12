@@ -130,6 +130,18 @@ export SLACK_WEBHOOK="https://hooks.slack.com/..."
 export ALERT_EMAIL="you@example.com"
 ```
 
+### 3. `star-chart.js`
+Regenerates the static star-history SVGs embedded in the main README
+(`docs/assets/star-history-{light,dark}.svg`).
+
+Self-hosted because third-party star-chart services cannot read this repo's
+starred-data timeline. Run **manually** (never from CI or any bot — repository
+policy) during doc port windows:
+
+```bash
+node scripts/star-chart.js   # requires an authenticated `gh` CLI
+```
+
 ---
 
 ## 📊 Automated Monitoring Setup
