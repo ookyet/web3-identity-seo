@@ -612,6 +612,6 @@ Growing! Join:
 
 ---
 
-**Last updated**: 2025-10-06
+**Last updated**: 2026-07-12
 **Project**: Web3 Identity SEO
-**License**: MIT
+**License**: MIT (code) · CC BY 4.0 (documentation)

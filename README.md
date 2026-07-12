@@ -359,7 +359,8 @@ chmod +x .githooks/commit-msg scripts/commit-message-guard.sh
 
 ## License
 
-MIT License.
+- **Code** — `scripts/`, `.github/`, and the copy-paste JSON-LD templates in `examples/`: [MIT](LICENSE). Drop them into your own site freely; no attribution required.
+- **Documentation** — README, CHANGELOG, and everything under `docs/`: [CC BY 4.0](LICENSE-docs). Share and adapt freely, with credit to **Qifeng Huang (ookyet)** and a link back to this repository.
 
 ## Disclaimer
 

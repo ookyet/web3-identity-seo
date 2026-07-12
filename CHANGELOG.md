@@ -6,6 +6,21 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.4.1] — 2026-07-12
+
+Licensing hygiene: made the implicit code/content split explicit.
+
+### Added
+
+- **`LICENSE-docs`** — the documentation (README, CHANGELOG, everything under `docs/`) is now explicitly **CC BY 4.0**: share and adapt freely, with credit to "Qifeng Huang (ookyet)" and a link back to the repository. Code, workflows, and the copy-paste JSON-LD templates in `examples/` stay **MIT**, so nothing a reader drops into their own site ever owes attribution.
+
+### Changed
+
+- **`README.md` License section** — documents the split.
+- **`docs/faq.md` footer** — license line updated; stale "Last updated 2025-10-06" stamp refreshed.
+
+---
+
 ## [3.4.0] — 2026-07-12
 
 Ported the corpus-supply execution lessons from the reference implementation's Jul 8–12 field window: authored content mounted on an existing anchor, and the off-site display-name question settled by deploying profiles across five surfaces in one day.
