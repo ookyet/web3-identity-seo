@@ -349,16 +349,13 @@ chmod +x .githooks/commit-msg scripts/commit-message-guard.sh
 
 ## Star History
 
-<a href="https://github.com/ookyet/web3-identity-seo/stargazers">
+<a href="https://www.star-history.com/#ookyet/web3-identity-seo&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/star-history-dark.svg" />
-   <source media="(prefers-color-scheme: light)" srcset="docs/assets/star-history-light.svg" />
-   <img alt="Cumulative GitHub star history" src="docs/assets/star-history-light.svg" width="800" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ookyet/web3-identity-seo&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ookyet/web3-identity-seo&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ookyet/web3-identity-seo&type=Date" />
  </picture>
 </a>
-
-Self-hosted snapshot (third-party star-chart services cannot read this repo's
-starred-data timeline); regenerated manually with [`scripts/star-chart.js`](scripts/star-chart.js).
 
 ## License
 
