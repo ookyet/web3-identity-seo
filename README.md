@@ -347,16 +347,6 @@ git config core.hooksPath .githooks
 chmod +x .githooks/commit-msg scripts/commit-message-guard.sh
 ```
 
-## Star History
-
-<a href="https://www.star-history.com/#ookyet/web3-identity-seo&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ookyet/web3-identity-seo&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ookyet/web3-identity-seo&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ookyet/web3-identity-seo&type=Date" />
- </picture>
-</a>
-
 ## License
 
 - **Code** — `scripts/`, `.github/`, and the copy-paste JSON-LD templates in `examples/`: [MIT](LICENSE). Drop them into your own site freely; no attribution required.
