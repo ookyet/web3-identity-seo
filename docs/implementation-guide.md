@@ -446,6 +446,21 @@ curl -s -H "Accept: application/json" \
   "https://pub.orcid.org/v3.0/YOUR-ORCID-ID/works" | jq '.group[]."work-summary"[0].title'
 ```
 
+**Software works.** Open-source repositories mount the same way and give the anchor a
+second work type (field-tested 2026-07-17, both entries public-API-verified). *Add
+manually* → work type **Software**; title verbatim from the repo's `CITATION.cff`;
+publication date = the **first** public release — for an older repo, the platform's
+`created_at` from its API is the externally verifiable anchor, not the latest version
+date, and not the first commit in a history that may have been rewritten. External IDs:
+URI with relationship *Self* for the repository URL, plus a second URI/Self for the
+package-registry page if one exists (two independent resolvable anchors on one work).
+Contributor role: **Software** — the CRediT picker has it, and it replaces the
+*Writing – Original draft* role used for articles. Visibility: Everyone. One UI quirk to
+expect: the edit modal's Save button sits at the very bottom of a long form, and closing
+mid-way silently drops unsaved fields — it took three attempts to persist the cosmetic
+Link field on the reference record. The identifiers are what reconciliation actually
+reads, so if an optional field refuses to stick, stop editing rather than churn the record.
+
 **Display names: two tiers, one bio.** `Real Name (@handle)` — Instagram's display
 format — is the ideal shape *where a real name reads natively*: Instagram, and Discourse
 forums, whose separate profile **Name** field is worth filling for the same reason.
@@ -521,6 +536,18 @@ curl "https://kgsearch.googleapis.com/v1/entities:search?query=yourname.eth&key=
 4. `detailedDescription` = encyclopedic-source gated (Wikipedia/Wikidata); often stays empty for niche entities and does **not** block the others.
 
 No change week over week is the normal case and not a negative signal. While waiting, the only lever that moves the corpus is **authored content supply** (posts and articles under your byline). Do not touch a stable entity graph to "speed things up" — schema edits reset Google's re-evaluation clock.
+
+**A second gauge: binding depth via combined queries** (measured 2026-07-18 on the reference entity). Query the API with the handle alone, then add real-name tokens, and compare `resultScore` on the *same* node:
+
+| Query | resultScore | vs. handle alone |
+|---|---|---|
+| `ookyet` | 0.0001 | 1× |
+| `ookyet qifeng` | 0.005 | 50× |
+| `ookyet qifeng huang` | 0.08 | 800× |
+
+Each real-name token multiplies routing confidence by roughly an order of magnitude, word order does not matter, and every rung resolves uniquely to the same node — no bleed into the eight same-name Person entities. That ladder is the name↔handle co-occurrence discipline showing up inside Google's matching layer, and it is measurable long before the node grows fields. Track the full-combination score weekly alongside the staircase: a rising ratio means co-occurrence supply is still being absorbed.
+
+**What `resultScore` is — and is not.** Google's documentation defines it as "an indicator of how well the entity matched the request constraints": a match score, unscaled, with no published panel threshold. The internal confidence value that actually gates panels is not exposed by any API. A consultancy convention treats the score on an exact-name query as a confidence proxy, with ~500 as a "secure entity" benchmark — useful context, but the proxy **breaks for people with common names**: on the reference entity, the exact-name query returns a flat name-match score across eight namesakes and measures nothing. For a crowded-name person anchored by a unique handle, the handle query and the combination ladder above are the gauges that actually move.
 
 ---
 

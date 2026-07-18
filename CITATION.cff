@@ -14,8 +14,8 @@ authors:
     alias: ookyet
     orcid: "https://orcid.org/0009-0005-1400-7291"
     website: "https://ookyet.com"
-version: "3.4.1"
-date-released: "2026-07-12"
+version: "3.5.0"
+date-released: "2026-07-18"
 repository-code: "https://github.com/ookyet/web3-identity-seo"
 url: "https://ookyet.com/proof/"
 license: MIT

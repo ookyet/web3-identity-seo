@@ -502,6 +502,34 @@ echo '{"@context": "https://schema.org", ...}' | jq -c .
 
 ---
 
+## Off-Site Surface Issues
+
+### ❌ Google shows outdated or off-brand text for one of my profiles
+
+The search snippet for a profile you control (X, LinkedIn, a link-in-bio page, About.me)
+shows old wording, a retired claim, or text you cannot find on the page. Two distinct
+causes, one diagnostic:
+
+```bash
+curl -s -A "Mozilla/5.0" "https://profile-url" | grep -ci "the offending phrase"
+```
+
+**Zero hits → stale crawl.** The live page is already correct; Google is quoting an old
+snapshot. Low-traffic profile pages get recrawled on a cycle of weeks to months. Do
+nothing — every "fix" you attempt churns a page that was never broken. (Field data: three
+reference-entity profiles showed retired wording in snippets during 2026-07 while every
+live page was verified current.)
+
+**One or more hits → page data is leaking.** The visible page looks clean, but the phrase
+lives in the page source — typically a forgotten feature toggle serializing into embedded
+JSON. Field case: a link-in-bio profile carried `"donationsActive":true` and an awareness
+`causeBanner` from a years-old campaign prompt; Google's snippet quoted the campaign
+banner instead of the bio. Find the toggle (it is usually a settings switch, not a content
+field), turn it off, re-run the grep to confirm zero hits, and let the next crawl replace
+the snippet. Audit page *source*, not just what renders — crawlers read both.
+
+---
+
 ## Getting Help
 
 If issue persists:

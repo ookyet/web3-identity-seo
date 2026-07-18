@@ -6,6 +6,23 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.5.0] — 2026-07-18
+
+Ported the Jul 16–18 field window: the second corpus pillar (a standalone library shipped on GitHub + npm), ORCID software works, and a week of measurement that pinned down what the KG API can and cannot tell you.
+
+### Added
+
+- **`docs/implementation-guide.md` Step 5.3 "A second gauge: binding depth via combined queries"** — the measured confidence ladder on the reference entity: handle alone 0.0001 → handle + half the real name 50× → full combination 800×, order-insensitive, uniquely resolved at every rung against eight same-name entities. Plus **"What `resultScore` is — and is not"**: Google's own definition (a match indicator, unscaled, no panel threshold; the gating confidence value is not exposed by any API), and why the consultancy exact-name proxy (~500 = "secure") breaks for crowded-name people — the handle query and the combination ladder are the gauges that actually move.
+- **`docs/implementation-guide.md` Step 4.3 "Software works"** — mounting open-source repositories on the ORCID anchor: work type Software, title verbatim from `CITATION.cff`, publication date anchored to the platform's `created_at` (not the latest version, not a possibly-rewritten first commit), dual URI/Self identifiers (repo + package registry), CRediT **Software** contributor role, and the long-form Save-button quirk that silently drops fields.
+- **`docs/faq.md`** — three new questions: *"My AI Overview appears instantly and reads identically every time"* (cached/converged answers as interface-layer evidence that comprehension is settled, and why the locked-in definition is the controlled vocabulary's payoff); *"A 'People also search for' box appeared"* (entity-shaped query treatment; template-generated commercial variants are not demand); *"My ENS app profile page got indexed"* (consistency-layer anchor, not a notability signal).
+- **`docs/troubleshooting.md` "Off-Site Surface Issues"** — one diagnostic (`curl | grep -ci`) that splits snippet problems into stale crawls (live page correct → do nothing; three field cases) and page-data leaks (a forgotten link-in-bio campaign toggle serialized `causeBanner` JSON that Google quoted instead of the bio → find the switch, not the content).
+
+### Changed
+
+- **`README.md` timeline** — appended **Jul 16–18, 2026**: second corpus pillar on GitHub + npm (the package author field as the identity's first open-web real-name co-occurrence surface), both repositories mounted as ORCID software works, combined-query ladder measured.
+
+---
+
 ## [3.4.1] — 2026-07-12
 
 Licensing hygiene: made the implicit code/content split explicit.

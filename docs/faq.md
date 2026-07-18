@@ -527,6 +527,44 @@ graph (Person/Organization, `sameAs`, verifiable `identifier`/`hasCredential`) �
 from `FAQPage`/`HowTo` JSON-LD. Write clear, factual answers as visible copy, and keep
 the structured data to supported entity types.
 
+### My AI Overview appears instantly and reads identically every time — what does that mean?
+
+AI Overviews are served two ways: generated on the fly (slower, streamed, wording drifts
+between sessions) or from a cached, precomputed answer (instant, verbatim-stable). If your
+entity query returns the same definition in under a second, on desktop and mobile alike,
+Google has stopped re-reasoning about who you are and is serving a converged answer
+(observed on the reference entity from 2026-07-17: two different entity queries, both
+definition-grade, both cached). That matters twice. First, it is strong interface-layer
+evidence that the "does Google understand this entity" question is settled — the remaining
+gap to a Knowledge Panel is the graph-side field binding and the notability threshold, not
+comprehension. Second, whatever that cached answer says is now the *standard answer* every
+searcher gets — which is the payoff of a controlled vocabulary: the definition Google
+locked in is assembled from sentences you wrote. It is still an answer-layer artifact, not
+a Knowledge Graph node change; keep reading the node fields separately. And with AI
+answers increasingly drawn from the same entity understanding (Knowledge Graph → AI
+answers is one pipeline now), a converged, correct cached definition is worth more than
+most rich results ever were.
+
+### A "People also search for" box appeared for my name — is that meaningful?
+
+Mildly, yes: it means Google treats the query as an entity-shaped query with a refinement
+cluster — one more interface-layer sign of entity processing, in the same family as an
+image pack. Read the variants critically, though. On the reference entity the box showed
+one genuine vocabulary echo (`ookyet eth` — a real token pair from the corpus) and two
+template-generated commercial suffixes (`… wallet`, `… review`) that Google auto-appends
+to entity-like queries in this niche. Template variants are not evidence of real search
+demand; do not build content for them.
+
+### My ENS app profile page (app.ens.domains) got indexed — how much does that help?
+
+It is a consistency-layer anchor, not a notability signal. The page carries your handle
+and records on an official, high-authority domain — better than aggregator mirrors, and
+one more block of the search page that is about you. But its content is self-declared
+(your own ENS records), usually with no real name and no third-party editorial judgment,
+so it corroborates identity consistency without advancing the independent-coverage
+threshold that actually gates panels. Welcome it, count it, and do not mistake it for a
+trigger.
+
 ### Can I combine this with other Schema.org types?
 
 Yes! Use `@graph` for multiple entities:
