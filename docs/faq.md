@@ -565,6 +565,31 @@ so it corroborates identity consistency without advancing the independent-covera
 threshold that actually gates panels. Welcome it, count it, and do not mistake it for a
 trigger.
 
+### I'm a well-known pseudonymous creator — why don't I have a Knowledge Panel (or why did mine disappear)?
+
+Because fame is not the input. The graph's gating question for a Person entity is
+*which verifiable human is this?* — and a purely pseudonymous identity gives Google no
+way to answer it. Measured on real cases (2026-07-19/20, anonymized): a Web3-era creator
+with mainstream press coverage and seven-figure sales returns *empty* for both real-name
+and handle queries, while an entrenched same-name legacy entity owns the alias outright.
+
+Three mechanics produce that outcome:
+
+1. **Person reconciliation never completes.** With no real-name binding on authority
+   surfaces (LinkedIn, ORCID), there is no anchor to reconcile against. Press coverage
+   of a pseudonym corroborates a *name*, not a confirmed person.
+2. **Hype-cycle panels are shallow.** A panel can appear during a fame burst on
+   query-level mapping alone, with no reconciled entity underneath. Those are the first
+   casualties of a recalibration — while panels backed by completed reconciliation
+   survive years of dormancy untouched.
+3. **Walled-garden activity doesn't convert.** Posting weekly inside login-walled
+   platforms is high-volume, zero-conversion supply; the graph never sees it.
+
+The fix is not abandoning the pseudonym. It is the dual-layer pattern this playbook
+documents: keep the handle as the public display name everywhere, and complete the
+machine layer with a real name on authority anchors ([Step 4.3](implementation-guide.md)).
+Reconciliation before display.
+
 ### Can I combine this with other Schema.org types?
 
 Yes! Use `@graph` for multiple entities:

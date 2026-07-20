@@ -6,6 +6,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.6.0] — 2026-07-20
+
+Ported the Jul 19–20 measurement window: a three-case control group run through the same KG API that confirmed the reference entity, and the doctrine the cases converge on — reconciliation before display.
+
+### Added
+
+- **`README.md` "The control group: three ways entities fail"** — three anonymized cases measured against the KG Search API: a famous open-source developer (an order of magnitude more stars; empty return — the graph doesn't count stars, it reads structure), a brand named after a common phrase (query drowned by unrelated legacy entities — the coined-word advantage is structural), and a globally known pseudonymous Web3-era creator (mainstream press, seven-figure sales; empty for both real-name and handle queries, the alias owned by an entrenched legacy entity). The third case carries the deepest lesson: fame without completed Person reconciliation does not persist — hype-cycle panels ride shallow query mapping and are the first casualties of recalibration, while reconciled entities survive years of dormancy. Includes the conversion trap: weekly posting inside login-walled platforms is high-volume, zero-conversion supply.
+- **`docs/faq.md`** — new question: *"I'm a well-known pseudonymous creator — why don't I have a Knowledge Panel (or why did mine disappear)?"* — the three mechanics (reconciliation never completes without real-name anchors; hype panels are shallow; walled-garden activity doesn't convert) and the dual-layer fix that keeps the pseudonym while completing the machine layer.
+- **`docs/implementation-guide.md` Step 5.3 "Node maintenance is permanent"** — grown fields are rented, not owned; when `url`/`image`/a panel arrive, monthly authored supply shifts from launch fuel to life support.
+
+---
+
 ## [3.5.0] — 2026-07-18
 
 Ported the Jul 16–18 field window: the second corpus pillar (a standalone library shipped on GitHub + npm), ORCID software works, and a week of measurement that pinned down what the KG API can and cannot tell you.

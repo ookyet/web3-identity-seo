@@ -549,6 +549,12 @@ Each real-name token multiplies routing confidence by roughly an order of magnit
 
 **What `resultScore` is — and is not.** Google's documentation defines it as "an indicator of how well the entity matched the request constraints": a match score, unscaled, with no published panel threshold. The internal confidence value that actually gates panels is not exposed by any API. A consultancy convention treats the score on an exact-name query as a confidence proxy, with ~500 as a "secure entity" benchmark — useful context, but the proxy **breaks for people with common names**: on the reference entity, the exact-name query returns a flat name-match score across eight namesakes and measures nothing. For a crowded-name person anchored by a unique handle, the handle query and the combination ladder above are the gauges that actually move.
 
+**Node maintenance is permanent.** Fields, once grown, are rented rather than owned:
+entities that stop supplying ingestible corpus decay at the next recalibration (see the
+control-group cases in the README — including a famous creator whose weekly walled-garden
+posting counted for nothing). When `url`, `image`, or a panel arrive, keep the monthly
+authored-supply cadence; it shifts from launch fuel to life support.
+
 ---
 
 ## Troubleshooting
