@@ -308,7 +308,7 @@ Not all panels are claimable yet, and verification lets you *suggest* correction
 
 ### How many third-party citations do I need for a Knowledge Panel?
 
-There is no magic number. "You need 30+ references" is SEO-community folklore, not a Google threshold. Knowledge Panel eligibility is a fuzzy confidence judgment, and **source quality × time × stability compounds** — one authoritative, independent mention (e.g. a recognized organization referencing you) outweighs dozens of anonymous reposts. Don't chase a count; let quality signals accumulate and stay stable.
+"You need 30+ references" is not a Google threshold — no such number is published, and eligibility is a fuzzy confidence judgment. But calling it pure folklore was too dismissive (this guide did, in earlier versions): one consultancy's cohort data (Kalicube Pro, across their client base) puts the observed average at **~20 consistent corroborating sources** — around six when Wikipedia/Wikidata carry the weight, around thirty when they don't. Two refinements matter more than the number itself. First, **consistent profile pages count**: converging your own second-party profiles (LinkedIn, directories, forums) onto one exact factual description measurably raises confidence — the sources don't all have to be editorial. Second, **authority is a multiplier**: one recognized organization referencing you outweighs dozens of anonymous reposts and pulls the required count down. So converge every surface you control, add real anchors, and let **quality × time × stability** compound. Don't chase the count — but don't dismiss it as myth either.
 
 ### Does a unique or coined name help?
 
@@ -589,6 +589,37 @@ The fix is not abandoning the pseudonym. It is the dual-layer pattern this playb
 documents: keep the handle as the public display name everywhere, and complete the
 machine layer with a real name on authority anchors ([Step 4.3](implementation-guide.md)).
 Reconciliation before display.
+
+### Google shows a page full of rich results about me — why is there still no panel?
+
+Because those are two different pipelines. The **document pipeline** (crawl → index →
+rank) is per-page: marketplaces, press, and video platforms rank their own pages about
+you, and the rich snippets come from *their* per-page markup. A rich SERP proves this
+pipeline works. The **entity pipeline** (reconcile → node → fields → panel) is what a
+panel renders from, and it starts with Person reconciliation. Measured case
+(2026-07-20): the pseudonymous creator from the previous answer has an abundant,
+high-authority SERP — and still returns *empty* from the KG API. Their corroboration
+*material* exceeds any threshold; it simply has no anchor to reconcile to.
+Corroboration without an anchor is sand; an entity home without corroboration is an
+island. Build the anchor — your material may already be waiting.
+
+### Someone who shares my name or alias has a panel — what does that mean for me?
+
+Three things, measured on a real shared-alias case (2026-07-20):
+
+1. **Vertical feeds change the rules.** The same-alias panel belongs to a modestly
+   known film director with no Wikipedia article — fed by the movies vertical, where
+   IMDb plays the role ORCID plays for research: an authoritative structured feed.
+   Vertical-fed entities can display **full panels while their KG API fields look
+   sparse** (that node reads as name + type only — no url, no image, no description —
+   yet renders a photo and a filmography carousel). Feed membership gated the panel;
+   fame did not.
+2. **Occupation is permanent.** A displayed panel re-wins the query↔entity association
+   with every impression. An occupied alias is effectively gone; signals you emit under
+   it route into a contested namespace.
+3. **The move is to change keys, not to fight.** Bind your identity to an uncontested
+   key — a unique handle plus real-name anchors — and read your own monitoring gauges
+   against general-web entities, never against vertical-fed ones.
 
 ### Can I combine this with other Schema.org types?
 

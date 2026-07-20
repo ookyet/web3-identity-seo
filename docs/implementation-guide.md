@@ -555,6 +555,12 @@ control-group cases in the README — including a famous creator whose weekly wa
 posting counted for nothing). When `url`, `image`, or a panel arrive, keep the monthly
 authored-supply cadence; it shifts from launch fuel to life support.
 
+**Read your gauges against the right cohort.** The staircase describes general-web
+entities — people whose corroboration arrives through crawled pages. Entities inside
+authoritative verticals (film, music, books) are fed by structured sources such as IMDb
+and can display full panels while their KG API fields stay sparse. Don't calibrate your
+expectations — or your envy — against them.
+
 ---
 
 ## Troubleshooting

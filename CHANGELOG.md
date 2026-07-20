@@ -6,6 +6,22 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ---
 
+## [3.7.0] — 2026-07-20
+
+Same-day follow-up to 3.6.0: a correction this guide owed its readers, and the measurement that completes the control group — the shared-alias entity turned out to hold a full panel.
+
+### Changed
+
+- **`docs/faq.md` "success rate" answer corrected** — earlier versions dismissed "you need 30+ references" as pure folklore; that was too dismissive. It is still not a Google threshold, but consultancy cohort data (Kalicube Pro) puts the observed average at ~20 consistent corroborating sources — ~6 with Wikipedia/Wikidata, ~30 without. Two refinements matter more than the number: **consistent second-party profile pages count** toward it, and **authority is a multiplier** that pulls the required count down.
+
+### Added
+
+- **`docs/faq.md`** — two new questions: *"Google shows a page full of rich results about me — why is there still no panel?"* (the document pipeline vs. the entity pipeline; a rich SERP is other sites' per-page markup shining; corroboration without an anchor is sand, an anchor without corroboration is an island) and *"Someone who shares my name or alias has a panel — what does that mean for me?"* (vertical feeds — IMDb as film's ORCID — can render full panels over API-sparse nodes; panel occupation re-wins the alias with every impression; the move is to change keys, not to fight for the shared word).
+- **`README.md` control-group postscript** — the entrenched same-alias entity is a modestly known film director with a full movies-vertical panel: feed membership beat world fame.
+- **`docs/implementation-guide.md` Step 5.3 "Read your gauges against the right cohort"** — the staircase describes general-web entities; vertical-fed entities are the wrong comparison set.
+
+---
+
 ## [3.6.0] — 2026-07-20
 
 Ported the Jul 19–20 measurement window: a three-case control group run through the same KG API that confirmed the reference entity, and the doctrine the cases converge on — reconciliation before display.
